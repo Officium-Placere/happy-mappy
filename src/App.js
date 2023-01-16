@@ -1,9 +1,6 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import "./styles/styles.scss";
-
-
 
 //* to add: geocoding + markers (https://docs.mapbox.com/mapbox-gl-js/example/marker-from-geocode/)
 //* permanence? logins?
@@ -15,15 +12,18 @@ export default function App() {
 
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(3);
+  const [lng, setLng] = useState(Math.floor(Math.random() * (90 - (-90))) + (-90));
+  const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
+  const [zoom, setZoom] = useState(2);
+  const button = useRef(null)
+
+  // const thresholdChecker = (lng, lat) => {
+  //   lat < -90 || lat > 90 ? lat = Math.floor(Math.random() * (45 - (-45))) + (-45)
+  // }
 
   //initialize map
   useEffect(() => {
-
-    if (map.current) return; // initialize map only once
-
+    if (map.current) return; 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v12',
@@ -31,15 +31,9 @@ export default function App() {
       zoom: zoom
     });
 
-    //! very interesting - show gaby when you enter it in the other useEffect
+    //add fullscreen button
     map.current.addControl(new mapboxgl.FullscreenControl());
-    //! use ref allows targeting map in react - tell gaby
-    map.current.on("load", ()=> {
-
-    })
-
-
-    //! now this works???
+    //add 3d buildings
     map.current.on('style.load', () => {
       // Insert the layer beneath any symbol layer.
       const layers = map.current.getStyle().layers;
@@ -47,9 +41,6 @@ export default function App() {
         (layer) => layer.type === 'symbol' && layer.layout['text-field']
       ).id;
 
-      // The 'building' layer in the Mapbox Streets
-      // vector tileset contains building height data
-      // from OpenStreetMap.
       map.current.addLayer(
         {
           'id': 'add-3d-buildings',
@@ -89,133 +80,75 @@ export default function App() {
       );
     });
 
-
-
-
-
-
-
-    // The following values can be changed to control rotation speed:
-
-    // At low zooms, complete a revolution every two minutes.
-    const secondsPerRevolution = 2;
-    // Above zoom level 5, do not rotate.
-    const maxSpinZoom = 4;
-    // Rotate at intermediate speeds between zoom levels 3 and 5.
-    const slowSpinZoom = 2;
-
-    let userInteracting = false;
-    let spinEnabled = false;
-
-    function spinGlobe() {
-      const zoom = map.current.getZoom();
-      if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
-        let distancePerSecond = 360 / secondsPerRevolution;
-        if (zoom > slowSpinZoom) {
-          // Slow spinning at higher zooms
-          const zoomDif =
-            (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
-          distancePerSecond *= zoomDif;
-        }
-        const center = map.current.getCenter();
-        center.lng -= distancePerSecond;
-        // Smoothly animate the map over one second.
-        // When this animation is complete, it calls a 'moveend' event.
-        map.current.easeTo({ center, duration: 1000, easing: (n) => n });
-      }
-    }
-
-    // Pause spinning on interaction
-    map.current.on('mousedown', () => {
-      userInteracting = true;
-    });
-
-    // Restart spinning the globe when interaction is complete
-    map.current.on('mouseup', () => {
-      userInteracting = false;
-      spinGlobe();
-    });
-
-    // These events account for cases where the mouse has moved
-    // off the map, so 'mouseup' will not be fired.
-    map.current.on('dragend', () => {
-      userInteracting = false;
-      spinGlobe();
-    });
-    map.current.on('pitchend', () => {
-      userInteracting = false;
-      spinGlobe();
-    });
-    map.current.on('rotateend', () => {
-      userInteracting = false;
-      spinGlobe();
-    });
-
-    // When animation is complete, start spinning if there is no ongoing interaction
+    //reset button when globe spin ends
     map.current.on('moveend', () => {
-      spinGlobe();
-    });
-
-    document.getElementById('btn-spin').addEventListener('click', (e) => {
-      spinEnabled = !spinEnabled;
-      if (spinEnabled) {
-        spinGlobe();
-        e.target.innerHTML = 'Pause rotation';
-      } else {
-        map.current.stop(); // Immediately end ongoing animation
-        e.target.innerHTML = 'Start rotation';
-      }
-    });
-
-    spinGlobe();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      button.current.innerHTML = 'Try again!';
+    }) 
   });
 
-  
-
-  
   //get coordinates on user interaction with map
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
-
     map.current.on('move', () => {
       setLng(map.current.getCenter().lng.toFixed(4));
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
-    
-  
   });
 
-  
+  const revolutionSpeed = 10;
+  let spinEnabled = false;
 
+
+  function spinGlobe() {
+
+    if (spinEnabled) {
+      let distancePerSecond = 360 / revolutionSpeed;
+      // const center = map.current.getCenter();
   
+      // center.lng = lng;
+      // center.lat = lat;
+      const time = Math.floor(Math.random() * (5000 - 2000)) + 2000
+      const chance = Math.floor(Math.random() * (5 - 1) + 1);
+      // console.log(center)
+      if (chance === 1) {
+        console.log(1)
+        setLng(lng + distancePerSecond)
+        setLat(lat + distancePerSecond)
+
+      } else if (chance === 2) {
+        console.log(2)
+        setLng(lng - distancePerSecond)
+        setLat(lat - distancePerSecond)
+      } else if (chance === 3) {
+        console.log(3)
+        setLng(lng - distancePerSecond)
+        setLat(lat + distancePerSecond)
+      } else {
+        console.log(4)
+        setLng(lng + distancePerSecond)
+        setLat(lat - distancePerSecond)
+      }
+      console.log(lng, lat)
+      // console.log(center)
+      map.current.easeTo({ center:[lng, lat], duration: time, easing: (n) => n });
+
+    }
+  }
+
+  const handleBtn = () => {
+    spinEnabled = !spinEnabled;
+    if (spinEnabled) {
+      spinGlobe();
+      button.current.innerHTML = 'Finding...';
+    }
+    spinEnabled = !spinEnabled
+  };
+
   return (
     <>
       <div className="wrapper">
-        <button id="btn-spin">Start rotation</button>
+        <button id="btn-spin" ref={button} onClick={()=>handleBtn()}>Start rotation</button>
         <div className="logoInfo">
           <div className="logoContainer">
             <h1>globe.trotter</h1>
