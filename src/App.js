@@ -18,12 +18,22 @@ export default function App() {
   const button = useRef(null)
 
   // const thresholdChecker = (lng, lat) => {
-  //   lat < -90 || lat > 90 ? lat = Math.floor(Math.random() * (45 - (-45))) + (-45)
+  //   const coordinates = [0, 0];
+
+  //   if (lng < -180 || lng > 180) {
+  //     coordinates.splice(0, 0, (Math.floor(Math.random() * (90 - (-90))) + (-90)))
+  //   } else (coordinates.splice(0, 0, lng))
+
+  //   if (lat < -90 || lat > 90) {
+  //     coordinates.splice(0, 0, (Math.floor(Math.random() * (45 - (-45))) + (-45)))
+  //   } else (coordinates.splice(0, 0, lat))
+
+  //   return coordinates;
   // }
 
   //initialize map
   useEffect(() => {
-    if (map.current) return; 
+    if (map.current) return;
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v12',
@@ -83,7 +93,7 @@ export default function App() {
     //reset button when globe spin ends
     map.current.on('moveend', () => {
       button.current.innerHTML = 'Try again!';
-    }) 
+    })
   });
 
   //get coordinates on user interaction with map
@@ -96,48 +106,25 @@ export default function App() {
     });
   });
 
-  const revolutionSpeed = 10;
+  const revolutionSpeed = .5;
   let spinEnabled = false;
 
-
   function spinGlobe() {
+    const time = Math.floor(Math.random() * (5000 - 2000)) + 2000
+    const center = map.current.getCenter();
 
     if (spinEnabled) {
       let distancePerSecond = 360 / revolutionSpeed;
-      // const center = map.current.getCenter();
-  
-      // center.lng = lng;
-      // center.lat = lat;
-      const time = Math.floor(Math.random() * (5000 - 2000)) + 2000
-      const chance = Math.floor(Math.random() * (5 - 1) + 1);
-      // console.log(center)
-      if (chance === 1) {
-        console.log(1)
-        setLng(lng + distancePerSecond)
-        setLat(lat + distancePerSecond)
-
-      } else if (chance === 2) {
-        console.log(2)
-        setLng(lng - distancePerSecond)
-        setLat(lat - distancePerSecond)
-      } else if (chance === 3) {
-        console.log(3)
-        setLng(lng - distancePerSecond)
-        setLat(lat + distancePerSecond)
-      } else {
-        console.log(4)
-        setLng(lng + distancePerSecond)
-        setLat(lat - distancePerSecond)
-      }
-      console.log(lng, lat)
-      // console.log(center)
-      map.current.easeTo({ center:[lng, lat], duration: time, easing: (n) => n });
-
+      center.lng += distancePerSecond
+      center.lat = Math.floor(Math.random() * (90 - (-90))) + (-90);
     }
+
+    map.current.easeTo({ center, duration: time, easing: (n) => n });
   }
 
   const handleBtn = () => {
     spinEnabled = !spinEnabled;
+
     if (spinEnabled) {
       spinGlobe();
       button.current.innerHTML = 'Finding...';
@@ -148,7 +135,7 @@ export default function App() {
   return (
     <>
       <div className="wrapper">
-        <button id="btn-spin" ref={button} onClick={()=>handleBtn()}>Start rotation</button>
+        <button id="btn-spin" ref={button} onClick={() => handleBtn()}>Start rotation</button>
         <div className="logoInfo">
           <div className="logoContainer">
             <h1>globe.trotter</h1>
