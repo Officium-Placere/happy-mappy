@@ -106,6 +106,13 @@ export default function App() {
     });
   });
 
+  
+  function getPOI(longitude, latitude) {
+    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?routing=true&access_token=${mapboxgl.accessToken}`)
+      .then(response => response.json())
+      .then(data => console.log(data))
+  }
+
   const revolutionSpeed = .5;
   let spinEnabled = false;
 
@@ -120,8 +127,11 @@ export default function App() {
     }
 
     map.current.easeTo({ center, duration: time, easing: (n) => n });
+    getPOI(lng, lat)
   }
 
+
+ 
   const handleBtn = () => {
     spinEnabled = !spinEnabled;
 
