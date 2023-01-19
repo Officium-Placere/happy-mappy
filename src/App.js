@@ -14,7 +14,7 @@ export default function App() {
   const map = useRef(null);
   const [lng, setLng] = useState(Math.floor(Math.random() * (90 - (-90))) + (-90));
   const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
-  const [zoom, setZoom] = useState(3);
+  const [zoom, setZoom] = useState(2);
   const button = useRef(null)
 
 
@@ -347,7 +347,7 @@ export default function App() {
       }
     ]
   }
-  
+
   // console.log(testJson.features[Math.floor(Math.random() * testJson.features.length)].geometry.coordinates) // take features array in testJson obj and return 
 
   // const thresholdChecker = (lng, lat) => {
@@ -378,6 +378,18 @@ export default function App() {
     map.current.addControl(new mapboxgl.FullscreenControl());
     //add 3d buildings
     map.current.on('style.load', () => {
+
+      // ADD LATER ON BUTTON TOGGLE: TERRAIN 
+      // map.current.addSource('mapbox-dem', {
+      //   'type': 'raster-dem',
+      //   'url': 'mapbox://mapbox.terrain-rgb'
+      // });
+
+      // map.current.setTerrain({
+      //   'source': 'mapbox-dem',
+      //   'exaggeration': 1.5
+      // });
+
       // Insert the layer beneath any symbol layer.
       const layers = map.current.getStyle().layers;
       const labelLayerId = layers.find(
@@ -450,39 +462,53 @@ export default function App() {
   //     .then(response => response.json())
   //     .then(data => console.log(data))
   // }
-  
 
-  // const revolutionSpeed = .5;
+
+  const revolutionSpeed = 0.5;
   let spinEnabled = false;
 
   function spinGlobe() {
-    const time = Math.floor(Math.random() * (5000 - 2000)) + 2000
     const center = map.current.getCenter();
+    // const time = Math.floor(Math.random() * (5000 - 2000)) + 2000
 
     if (spinEnabled) {
-      // let distancePerSecond = 360 / revolutionSpeed;
-      // center.lng = distancePerSecond
-      // center.lat = Math.floor(Math.random() * (90 - (-90))) + (-90);
-
-      const cityNum = testJson.features[Math.floor(Math.random() * testJson.features.length)]
-      console.log(cityNum.properties)
-
-      center.lng = cityNum.geometry.coordinates[0]
-      center.lat = cityNum.geometry.coordinates[1]
+      let distancePerSecond = 360 / revolutionSpeed;
+      center.lng += distancePerSecond
+      center.lat = Math.floor(Math.random() * (90 - (-90))) + (-90);
     }
-
-    map.current.easeTo({ center, duration: time, easing: (n) => n });
-    // setZoom(map.current.getZoom().toFixed(10));
-    // getPOI(lng, lat)
+    map.current.easeTo({ center, duration: 3000, easing: (n) => n });
   }
 
+  function easeToCity() {
+    const center = map.current.getCenter();
+    const cityNum = testJson.features[Math.floor(Math.random() * testJson.features.length)]
+    console.log(cityNum.properties, cityNum.geometry.coordinates)
+    center.lng = cityNum.geometry.coordinates[0]
+    center.lat = cityNum.geometry.coordinates[1]
 
+    map.current.flyTo({
+      center,
+      zoom: 9,
+      speed: 0.3,
+      duration: 9000,
+      curve: 1.5,
+      essential: true,
+      easing(t) {
+        return t;
+      }
+    });
+  }
 
   const handleBtn = () => {
     spinEnabled = !spinEnabled;
 
     if (spinEnabled) {
-      spinGlobe();
+      spinGlobe()
+
+      setTimeout(() => {
+        easeToCity()
+      }, 3000)
+
       button.current.innerHTML = 'Finding...';
     }
     spinEnabled = !spinEnabled
