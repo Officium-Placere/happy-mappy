@@ -16,9 +16,9 @@ export default function App() {
   const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
   const [zoom, setZoom] = useState(2);
   const button = useRef(null)
+  const [buttonDisabled, setButtonDisabled] = useState(false)
 
-
-  const testJson = {
+  const geoJSON = {
     "type": "FeatureCollection",
     "features": [
       {
@@ -348,21 +348,7 @@ export default function App() {
     ]
   }
 
-  // console.log(testJson.features[Math.floor(Math.random() * testJson.features.length)].geometry.coordinates) // take features array in testJson obj and return 
-
-  // const thresholdChecker = (lng, lat) => {
-  //   const coordinates = [0, 0];
-
-  //   if (lng < -180 || lng > 180) {
-  //     coordinates.splice(0, 0, (Math.floor(Math.random() * (90 - (-90))) + (-90)))
-  //   } else (coordinates.splice(0, 0, lng))
-
-  //   if (lat < -90 || lat > 90) {
-  //     coordinates.splice(0, 0, (Math.floor(Math.random() * (45 - (-45))) + (-45)))
-  //   } else (coordinates.splice(0, 0, lat))
-
-  //   return coordinates;
-  // }
+  // console.log(geoJSON.features[Math.floor(Math.random() * geoJSON.features.length)].geometry.coordinates) // take features array in geoJSON obj and return 
 
   //initialize map
   useEffect(() => {
@@ -469,7 +455,6 @@ export default function App() {
 
   function spinGlobe() {
     const center = map.current.getCenter();
-    // const time = Math.floor(Math.random() * (5000 - 2000)) + 2000
 
     if (spinEnabled) {
       let distancePerSecond = 360 / revolutionSpeed;
@@ -479,12 +464,15 @@ export default function App() {
     map.current.easeTo({ center, duration: 3000, easing: (n) => n });
   }
 
-  function easeToCity() {
+  const randomPOI = geoJSON.features[Math.floor(Math.random() * geoJSON.features.length)]
+
+  function flyToCity() {
     const center = map.current.getCenter();
-    const cityNum = testJson.features[Math.floor(Math.random() * testJson.features.length)]
-    console.log(cityNum.properties, cityNum.geometry.coordinates)
-    center.lng = cityNum.geometry.coordinates[0]
-    center.lat = cityNum.geometry.coordinates[1]
+    //get random city object from geoJSON file
+
+    console.log(randomPOI.properties, randomPOI.geometry.coordinates)
+    center.lng = randomPOI.geometry.coordinates[0]
+    center.lat = randomPOI.geometry.coordinates[1]
 
     map.current.flyTo({
       center,
@@ -497,33 +485,94 @@ export default function App() {
         return t;
       }
     });
+
+
   }
 
-  const handleBtn = () => {
-    spinEnabled = !spinEnabled;
 
-    if (spinEnabled) {
+  //? testing bigdatacloud wikidataID
+
+
+
+  //* get random city from static JSON -> 
+  //* get wikiDataID from bigDataCloud API -> 
+  //!bigclouddata get request example - ask gaby for the one that returns wikidata IDs
+  // function getPOI(longitude, latitude) {
+
+  fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_3310b69981ed4fba900d25cc711e6f87`)
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data)
+      const cityObj = data.localityInfo.administrative.find((poiObj => poiObj.name === data.city))
+      // console.log(cityObj)//
+
+      return fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${cityObj.wikidataId}&sitefilter=enwiki&format=json`)
+
+    })
+    .then(response => response.json())
+    .then(data => console.log(data)) //should return wikiData on the city
+    .catch(error => console.log(error))
+
+
+
+  // }
+
+
+
+
+  // //! use wikiDataID to GET json with wikimedia pageID
+  // fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=Q30&sitefilter=enwiki&format=json`).then(response => response.json()).then(json => {
+  //   console.log(json);
+  // })
+
+  // //! -> use page ID to get extracted intro... via (https://stackoverflow.com/questions/8555320/is-there-a-wikipedia-api-just-for-retrieve-the-content-summary)?
+  // //*url to get extract with wiki pageID: https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&pageids=49728&origin=*
+
+  // //https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&pageids=21721040
+  // fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&pageids=3434750&origin=*`).then(response => response.json()).then(json => {
+  //   console.log(json);
+  // })
+  // fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=United States&format=json&origin=*`).then(response => response.json()).then(json => {
+  //   console.log(json);
+  // })
+
+
+
+  const handleBtn = () => {
+    setButtonDisabled(true)
+    if (!spinEnabled) {
+      spinEnabled = !spinEnabled
+
+      //! globe stays zoomed in after the first spin
       spinGlobe()
 
+      //! interrtupting the spin won't stop flyToCity from running
       setTimeout(() => {
-        easeToCity()
+        flyToCity()
+        setButtonDisabled(false)
       }, 3000)
 
-      button.current.innerHTML = 'Finding...';
+      button.current.innerHTML = 'Searching..';
     }
     spinEnabled = !spinEnabled
+
   };
 
   return (
     <>
       <div className="wrapper">
-        <button id="btn-spin" ref={button} onClick={() => handleBtn()}>Start rotation</button>
+        <button id="btn-spin" ref={button} disabled={buttonDisabled} onClick={() => handleBtn()}>Start rotation</button>
         <div className="logoInfo">
           <div className="logoContainer">
             <h1>globe.trotter</h1>
           </div>
           <div className="infoContainer">
-            <p>lat/lng/zoom is {lat}, {lng}, {zoom}</p>
+            <ul className="mapProperties">
+              <li>Longitude: {lng}</li>
+              <li>Latitude: {lat}</li>
+              <li>Zoom Level: {zoom}</li>
+            </ul>
+
           </div>
         </div>
         <div ref={mapContainer} className="map-container" />
