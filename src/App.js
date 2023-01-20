@@ -499,24 +499,42 @@ export default function App() {
   //!bigclouddata get request example - ask gaby for the one that returns wikidata IDs
   // function getPOI(longitude, latitude) {
 
-  fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_3310b69981ed4fba900d25cc711e6f87`)
-    .then(response => response.json())
-    .then(data => {
-      // console.log(data)
-      const cityObj = data.localityInfo.administrative.find((poiObj => poiObj.name === data.city))
-      // console.log(cityObj)//
+  async function pleaseRun() {
+    const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_3310b69981ed4fba900d25cc711e6f87`)
+      .then(response => response.json())
+      .then(data => data)
+      
+    const cityObj = firstAPI.localityInfo.administrative.find((poiObj => poiObj.name === firstAPI.city))
+    const id = cityObj.wikidataId
 
-      return fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${cityObj.wikidataId}&sitefilter=enwiki&format=json`)
+    const secondAPI = await fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
+      .then(response => response.json())
+      .then(data => data)
 
-    })
-    .then(response => response.json())
-    .then(data => console.log(data)) //should return wikiData on the city
-    .catch(error => console.log(error))
+    const wikiTitle = secondAPI.entities[id].sitelinks.enwiki.title
 
+    const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${wikiTitle}&origin=*`)
+      .then(response => response.json())
+      .then(data => data)
+
+    const keys = Object.keys(thirdAPI.query.pages)[0]
+    console.log(thirdAPI.query.pages[keys].pageID)
+
+    console.log(thirdAPI.query.pages[keys].extract)
+
+    // const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${wikiTitle}&format=json&origin=*`).then(response => response.json()).then(data => data)
+
+    
+    
+  }
+
+  pleaseRun()
 
 
   // }
-
+  // fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=United States&format=json&origin=*`).then(response => response.json()).then(json => {
+  //   console.log(json);
+  // })
 
 
 
