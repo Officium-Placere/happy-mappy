@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import "./styles/styles.scss";
+import axios from 'axios';
+import DisplayCityPhotos from './DisplayCityPhotos';
 
 //* to add: geocoding + markers (https://docs.mapbox.com/mapbox-gl-js/example/marker-from-geocode/)
 //* permanence? logins?
@@ -16,6 +18,7 @@ export default function App() {
   const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
   const [zoom, setZoom] = useState(2);
   const button = useRef(null)
+  const [cityPhotos, setCityPhotos] = useState([]);
 
 
   const testJson = {
@@ -348,21 +351,7 @@ export default function App() {
     ]
   }
 
-  // console.log(testJson.features[Math.floor(Math.random() * testJson.features.length)].geometry.coordinates) // take features array in testJson obj and return 
-
-  // const thresholdChecker = (lng, lat) => {
-  //   const coordinates = [0, 0];
-
-  //   if (lng < -180 || lng > 180) {
-  //     coordinates.splice(0, 0, (Math.floor(Math.random() * (90 - (-90))) + (-90)))
-  //   } else (coordinates.splice(0, 0, lng))
-
-  //   if (lat < -90 || lat > 90) {
-  //     coordinates.splice(0, 0, (Math.floor(Math.random() * (45 - (-45))) + (-45)))
-  //   } else (coordinates.splice(0, 0, lat))
-
-  //   return coordinates;
-  // }
+ 
 
   //initialize map
   useEffect(() => {
@@ -451,19 +440,6 @@ export default function App() {
     });
   });
 
-  // function getPOI(longitude, latitude) {
-  //   fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?routing=true&access_token=${mapboxgl.accessToken}`)
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  // }
-
-  // function getPOI(longitude, latitude) {
-  //   fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${latitude}&longitude=${longitude}&localityLanguage=en&key=bdc_e3a41bcc2937431191cc18382f3d5492`)
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  // }
-
-
   const revolutionSpeed = 0.5;
   let spinEnabled = false;
 
@@ -482,7 +458,10 @@ export default function App() {
   function easeToCity() {
     const center = map.current.getCenter();
     const cityNum = testJson.features[Math.floor(Math.random() * testJson.features.length)]
-    console.log(cityNum.properties, cityNum.geometry.coordinates)
+    // console.log(cityNum.properties, cityNum.geometry.coordinates)
+
+    const cityName = cityNum.properties.city;
+    console.log(cityName)
     center.lng = cityNum.geometry.coordinates[0]
     center.lat = cityNum.geometry.coordinates[1]
 
@@ -497,7 +476,24 @@ export default function App() {
         return t;
       }
     });
+
+    axios({
+      url: 'https://api.unsplash.com/search/photos',
+      method: 'GET',
+      dataResponse: 'json',
+      params: {
+        client_id: 'A9-ixNjoDZJlOAxHMjrAcrWJuUONOro6bnHexQnCEwY', 
+        query: cityName, 
+        per_page: 1,
+      }, 
+    }).then( (response) => {
+      const cityPic = response.data.results.map( (pic) => {
+        return {...pic};
+      });
+      setCityPhotos(cityPic);
+    })
   }
+
 
   const handleBtn = () => {
     spinEnabled = !spinEnabled;
@@ -527,6 +523,8 @@ export default function App() {
           </div>
         </div>
         <div ref={mapContainer} className="map-container" />
+
+        <DisplayCityPhotos photos={cityPhotos} />
       </div>
     </>
   );
