@@ -492,16 +492,7 @@ export default function App() {
     //   setCityPhotos(cityPic);
     // })
 
-    axios({
-      url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Moscow%20City&inputtype=textquery&key=AIzaSyDxucRNfHX6z1-v5ub6i0zgFWcFzC4P5EU',
-      method: 'get',
-      headers: { }
-    }).then((response) => {
-      console.log(response.data);
-    })
-      .catch((error) => {
-        console.log(error);
-      });
+
 
 
     // var axios = require('axios');
