@@ -351,8 +351,6 @@ export default function App() {
     ]
   }
 
- 
-
   //initialize map
   useEffect(() => {
     if (map.current) return;
@@ -477,21 +475,51 @@ export default function App() {
       }
     });
 
+    // axios api call to unsplash for photos of the cityName
+    // axios({
+    //   url: 'https://api.unsplash.com/search/photos',
+    //   method: 'GET',
+    //   dataResponse: 'json',
+    //   params: {
+    //     client_id: 'A9-ixNjoDZJlOAxHMjrAcrWJuUONOro6bnHexQnCEwY', 
+    //     query: cityName, 
+    //     per_page: 1,
+    //   }, 
+    // }).then( (response) => {
+    //   const cityPic = response.data.results.map( (pic) => {
+    //     return {...pic};
+    //   });
+    //   setCityPhotos(cityPic);
+    // })
+
     axios({
-      url: 'https://api.unsplash.com/search/photos',
-      method: 'GET',
-      dataResponse: 'json',
-      params: {
-        client_id: 'A9-ixNjoDZJlOAxHMjrAcrWJuUONOro6bnHexQnCEwY', 
-        query: cityName, 
-        per_page: 1,
-      }, 
-    }).then( (response) => {
-      const cityPic = response.data.results.map( (pic) => {
-        return {...pic};
-      });
-      setCityPhotos(cityPic);
+      url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Moscow%20City&inputtype=textquery&key=AIzaSyDxucRNfHX6z1-v5ub6i0zgFWcFzC4P5EU',
+      method: 'get',
+      headers: { }
+    }).then((response) => {
+      console.log(response.data);
     })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+    // var axios = require('axios');
+
+    // var config = {
+    //   method: 'get',
+    //   url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&key=YOUR_API_KEY',
+    //   headers: {}
+    // };
+
+    // axios(config)
+    //   .then(function (response) {
+    //     console.log(JSON.stringify(response.data));
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+
   }
 
 
