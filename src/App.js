@@ -15,11 +15,12 @@ export default function App() {
 
   const mapContainer = useRef(null);
   const map = useRef(null);
+  const button = useRef(null);
+  const blurbContainer = useRef(null);
   const [lng, setLng] = useState(Math.floor(Math.random() * (90 - (-90))) + (-90));
   const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
   const [zoom, setZoom] = useState(2);
-  const button = useRef(null)
-  // const [cityPhotos, setCityPhotos] = useState([]);
+  const [cityPhotos, setCityPhotos] = useState([]);
 
 
   const testJson = {
@@ -454,15 +455,17 @@ export default function App() {
     map.current.easeTo({ center, duration: 3000, easing: (n) => n });
   }
 
+  const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
+
   function easeToCity() {
     const center = map.current.getCenter();
-    const cityNum = testJson.features[Math.floor(Math.random() * testJson.features.length)]
+    const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
     // console.log(cityNum.properties, cityNum.geometry.coordinates)
 
-    const cityName = cityNum.properties.city;
+    const cityName = randomPOI.properties.city;
     console.log(cityName)
-    center.lng = cityNum.geometry.coordinates[0]
-    center.lat = cityNum.geometry.coordinates[1]
+    center.lng = randomPOI.geometry.coordinates[0]
+    center.lat = randomPOI.geometry.coordinates[1]
 
     map.current.flyTo({
       center,
@@ -476,26 +479,55 @@ export default function App() {
       }
     });
 
+    //* get random city from static JSON -> 
+    //* get wikiDataID from bigDataCloud API -> 
+    //!bigclouddata get request example - ask gaby for the one that returns wikidata IDs
+    // function getPOI(longitude, latitude) {
 
-    // axios api call to unsplash for photos of the cityName
-    axios({
-      url: 'https://api.unsplash.com/search/photos',
-      method: 'GET',
-      dataResponse: 'json',
-      params: {
-        client_id: 'A9-ixNjoDZJlOAxHMjrAcrWJuUONOro6bnHexQnCEwY', 
-        query: cityName, 
-        per_page: 1,
-      }, 
-    }).then( (response) => {
-      const cityPic = response.data.results.map( (pic) => {
-        return {...pic};
-      });
-      setCityPhotos(cityPic);
-    })
+    async function pleaseRun() {
+      const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_3310b69981ed4fba900d25cc711e6f87`)
+        .then(response => response.json())
+        .then(data => data)
+
+      const cityObj = firstAPI.localityInfo.administrative.find((poiObj => poiObj.name === firstAPI.city))
+      const id = cityObj.wikidataId
+
+      const secondAPI = await fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
+        .then(response => response.json())
+        .then(data => data)
+
+      const wikiTitle = secondAPI.entities[id].sitelinks.enwiki.title
+
+      const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${wikiTitle}&origin=*`)
+        .then(response => response.json())
+        .then(data => data)
+
+      const keys = Object.keys(thirdAPI.query.pages)[0]
+
+      const extract = (thirdAPI.query.pages[keys].extract)
+
+      // const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${wikiTitle}&format=json&origin=*`).then(response => response.json()).then(data => data)
+
+      const blurb = extract.match(/[^.]*.[^.]*.[^.]*./)[0]
+
+      blurbContainer.current.innerHTML =`<p>${blurb}.. <a href="https://en.wikipedia.org/wiki/${wikiTitle}">see more</a></p>`
+
+      const fourthAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=%2A&pithumbsize=800&prop=pageimages&titles=${wikiTitle}&format=json`)
+      .then(response => response.json())
+      .then(data => data)
+     
+
+      const imageKey = Object.keys(fourthAPI.query.pages)[0]
+      const imageLink = (fourthAPI.query.pages[imageKey].thumbnail.source)
+      console.log(imageLink)
+    }
+
+    pleaseRun()
 
 
   }
+
+
 
 
   const handleBtn = () => {
@@ -515,20 +547,23 @@ export default function App() {
 
   return (
     <>
-        <div className="wrapper">
-          <button id="btn-spin" ref={button} onClick={() => handleBtn()}>Start rotation</button>
-          <div className="logoInfo">
-            <div className="logoContainer">
-              <h1>globe.trotter</h1>
-            </div>
-            <div className="infoContainer">
-              <p>lat/lng/zoom is {lat}, {lng}, {zoom}</p>
-            </div>
+      <div className="wrapper">
+        <button id="btn-spin" ref={button} onClick={() => handleBtn()}>Start rotation</button>
+        <div className="logoInfo">
+          <div className="logoContainer">
+            <h1>globe.trotter</h1>
           </div>
-          <div ref={mapContainer} className="map-container" />
-
-          <DisplayCityPhotos photos={cityPhotos} />
+          <div className="infoContainer">
+            <p>lat/lng/zoom is {lat}, {lng}, {zoom}</p>
+          </div>
         </div>
+        <div ref={mapContainer} className="map-container" />
+
+        <DisplayCityPhotos photos={cityPhotos} />
+        <div ref={blurbContainer}>
+        
+        </div>
+      </div>
     </>
   );
 
