@@ -4,6 +4,7 @@ import "./styles/styles.scss";
 import axios from 'axios';
 import DisplayCityPhotos from './DisplayCityPhotos';
 
+
 //* to add: geocoding + markers (https://docs.mapbox.com/mapbox-gl-js/example/marker-from-geocode/)
 //* permanence? logins?
 //* cool isotope grid?
@@ -18,7 +19,7 @@ export default function App() {
   const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
   const [zoom, setZoom] = useState(2);
   const button = useRef(null)
-  const [cityPhotos, setCityPhotos] = useState([]);
+  // const [cityPhotos, setCityPhotos] = useState([]);
 
 
   const testJson = {
@@ -475,41 +476,24 @@ export default function App() {
       }
     });
 
+
     // axios api call to unsplash for photos of the cityName
-    // axios({
-    //   url: 'https://api.unsplash.com/search/photos',
-    //   method: 'GET',
-    //   dataResponse: 'json',
-    //   params: {
-    //     client_id: 'A9-ixNjoDZJlOAxHMjrAcrWJuUONOro6bnHexQnCEwY', 
-    //     query: cityName, 
-    //     per_page: 1,
-    //   }, 
-    // }).then( (response) => {
-    //   const cityPic = response.data.results.map( (pic) => {
-    //     return {...pic};
-    //   });
-    //   setCityPhotos(cityPic);
-    // })
+    axios({
+      url: 'https://api.unsplash.com/search/photos',
+      method: 'GET',
+      dataResponse: 'json',
+      params: {
+        client_id: 'A9-ixNjoDZJlOAxHMjrAcrWJuUONOro6bnHexQnCEwY', 
+        query: cityName, 
+        per_page: 1,
+      }, 
+    }).then( (response) => {
+      const cityPic = response.data.results.map( (pic) => {
+        return {...pic};
+      });
+      setCityPhotos(cityPic);
+    })
 
-
-
-
-    // var axios = require('axios');
-
-    // var config = {
-    //   method: 'get',
-    //   url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&key=YOUR_API_KEY',
-    //   headers: {}
-    // };
-
-    // axios(config)
-    //   .then(function (response) {
-    //     console.log(JSON.stringify(response.data));
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
 
   }
 
@@ -531,20 +515,20 @@ export default function App() {
 
   return (
     <>
-      <div className="wrapper">
-        <button id="btn-spin" ref={button} onClick={() => handleBtn()}>Start rotation</button>
-        <div className="logoInfo">
-          <div className="logoContainer">
-            <h1>globe.trotter</h1>
+        <div className="wrapper">
+          <button id="btn-spin" ref={button} onClick={() => handleBtn()}>Start rotation</button>
+          <div className="logoInfo">
+            <div className="logoContainer">
+              <h1>globe.trotter</h1>
+            </div>
+            <div className="infoContainer">
+              <p>lat/lng/zoom is {lat}, {lng}, {zoom}</p>
+            </div>
           </div>
-          <div className="infoContainer">
-            <p>lat/lng/zoom is {lat}, {lng}, {zoom}</p>
-          </div>
-        </div>
-        <div ref={mapContainer} className="map-container" />
+          <div ref={mapContainer} className="map-container" />
 
-        <DisplayCityPhotos photos={cityPhotos} />
-      </div>
+          <DisplayCityPhotos photos={cityPhotos} />
+        </div>
     </>
   );
 
