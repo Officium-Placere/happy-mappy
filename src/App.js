@@ -1,8 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import "./styles/styles.scss";
-import axios from 'axios';
-import DisplayCityPhotos from './DisplayCityPhotos';
+// import DisplayCityPhotos from './DisplayCityPhotos';
 
 
 //* to add: geocoding + markers (https://docs.mapbox.com/mapbox-gl-js/example/marker-from-geocode/)
@@ -13,37 +12,24 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXBwbGVtdWZmaW4iLCJhIjoiY2xjdmFzZmppMDYwMTNxb
 
 export default function App() {
 
-  const mapContainer = useRef(null);
   const map = useRef(null);
+  const mapContainer = useRef(null);
   const button = useRef(null);
   const blurbContainer = useRef(null);
+  const imageContainer = useRef(null);
+  const teleportImageContainer = useRef(null);
+  const teleportSummary = useRef(null);
+  const teleportRanking = useRef(null);
+
   const [lng, setLng] = useState(Math.floor(Math.random() * (90 - (-90))) + (-90));
   const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
   const [zoom, setZoom] = useState(2);
-  const [cityPhotos, setCityPhotos] = useState([]);
+  // const [cityPhotos, setCityPhotos] = useState([]);
 
 
   const testJson = {
     "type": "FeatureCollection",
     "features": [
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [139.7744, 35.6839]
-        },
-        "properties": {
-          "city": "Tokyo",
-          "city_ascii": "Tokyo",
-          "country": "Japan",
-          "iso2": "JP",
-          "iso3": "JPN",
-          "admin_name": "Tōkyō",
-          "capital": "primary",
-          "population": 39105000,
-          "id": 1392685764
-        }
-      },
       {
         "type": "Feature",
         "geometry": {
@@ -455,7 +441,7 @@ export default function App() {
     map.current.easeTo({ center, duration: 3000, easing: (n) => n });
   }
 
-  const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
+  // const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
 
   function easeToCity() {
     const center = map.current.getCenter();
@@ -484,7 +470,7 @@ export default function App() {
     //!bigclouddata get request example - ask gaby for the one that returns wikidata IDs
     // function getPOI(longitude, latitude) {
 
-    async function pleaseRun() {
+    async function getWikiData() {
       const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_3310b69981ed4fba900d25cc711e6f87`)
         .then(response => response.json())
         .then(data => data)
@@ -502,44 +488,107 @@ export default function App() {
         .then(response => response.json())
         .then(data => data)
 
+      // get wikiID out of the thirdAPI result so it's consistent on every call
       const keys = Object.keys(thirdAPI.query.pages)[0]
 
       const extract = (thirdAPI.query.pages[keys].extract)
-
-      // const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${wikiTitle}&format=json&origin=*`).then(response => response.json()).then(data => data)
-
+      // save first 3 sentences of extract into blurb
       const blurb = extract.match(/[^.]*.[^.]*.[^.]*./)[0]
+      // add blurb to page and link to rest of article
+      blurbContainer.current.innerHTML = `<p>${blurb}.. <a href="https://en.wikipedia.org/wiki/${wikiTitle}">see more</a></p>`
 
-      blurbContainer.current.innerHTML =`<p>${blurb}.. <a href="https://en.wikipedia.org/wiki/${wikiTitle}">see more</a></p>`
-
+      // fetch main image from wiki article
       const fourthAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=%2A&pithumbsize=800&prop=pageimages&titles=${wikiTitle}&format=json`)
-      .then(response => response.json())
-      .then(data => data)
-     
+        .then(response => response.json())
+        .then(data => data)
 
+      // get wikiID out of fourthAPI
       const imageKey = Object.keys(fourthAPI.query.pages)[0]
       const imageLink = (fourthAPI.query.pages[imageKey].thumbnail.source)
-      console.log(imageLink)
+      imageContainer.current.innerHTML = `<img src=${imageLink} alt="Image of ${wikiTitle} city" />`
+
+
+      // FIND CITY VIA COORDS TO GET CORRECT CITY NAME IN TELEPORT, AND THEN FIND IMAGE AFTER
+      const teleportCity = await fetch(`https://api.teleport.org/api/locations/${randomPOI.geometry.coordinates[1]},${randomPOI.geometry.coordinates[0]}/`)
+        .then(response => response.json())
+        .then(data => data);
+      // console.log(teleportCity._embedded)
+      const nearestCity = Object.entries(teleportCity._embedded)
+      // console.log(nearestCity[0]) - targetting into the object to get the city name
+      const nearestCityName = nearestCity[0];
+      // more targetting into the object to get the city name
+      const cName = Object.entries(nearestCityName[1][0]._links)
+      const tpCity = cName[0][1].name
+
+      // remove 'city' from the name, when it's not Mexico City, ie for New York City as API lists NYC as New York.. UGHHHHH
+      const editedCityName = [];
+      let cityLowerCase = '';
+      tpCity === 'Mexico City' 
+      ? 
+      cityLowerCase = tpCity.toLowerCase().split(' ').join('-') 
+      :
+      tpCity.toLowerCase().split(' ').map((word) => {
+        if (word !== 'city') {
+          editedCityName.push(word)
+        }
+        cityLowerCase = editedCityName.join('-');
+        return cityLowerCase;
+      })
+
+      // remove accents from the city name (ie Sao Paulo)
+      let cityASCII = ''
+      function removeAccents(str) {
+        cityASCII = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        return cityASCII
+      }
+      removeAccents(cityLowerCase)
+      // console.log(cityASCII)
+
+      // clear out teleport refs if the city isn't found in teleport api:
+      teleportRanking.current.innerHTML = '';
+      teleportSummary.current.innerHTML = '';
+      teleportImageContainer.current.innerHTML = '';
+
+      // IMAGE FROM TELEPORT API
+      const teleportImg = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/images/`)
+        .then(response => response.json())
+        .then(data => data);
+      const tpPhoto = teleportImg.photos[0].image.mobile
+      // console.log(tpPhoto)
+      teleportImageContainer.current.innerHTML = `<img src=${tpPhoto} alt="Image of ${wikiTitle} city" />`
+
+
+      // IMAGE FROM TELEPORT API
+      const teleportBlurb = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/scores/`)
+        .then(response => response.json())
+        .then(data => data);
+
+      // get the city summary blurb
+      const citySummary = teleportBlurb.summary;
+      teleportSummary.current.innerHTML = `${citySummary}`
+
+      // get the ranking for city
+      const cityRanking = teleportBlurb.categories
+
+      const cityRank = cityRanking.map((category) => {
+        return `${category.name}: ${category.score_out_of_10.toFixed(2)}/10`
+      })
+
+      console.log(cityRank)
+      teleportRanking.current.innerHTML = cityRank
+
     }
 
-    pleaseRun()
-
-
+    getWikiData()
   }
-
-
-
 
   const handleBtn = () => {
     spinEnabled = !spinEnabled;
-
     if (spinEnabled) {
       spinGlobe()
-
       setTimeout(() => {
         easeToCity()
       }, 3000)
-
       button.current.innerHTML = 'Finding...';
     }
     spinEnabled = !spinEnabled
@@ -559,10 +608,12 @@ export default function App() {
         </div>
         <div ref={mapContainer} className="map-container" />
 
-        <DisplayCityPhotos photos={cityPhotos} />
-        <div ref={blurbContainer}>
-        
-        </div>
+        {/* <DisplayCityPhotos photos={cityPhotos} /> */}
+        <div ref={blurbContainer} />
+        <div ref={imageContainer} />
+        <div ref={teleportImageContainer} />
+        <div ref={teleportRanking} />
+        <div ref={teleportSummary} />
       </div>
     </>
   );
