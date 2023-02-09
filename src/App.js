@@ -20,12 +20,14 @@ export default function App() {
   const teleportImageContainer = useRef(null);
   const teleportSummary = useRef(null);
   const teleportRanking = useRef(null);
-
+  const spinButton = useRef(null);
+  
   const [lng, setLng] = useState(Math.floor(Math.random() * (90 - (-90))) + (-90));
   const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
   const [zoom, setZoom] = useState(2);
+  const [showInfo, setShowInfo] = useState(false);
+  // const [showInfoBtn, setShowInfoBtn] = useState(false);
   // const [cityPhotos, setCityPhotos] = useState([]);
-
 
   const testJson = {
     "type": "FeatureCollection",
@@ -339,6 +341,8 @@ export default function App() {
     ]
   }
 
+
+
   //initialize map
   useEffect(() => {
     if (map.current) return;
@@ -432,7 +436,6 @@ export default function App() {
   function spinGlobe() {
     const center = map.current.getCenter();
     // const time = Math.floor(Math.random() * (5000 - 2000)) + 2000
-
     if (spinEnabled) {
       let distancePerSecond = 360 / revolutionSpeed;
       center.lng += distancePerSecond
@@ -464,19 +467,23 @@ export default function App() {
         return t;
       }
     });
+    button.current.innerHTML = 'Finding...';
 
     //* get random city from static JSON -> 
     //* get wikiDataID from bigDataCloud API -> 
     //!bigclouddata get request example - ask gaby for the one that returns wikidata IDs
     // function getPOI(longitude, latitude) {
 
-    async function getWikiData() {
+    async function getApiData() {
       const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_3310b69981ed4fba900d25cc711e6f87`)
         .then(response => response.json())
         .then(data => data)
 
       const cityObj = firstAPI.localityInfo.administrative.find((poiObj => poiObj.name === firstAPI.city))
-      const id = cityObj.wikidataId
+
+      // ID returned for coordinates is Sao Paulo state, so in this case, change id to Q174 for Sao Paulo city
+      let id = ''
+      cityObj.wikidataId === 'Q175' ? id = 'Q174' : id = cityObj.wikidataId;
 
       const secondAPI = await fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
         .then(response => response.json())
@@ -523,17 +530,17 @@ export default function App() {
       // remove 'city' from the name, when it's not Mexico City, ie for New York City as API lists NYC as New York.. UGHHHHH
       const editedCityName = [];
       let cityLowerCase = '';
-      tpCity === 'Mexico City' 
-      ? 
-      cityLowerCase = tpCity.toLowerCase().split(' ').join('-') 
-      :
-      tpCity.toLowerCase().split(' ').map((word) => {
-        if (word !== 'city') {
-          editedCityName.push(word)
-        }
-        cityLowerCase = editedCityName.join('-');
-        return cityLowerCase;
-      })
+      tpCity === 'Mexico City'
+        ?
+        cityLowerCase = tpCity.toLowerCase().split(' ').join('-')
+        :
+        tpCity.toLowerCase().split(' ').map((word) => {
+          if (word !== 'city') {
+            editedCityName.push(word)
+          }
+          cityLowerCase = editedCityName.join('-');
+          return cityLowerCase;
+        })
 
       // remove accents from the city name (ie Sao Paulo)
       let cityASCII = ''
@@ -565,6 +572,7 @@ export default function App() {
 
       // get the city summary blurb
       const citySummary = teleportBlurb.summary;
+      // NOTE: for Moscow- there's a byline in <i> tags above the blurb, we might want to cut it out..?
       teleportSummary.current.innerHTML = `${citySummary}`
 
       // get the ranking for city
@@ -573,13 +581,9 @@ export default function App() {
       const cityRank = cityRanking.map((category) => {
         return `${category.name}: ${category.score_out_of_10.toFixed(2)}/10`
       })
-
-      console.log(cityRank)
       teleportRanking.current.innerHTML = cityRank
-
     }
-
-    getWikiData()
+    getApiData()
   }
 
   const handleBtn = () => {
@@ -593,6 +597,7 @@ export default function App() {
     }
     spinEnabled = !spinEnabled
   };
+
 
   return (
     <>
@@ -609,11 +614,19 @@ export default function App() {
         <div ref={mapContainer} className="map-container" />
 
         {/* <DisplayCityPhotos photos={cityPhotos} /> */}
-        <div ref={blurbContainer} />
-        <div ref={imageContainer} />
-        <div ref={teleportImageContainer} />
-        <div ref={teleportRanking} />
-        <div ref={teleportSummary} />
+
+        {/* <div style={{ display: showInfoBtn ? 'block' : 'none'}}> */}
+          <button ref={spinButton} onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : 'Show city info'}</button>
+        {/* </div> */}
+
+        <div style={{ display: showInfo ? 'block' : 'none' }}>
+          <div ref={blurbContainer} />
+          <div ref={imageContainer} />
+          <div ref={teleportImageContainer} />
+          <div ref={teleportRanking} />
+          <div ref={teleportSummary} />
+        </div>
+
       </div>
     </>
   );
