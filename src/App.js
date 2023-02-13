@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import "./styles/styles.scss";
+// import DisplayCityPhotos from './DisplayCityPhotos';
+
 
 //* to add: geocoding + markers (https://docs.mapbox.com/mapbox-gl-js/example/marker-from-geocode/)
 //* permanence? logins?
@@ -10,35 +12,26 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXBwbGVtdWZmaW4iLCJhIjoiY2xjdmFzZmppMDYwMTNxb
 
 export default function App() {
 
-  const mapContainer = useRef(null);
   const map = useRef(null);
+  const mapContainer = useRef(null);
+  const button = useRef(null);
+  const blurbContainer = useRef(null);
+  const imageContainer = useRef(null);
+  const teleportImageContainer = useRef(null);
+  const teleportSummary = useRef(null);
+  const teleportRanking = useRef(null);
+  const spinButton = useRef(null);
+  
   const [lng, setLng] = useState(Math.floor(Math.random() * (90 - (-90))) + (-90));
   const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
   const [zoom, setZoom] = useState(2);
-  const button = useRef(null)
-  const [buttonDisabled, setButtonDisabled] = useState(false)
+  const [showInfo, setShowInfo] = useState(false);
+  // const [showInfoBtn, setShowInfoBtn] = useState(false);
+  // const [cityPhotos, setCityPhotos] = useState([]);
 
-  const geoJSON = {
+  const testJson = {
     "type": "FeatureCollection",
     "features": [
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [139.7744, 35.6839]
-        },
-        "properties": {
-          "city": "Tokyo",
-          "city_ascii": "Tokyo",
-          "country": "Japan",
-          "iso2": "JP",
-          "iso3": "JPN",
-          "admin_name": "Tōkyō",
-          "capital": "primary",
-          "population": 39105000,
-          "id": 1392685764
-        }
-      },
       {
         "type": "Feature",
         "geometry": {
@@ -348,7 +341,7 @@ export default function App() {
     ]
   }
 
-  // console.log(geoJSON.features[Math.floor(Math.random() * geoJSON.features.length)].geometry.coordinates) // take features array in geoJSON obj and return 
+
 
   //initialize map
   useEffect(() => {
@@ -437,25 +430,13 @@ export default function App() {
     });
   });
 
-  // function getPOI(longitude, latitude) {
-  //   fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?routing=true&access_token=${mapboxgl.accessToken}`)
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  // }
-
-  // function getPOI(longitude, latitude) {
-  //   fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${latitude}&longitude=${longitude}&localityLanguage=en&key=bdc_e3a41bcc2937431191cc18382f3d5492`)
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  // }
-
-
   const revolutionSpeed = 0.5;
   let spinEnabled = false;
 
   function spinGlobe() {
-    const center = map.current.getCenter();
 
+    const center = map.current.getCenter();
+    // const time = Math.floor(Math.random() * (5000 - 2000)) + 2000
     if (spinEnabled) {
       let distancePerSecond = 360 / revolutionSpeed;
       center.lng += distancePerSecond
@@ -464,15 +445,18 @@ export default function App() {
     map.current.easeTo({ center, duration: 3000, easing: (n) => n });
   }
 
+  // const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
+
+  // const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
+
   const randomPOI = geoJSON.features[Math.floor(Math.random() * geoJSON.features.length)]
 
-  function flyToCity() {
+  function easeToCity() {
     const center = map.current.getCenter();
-    //get random city object from geoJSON file
-
-    console.log(randomPOI.properties, randomPOI.geometry.coordinates)
-    center.lng = randomPOI.geometry.coordinates[0]
-    center.lat = randomPOI.geometry.coordinates[1]
+    const cityNum = testJson.features[Math.floor(Math.random() * testJson.features.length)]
+    console.log(cityNum.properties, cityNum.geometry.coordinates)
+    center.lng = cityNum.geometry.coordinates[0]
+    center.lat = cityNum.geometry.coordinates[1]
 
     map.current.flyTo({
       center,
@@ -485,8 +469,123 @@ export default function App() {
         return t;
       }
     });
+    button.current.innerHTML = 'Finding...';
+
+    //* get random city from static JSON -> 
+    //* get wikiDataID from bigDataCloud API -> 
+    //!bigclouddata get request example - ask gaby for the one that returns wikidata IDs
+    // function getPOI(longitude, latitude) {
+
+    async function getApiData() {
+      const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_3310b69981ed4fba900d25cc711e6f87`)
+        .then(response => response.json())
+        .then(data => data)
+
+      const cityObj = firstAPI.localityInfo.administrative.find((poiObj => poiObj.name === firstAPI.city))
+
+      // ID returned for coordinates is Sao Paulo state, so in this case, change id to Q174 for Sao Paulo city
+      let id = ''
+      cityObj.wikidataId === 'Q175' ? id = 'Q174' : id = cityObj.wikidataId;
+
+      const secondAPI = await fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
+        .then(response => response.json())
+        .then(data => data)
+
+      const wikiTitle = secondAPI.entities[id].sitelinks.enwiki.title
+
+      const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${wikiTitle}&origin=*`)
+        .then(response => response.json())
+        .then(data => data)
+
+      // get wikiID out of the thirdAPI result so it's consistent on every call
+      const keys = Object.keys(thirdAPI.query.pages)[0]
+
+      const extract = (thirdAPI.query.pages[keys].extract)
+      // save first 3 sentences of extract into blurb
+      const blurb = extract.match(/[^.]*.[^.]*.[^.]*./)[0]
+      // add blurb to page and link to rest of article
+      blurbContainer.current.innerHTML = `<p>${blurb}.. <a href="https://en.wikipedia.org/wiki/${wikiTitle}">see more</a></p>`
+
+      // fetch main image from wiki article
+      const fourthAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=%2A&pithumbsize=800&prop=pageimages&titles=${wikiTitle}&format=json`)
+        .then(response => response.json())
+        .then(data => data)
+
+      // get wikiID out of fourthAPI
+      const imageKey = Object.keys(fourthAPI.query.pages)[0]
+      const imageLink = (fourthAPI.query.pages[imageKey].thumbnail.source)
+      imageContainer.current.innerHTML = `<img src=${imageLink} alt="Image of ${wikiTitle} city" />`
 
 
+      // FIND CITY VIA COORDS TO GET CORRECT CITY NAME IN TELEPORT, AND THEN FIND IMAGE AFTER
+      const teleportCity = await fetch(`https://api.teleport.org/api/locations/${randomPOI.geometry.coordinates[1]},${randomPOI.geometry.coordinates[0]}/`)
+        .then(response => response.json())
+        .then(data => data);
+      // console.log(teleportCity._embedded)
+      const nearestCity = Object.entries(teleportCity._embedded)
+      // console.log(nearestCity[0]) - targetting into the object to get the city name
+      const nearestCityName = nearestCity[0];
+      // more targetting into the object to get the city name
+      const cName = Object.entries(nearestCityName[1][0]._links)
+      const tpCity = cName[0][1].name
+
+      // remove 'city' from the name, when it's not Mexico City, ie for New York City as API lists NYC as New York.. UGHHHHH
+      const editedCityName = [];
+      let cityLowerCase = '';
+      tpCity === 'Mexico City'
+        ?
+        cityLowerCase = tpCity.toLowerCase().split(' ').join('-')
+        :
+        tpCity.toLowerCase().split(' ').map((word) => {
+          if (word !== 'city') {
+            editedCityName.push(word)
+          }
+          cityLowerCase = editedCityName.join('-');
+          return cityLowerCase;
+        })
+
+      // remove accents from the city name (ie Sao Paulo)
+      let cityASCII = ''
+      function removeAccents(str) {
+        cityASCII = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        return cityASCII
+      }
+      removeAccents(cityLowerCase)
+      // console.log(cityASCII)
+
+      // clear out teleport refs if the city isn't found in teleport api:
+      teleportRanking.current.innerHTML = '';
+      teleportSummary.current.innerHTML = '';
+      teleportImageContainer.current.innerHTML = '';
+
+      // IMAGE FROM TELEPORT API
+      const teleportImg = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/images/`)
+        .then(response => response.json())
+        .then(data => data);
+      const tpPhoto = teleportImg.photos[0].image.mobile
+      // console.log(tpPhoto)
+      teleportImageContainer.current.innerHTML = `<img src=${tpPhoto} alt="Image of ${wikiTitle} city" />`
+
+
+      // IMAGE FROM TELEPORT API
+      const teleportBlurb = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/scores/`)
+        .then(response => response.json())
+        .then(data => data);
+
+      // get the city summary blurb
+      const citySummary = teleportBlurb.summary;
+      // NOTE: for Moscow- there's a byline in <i> tags above the blurb, we might want to cut it out..?
+      teleportSummary.current.innerHTML = `${citySummary}`
+
+      // get the ranking for city
+      const cityRanking = teleportBlurb.categories
+
+      const cityRank = cityRanking.map((category) => {
+        return `${category.name}: ${category.score_out_of_10.toFixed(2)}/10`
+      })
+      teleportRanking.current.innerHTML = cityRank
+    }
+    getApiData()
   }
 
 
@@ -539,24 +638,20 @@ export default function App() {
 
 
   const handleBtn = () => {
-    setButtonDisabled(true)
-    if (!spinEnabled) {
-      spinEnabled = !spinEnabled
-
-      //! globe stays zoomed in after the first spin
+    // TO ADD: IF zoom is 9, ie we're zoomed into a city, THEN zoom out to 2 first before starting spinGlobe() so we don't get a blur of white for a few seconds as if we spin zoomed at 9 we won't see any map details, we have to be zoomed out to see globe spinning. 
+    spinEnabled = !spinEnabled;
+    if (spinEnabled) {
       spinGlobe()
-
-      //! interrtupting the spin won't stop flyToCity from running
       setTimeout(() => {
-        flyToCity()
+        easeToCity()
         setButtonDisabled(false)
       }, 3000)
-
-      button.current.innerHTML = 'Searching..';
+      button.current.innerHTML = 'Finding...';
     }
     spinEnabled = !spinEnabled
 
   };
+
 
   return (
     <>
@@ -576,6 +671,21 @@ export default function App() {
           </div>
         </div>
         <div ref={mapContainer} className="map-container" />
+
+        {/* <DisplayCityPhotos photos={cityPhotos} /> */}
+
+        {/* <div style={{ display: showInfoBtn ? 'block' : 'none'}}> */}
+          <button ref={spinButton} onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : 'Show city info'}</button>
+        {/* </div> */}
+
+        <div style={{ display: showInfo ? 'block' : 'none' }}>
+          <div ref={blurbContainer} />
+          <div ref={imageContainer} />
+          <div ref={teleportImageContainer} />
+          <div ref={teleportRanking} />
+          <div ref={teleportSummary} />
+        </div>
+
       </div>
     </>
   );
