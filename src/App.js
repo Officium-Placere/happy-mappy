@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import "./styles/styles.scss";
-// import DisplayCityPhotos from './DisplayCityPhotos';
+// import GetCityInfo from './GetCityInfo';
 
 
 //* to add: geocoding + markers (https://docs.mapbox.com/mapbox-gl-js/example/marker-from-geocode/)
@@ -15,19 +15,19 @@ export default function App() {
   const map = useRef(null);
   const mapContainer = useRef(null);
   const button = useRef(null);
-  const blurbContainer = useRef(null);
-  const imageContainer = useRef(null);
-  const teleportImageContainer = useRef(null);
-  const teleportSummary = useRef(null);
-  const teleportRanking = useRef(null);
   const spinButton = useRef(null);
-  
+
   const [lng, setLng] = useState(Math.floor(Math.random() * (90 - (-90))) + (-90));
   const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
   const [zoom, setZoom] = useState(2);
   const [showInfo, setShowInfo] = useState(false);
-  // const [showInfoBtn, setShowInfoBtn] = useState(false);
-  // const [cityPhotos, setCityPhotos] = useState([]);
+
+  const [wikiBlurb, setWikiBlurb] = useState()
+  const [wikiPic, setWikiPic] = useState()
+  const [tpBlurb, setTpBlurb] = useState()
+  const [tpMetrics, setTpMetrics] = useState()
+  const [tpPic, setTpPic] = useState()
+  const [cityName, setCityName] = useState()
 
   const testJson = {
     "type": "FeatureCollection",
@@ -341,8 +341,6 @@ export default function App() {
     ]
   }
 
-
-
   //initialize map
   useEffect(() => {
     if (map.current) return;
@@ -419,7 +417,7 @@ export default function App() {
       if (map.current.getZoom() === 9) {
         button.current.innerHTML = 'Try again!';
       }
-      
+
     })
   });
 
@@ -439,25 +437,22 @@ export default function App() {
   function spinGlobe() {
 
     const center = map.current.getCenter();
-    // const time = Math.floor(Math.random() * (5000 - 2000)) + 2000
+
     if (spinEnabled) {
       let distancePerSecond = 360 / revolutionSpeed;
       center.lng += distancePerSecond
       center.lat = Math.floor(Math.random() * (90 - (-90))) + (-90);
     }
     map.current.zoomTo(2, { easing: (n) => n, duration: 1000 })
-      
+
     setTimeout(() => {
       map.current.easeTo({ center, duration: 3000, easing: (n) => n });
     }, 1000)
-    
+
   }
 
   // const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
-
-  const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
-
-  // const randomPOI = geoJSON.features[Math.floor(Math.random() * geoJSON.features.length)]
+  // console.log(randomPOI.geometry.coordinates[1], randomPOI.geometry.coordinates[0])
 
   function easeToCity() {
     const center = map.current.getCenter();
@@ -477,15 +472,9 @@ export default function App() {
         return t;
       }
     });
-    
-
-    //* get random city from static JSON -> 
-    //* get wikiDataID from bigDataCloud API -> 
-    //!bigclouddata get request example - ask gaby for the one that returns wikidata IDs
-    // function getPOI(longitude, latitude) {
 
     async function getApiData() {
-      const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_e3a41bcc2937431191cc18382f3d5492`)
+      const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${center.lat}&longitude=${center.lng}&localityLanguage=en&key=bdc_e3a41bcc2937431191cc18382f3d5492`)
         .then(response => response.json())
         .then(data => data)
 
@@ -511,9 +500,7 @@ export default function App() {
       const extract = (thirdAPI.query.pages[keys].extract)
       // save first 3 sentences of extract into blurb
       const blurb = extract.match(/[^.]*.[^.]*.[^.]*./)[0]
-      // add blurb to page and link to rest of article
-      blurbContainer.current.innerHTML = `<p>${blurb}.. <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/${wikiTitle}">see more</a></p>`
-
+  
       // fetch main image from wiki article
       const fourthAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=%2A&pithumbsize=800&prop=pageimages&titles=${wikiTitle}&format=json`)
         .then(response => response.json())
@@ -522,11 +509,9 @@ export default function App() {
       // get wikiID out of fourthAPI
       const imageKey = Object.keys(fourthAPI.query.pages)[0]
       const imageLink = (fourthAPI.query.pages[imageKey].thumbnail.source)
-      imageContainer.current.innerHTML = `<img src=${imageLink} alt="Image of ${wikiTitle} city" />`
-
 
       // FIND CITY VIA COORDS TO GET CORRECT CITY NAME IN TELEPORT, AND THEN FIND IMAGE AFTER
-      const teleportCity = await fetch(`https://api.teleport.org/api/locations/${randomPOI.geometry.coordinates[1]},${randomPOI.geometry.coordinates[0]}/`)
+      const teleportCity = await fetch(`https://api.teleport.org/api/locations/${center.lat},${center.lng}/`)
         .then(response => response.json())
         .then(data => data);
       // console.log(teleportCity._embedded)
@@ -537,7 +522,7 @@ export default function App() {
       const cName = Object.entries(nearestCityName[1][0]._links)
       const tpCity = cName[0][1].name
 
-      // remove 'city' from the name, when it's not Mexico City, ie for New York City as API lists NYC as New York.. UGHHHHH
+      // remove 'city' from the name, when it's not Mexico City, ie for New York City as API lists NYC as New York
       const editedCityName = [];
       let cityLowerCase = '';
       tpCity === 'Mexico City'
@@ -559,21 +544,12 @@ export default function App() {
         return cityASCII
       }
       removeAccents(cityLowerCase)
-      // console.log(cityASCII)
-
-      // clear out teleport refs if the city isn't found in teleport api:
-      teleportRanking.current.innerHTML = '';
-      teleportSummary.current.innerHTML = '';
-      teleportImageContainer.current.innerHTML = '';
 
       // IMAGE FROM TELEPORT API
       const teleportImg = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/images/`)
         .then(response => response.json())
         .then(data => data);
       const tpPhoto = teleportImg.photos[0].image.mobile
-      // console.log(tpPhoto)
-      teleportImageContainer.current.innerHTML = `<img src=${tpPhoto} alt="Image of ${wikiTitle} city" />`
-
 
       // IMAGE FROM TELEPORT API
       const teleportBlurb = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/scores/`)
@@ -583,19 +559,25 @@ export default function App() {
       // get the city summary blurb
       const citySummary = teleportBlurb.summary;
       // NOTE: for Moscow- there's a byline in <i> tags above the blurb, we might want to cut it out..?
-      teleportSummary.current.innerHTML = `${citySummary}`
 
       // get the ranking for city
       const cityRanking = teleportBlurb.categories
-
       const cityRank = cityRanking.map((category) => {
-        return `${category.name}: ${category.score_out_of_10.toFixed(2)}/10`
+        return `${category.name}: ${category.score_out_of_10.toFixed(2)} / 10`
       })
-      teleportRanking.current.innerHTML = cityRank
+  
+      setWikiBlurb(blurb);
+      setWikiPic(imageLink)
+      setTpMetrics(cityRank)
+      setTpPic(tpPhoto)
+      const regex = /(<([^>]+)>)/ig;
+      const tpSummary = citySummary.replace(regex, '');
+      setTpBlurb(tpSummary)
+      setCityName(wikiTitle)
+
     }
     getApiData()
   }
-
 
   //? testing bigdatacloud wikidataID
 
@@ -664,9 +646,9 @@ export default function App() {
   return (
     <>
       <div className="wrapper">
-        <button id="btn-spin" ref={button} 
-        // smart disabled={buttonDisabled} 
-        onClick={() => handleBtn()}>Start rotation</button>
+        <button id="btn-spin" ref={button}
+          // smart disabled={buttonDisabled} 
+          onClick={() => handleBtn()}>Start rotation</button>
         <div className="logoInfo">
           <div className="logoContainer">
             <h1>globe.trotter</h1>
@@ -685,16 +667,23 @@ export default function App() {
         {/* <DisplayCityPhotos photos={cityPhotos} /> */}
 
         {/* <div style={{ display: showInfoBtn ? 'block' : 'none'}}> */}
-          <button ref={spinButton} onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : 'Show city info'}</button>
+        <button ref={spinButton} onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : 'Show city info'}</button>
         {/* </div> */}
 
 
         <div style={{ display: showInfo ? 'block' : 'none' }}>
-          <div ref={blurbContainer} />
-          <div ref={imageContainer} />
-          <div ref={teleportImageContainer} />
-          <div ref={teleportRanking} />
-          <div ref={teleportSummary} />
+        
+          <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a></p>
+          <img src={tpPic} alt={`${cityName}`} />
+          <img src={wikiPic} alt={`${cityName}`} />
+          <p>
+            {tpMetrics}
+          </p>
+          <p>
+            {tpBlurb}
+          </p>
+
+
         </div>
 
       </div>

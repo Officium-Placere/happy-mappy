@@ -1,5 +1,5 @@
 
-function DisplayCityPhotos({ photos }) {
+function GetCityInfo({ photos }) {
 
     let showPics = true;
 
@@ -31,4 +31,4 @@ function DisplayCityPhotos({ photos }) {
     )
 }
 
-export default DisplayCityPhotos;
+export default GetCityInfo;
