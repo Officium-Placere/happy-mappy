@@ -434,6 +434,7 @@ export default function App() {
   let spinEnabled = false;
 
   function spinGlobe() {
+
     const center = map.current.getCenter();
     // const time = Math.floor(Math.random() * (5000 - 2000)) + 2000
     if (spinEnabled) {
@@ -587,6 +588,7 @@ export default function App() {
   }
 
   const handleBtn = () => {
+    // TO ADD: IF zoom is 9, ie we're zoomed into a city, THEN zoom out to 2 first before starting spinGlobe() so we don't get a blur of white for a few seconds as if we spin zoomed at 9 we won't see any map details, we have to be zoomed out to see globe spinning. 
     spinEnabled = !spinEnabled;
     if (spinEnabled) {
       spinGlobe()
