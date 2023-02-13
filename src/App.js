@@ -416,7 +416,10 @@ export default function App() {
 
     //reset button when globe spin ends
     map.current.on('moveend', () => {
-      button.current.innerHTML = 'Try again!';
+      if (map.current.getZoom() === 9) {
+        button.current.innerHTML = 'Try again!';
+      }
+      
     })
   });
 
@@ -442,14 +445,19 @@ export default function App() {
       center.lng += distancePerSecond
       center.lat = Math.floor(Math.random() * (90 - (-90))) + (-90);
     }
-    map.current.easeTo({ center, duration: 3000, easing: (n) => n });
+    map.current.zoomTo(2, { easing: (n) => n, duration: 1000 })
+      
+    setTimeout(() => {
+      map.current.easeTo({ center, duration: 3000, easing: (n) => n });
+    }, 1000)
+    
   }
 
   // const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
 
-  // const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
+  const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
 
-  const randomPOI = geoJSON.features[Math.floor(Math.random() * geoJSON.features.length)]
+  // const randomPOI = geoJSON.features[Math.floor(Math.random() * geoJSON.features.length)]
 
   function easeToCity() {
     const center = map.current.getCenter();
@@ -469,7 +477,7 @@ export default function App() {
         return t;
       }
     });
-    button.current.innerHTML = 'Finding...';
+    
 
     //* get random city from static JSON -> 
     //* get wikiDataID from bigDataCloud API -> 
@@ -477,7 +485,7 @@ export default function App() {
     // function getPOI(longitude, latitude) {
 
     async function getApiData() {
-      const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_3310b69981ed4fba900d25cc711e6f87`)
+      const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_e3a41bcc2937431191cc18382f3d5492`)
         .then(response => response.json())
         .then(data => data)
 
@@ -504,7 +512,7 @@ export default function App() {
       // save first 3 sentences of extract into blurb
       const blurb = extract.match(/[^.]*.[^.]*.[^.]*./)[0]
       // add blurb to page and link to rest of article
-      blurbContainer.current.innerHTML = `<p>${blurb}.. <a href="https://en.wikipedia.org/wiki/${wikiTitle}">see more</a></p>`
+      blurbContainer.current.innerHTML = `<p>${blurb}.. <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/${wikiTitle}">see more</a></p>`
 
       // fetch main image from wiki article
       const fourthAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=%2A&pithumbsize=800&prop=pageimages&titles=${wikiTitle}&format=json`)
@@ -598,19 +606,19 @@ export default function App() {
   //!bigclouddata get request example - ask gaby for the one that returns wikidata IDs
   // function getPOI(longitude, latitude) {
 
-  fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_3310b69981ed4fba900d25cc711e6f87`)
-    .then(response => response.json())
-    .then(data => {
-      // console.log(data)
-      const cityObj = data.localityInfo.administrative.find((poiObj => poiObj.name === data.city))
-      // console.log(cityObj)//
+  // fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_3310b69981ed4fba900d25cc711e6f87`)
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     // console.log(data)
+  //     const cityObj = data.localityInfo.administrative.find((poiObj => poiObj.name === data.city))
+  //     // console.log(cityObj)//
 
-      return fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${cityObj.wikidataId}&sitefilter=enwiki&format=json`)
+  //     return fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${cityObj.wikidataId}&sitefilter=enwiki&format=json`)
 
-    })
-    .then(response => response.json())
-    .then(data => console.log(data)) //should return wikiData on the city
-    .catch(error => console.log(error))
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => console.log(data)) //should return wikiData on the city
+  //   .catch(error => console.log(error))
 
 
 
@@ -644,7 +652,7 @@ export default function App() {
       spinGlobe()
       setTimeout(() => {
         easeToCity()
-        setButtonDisabled(false)
+        // setButtonDisabled(false)
       }, 3000)
       button.current.innerHTML = 'Finding...';
     }
@@ -656,7 +664,9 @@ export default function App() {
   return (
     <>
       <div className="wrapper">
-        <button id="btn-spin" ref={button} disabled={buttonDisabled} onClick={() => handleBtn()}>Start rotation</button>
+        <button id="btn-spin" ref={button} 
+        // smart disabled={buttonDisabled} 
+        onClick={() => handleBtn()}>Start rotation</button>
         <div className="logoInfo">
           <div className="logoContainer">
             <h1>globe.trotter</h1>
@@ -677,6 +687,7 @@ export default function App() {
         {/* <div style={{ display: showInfoBtn ? 'block' : 'none'}}> */}
           <button ref={spinButton} onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : 'Show city info'}</button>
         {/* </div> */}
+
 
         <div style={{ display: showInfo ? 'block' : 'none' }}>
           <div ref={blurbContainer} />
