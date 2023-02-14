@@ -1,12 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import "./styles/styles.scss";
-// import GetCityInfo from './GetCityInfo';
 
-
-//* to add: geocoding + markers (https://docs.mapbox.com/mapbox-gl-js/example/marker-from-geocode/)
-//* permanence? logins?
-//* cool isotope grid?
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXBwbGVtdWZmaW4iLCJhIjoiY2xjdmFzZmppMDYwMTNxbW92dTBhYTZrdSJ9.NMqeTpj0UTSYGlOzAsBAAw';
 
@@ -14,7 +9,6 @@ export default function App() {
 
   const map = useRef(null);
   const mapContainer = useRef(null);
-  const button = useRef(null);
   const spinButton = useRef(null);
 
   const [lng, setLng] = useState(Math.floor(Math.random() * (90 - (-90))) + (-90));
@@ -415,7 +409,7 @@ export default function App() {
     //reset button when globe spin ends
     map.current.on('moveend', () => {
       if (map.current.getZoom() === 9) {
-        button.current.innerHTML = 'Try again!';
+        spinButton.current.innerHTML = 'Try again!';
       }
 
     })
@@ -443,21 +437,17 @@ export default function App() {
       center.lng += distancePerSecond
       center.lat = Math.floor(Math.random() * (90 - (-90))) + (-90);
     }
+
     map.current.zoomTo(2, { easing: (n) => n, duration: 1000 })
 
     setTimeout(() => {
       map.current.easeTo({ center, duration: 3000, easing: (n) => n });
     }, 1000)
-
   }
-
-  // const randomPOI = testJson.features[Math.floor(Math.random() * testJson.features.length)]
-  // console.log(randomPOI.geometry.coordinates[1], randomPOI.geometry.coordinates[0])
 
   function easeToCity() {
     const center = map.current.getCenter();
     const cityNum = testJson.features[Math.floor(Math.random() * testJson.features.length)]
-    console.log(cityNum.properties, cityNum.geometry.coordinates)
     center.lng = cityNum.geometry.coordinates[0]
     center.lat = cityNum.geometry.coordinates[1]
 
@@ -480,7 +470,7 @@ export default function App() {
 
       const cityObj = firstAPI.localityInfo.administrative.find((poiObj => poiObj.name === firstAPI.city))
 
-      // ID returned for coordinates is Sao Paulo state, so in this case, change id to Q174 for Sao Paulo city
+      // ID returned for coordinates is Sao Paulo state, so change id to Q174 for Sao Paulo city
       let id = ''
       cityObj.wikidataId === 'Q175' ? id = 'Q174' : id = cityObj.wikidataId;
 
@@ -500,7 +490,7 @@ export default function App() {
       const extract = (thirdAPI.query.pages[keys].extract)
       // save first 3 sentences of extract into blurb
       const blurb = extract.match(/[^.]*.[^.]*.[^.]*./)[0]
-  
+
       // fetch main image from wiki article
       const fourthAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=%2A&pithumbsize=800&prop=pageimages&titles=${wikiTitle}&format=json`)
         .then(response => response.json())
@@ -514,11 +504,9 @@ export default function App() {
       const teleportCity = await fetch(`https://api.teleport.org/api/locations/${center.lat},${center.lng}/`)
         .then(response => response.json())
         .then(data => data);
-      // console.log(teleportCity._embedded)
+
       const nearestCity = Object.entries(teleportCity._embedded)
-      // console.log(nearestCity[0]) - targetting into the object to get the city name
       const nearestCityName = nearestCity[0];
-      // more targetting into the object to get the city name
       const cName = Object.entries(nearestCityName[1][0]._links)
       const tpCity = cName[0][1].name
 
@@ -545,147 +533,76 @@ export default function App() {
       }
       removeAccents(cityLowerCase)
 
-      // IMAGE FROM TELEPORT API
       const teleportImg = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/images/`)
         .then(response => response.json())
         .then(data => data);
       const tpPhoto = teleportImg.photos[0].image.mobile
 
-      // IMAGE FROM TELEPORT API
       const teleportBlurb = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/scores/`)
         .then(response => response.json())
         .then(data => data);
 
-      // get the city summary blurb
       const citySummary = teleportBlurb.summary;
       // NOTE: for Moscow- there's a byline in <i> tags above the blurb, we might want to cut it out..?
 
-      // get the ranking for city
       const cityRanking = teleportBlurb.categories
       const cityRank = cityRanking.map((category) => {
         return `${category.name}: ${category.score_out_of_10.toFixed(2)} / 10`
       })
-  
+
+      const regex = /(<([^>]+)>)/ig;
+      const tpSummary = citySummary.replace(regex, '');
+      setTpBlurb(tpSummary)
       setWikiBlurb(blurb);
       setWikiPic(imageLink)
       setTpMetrics(cityRank)
       setTpPic(tpPhoto)
-      const regex = /(<([^>]+)>)/ig;
-      const tpSummary = citySummary.replace(regex, '');
-      setTpBlurb(tpSummary)
       setCityName(wikiTitle)
 
     }
     getApiData()
   }
 
-  //? testing bigdatacloud wikidataID
-
-
-
-  //* get random city from static JSON -> 
-  //* get wikiDataID from bigDataCloud API -> 
-  //!bigclouddata get request example - ask gaby for the one that returns wikidata IDs
-  // function getPOI(longitude, latitude) {
-
-  // fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${randomPOI.geometry.coordinates[1]}&longitude=${randomPOI.geometry.coordinates[0]}&localityLanguage=en&key=bdc_3310b69981ed4fba900d25cc711e6f87`)
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     // console.log(data)
-  //     const cityObj = data.localityInfo.administrative.find((poiObj => poiObj.name === data.city))
-  //     // console.log(cityObj)//
-
-  //     return fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${cityObj.wikidataId}&sitefilter=enwiki&format=json`)
-
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => console.log(data)) //should return wikiData on the city
-  //   .catch(error => console.log(error))
-
-
-
-  // }
-
-
-
-
-  // //! use wikiDataID to GET json with wikimedia pageID
-  // fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=Q30&sitefilter=enwiki&format=json`).then(response => response.json()).then(json => {
-  //   console.log(json);
-  // })
-
-  // //! -> use page ID to get extracted intro... via (https://stackoverflow.com/questions/8555320/is-there-a-wikipedia-api-just-for-retrieve-the-content-summary)?
-  // //*url to get extract with wiki pageID: https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&pageids=49728&origin=*
-
-  // //https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&pageids=21721040
-  // fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&pageids=3434750&origin=*`).then(response => response.json()).then(json => {
-  //   console.log(json);
-  // })
-  // fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=United States&format=json&origin=*`).then(response => response.json()).then(json => {
-  //   console.log(json);
-  // })
-
-
-
   const handleBtn = () => {
-    // TO ADD: IF zoom is 9, ie we're zoomed into a city, THEN zoom out to 2 first before starting spinGlobe() so we don't get a blur of white for a few seconds as if we spin zoomed at 9 we won't see any map details, we have to be zoomed out to see globe spinning. 
     spinEnabled = !spinEnabled;
     if (spinEnabled) {
       spinGlobe()
       setTimeout(() => {
         easeToCity()
-        // setButtonDisabled(false)
       }, 3000)
-      button.current.innerHTML = 'Finding...';
+      spinButton.current.innerHTML = 'Finding...';
     }
     spinEnabled = !spinEnabled
-
   };
-
 
   return (
     <>
       <div className="wrapper">
-        <button id="btn-spin" ref={button}
-          // smart disabled={buttonDisabled} 
+        <button
+          id="btn-spin"
+          ref={spinButton}
           onClick={() => handleBtn()}>Start rotation</button>
-        <div className="logoInfo">
-          <div className="logoContainer">
-            <h1>globe.trotter</h1>
-          </div>
-          <div className="infoContainer">
-            <ul className="mapProperties">
-              <li>Longitude: {lng}</li>
-              <li>Latitude: {lat}</li>
-              <li>Zoom Level: {zoom}</li>
-            </ul>
-
-          </div>
-        </div>
         <div ref={mapContainer} className="map-container" />
 
-        {/* <DisplayCityPhotos photos={cityPhotos} /> */}
-
-        {/* <div style={{ display: showInfoBtn ? 'block' : 'none'}}> */}
-        <button ref={spinButton} onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : 'Show city info'}</button>
-        {/* </div> */}
-
+        <button
+          onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : 'Show city info'}
+        </button>
 
         <div style={{ display: showInfo ? 'block' : 'none' }}>
-        
-          <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a></p>
-          <img src={tpPic} alt={`${cityName}`} />
-          <img src={wikiPic} alt={`${cityName}`} />
-          <p>
-            {tpMetrics}
-          </p>
-          <p>
-            {tpBlurb}
+          <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
           </p>
 
+          <p>{tpMetrics}</p>
+          <p>{tpBlurb}</p>
+
+          <div>
+            <img src={tpPic} alt={`${cityName}`} />
+          </div>
+          <div>
+            <img src={wikiPic} alt={`${cityName}`} />
+          </div>
 
         </div>
-
       </div>
     </>
   );
