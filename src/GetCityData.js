@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 export default function GetCityData({ map, trigger }) {
 
     const [showInfo, setShowInfo] = useState(false);
-
     const [wikiBlurb, setWikiBlurb] = useState()
     const [wikiPic, setWikiPic] = useState()
     const [tpBlurb, setTpBlurb] = useState()
@@ -11,8 +10,8 @@ export default function GetCityData({ map, trigger }) {
     const [tpPic, setTpPic] = useState()
     const [cityName, setCityName] = useState()
 
-    
-    
+
+
     useEffect(() => {
         const testJson = {
             "type": "FeatureCollection",
@@ -361,25 +360,29 @@ export default function GetCityData({ map, trigger }) {
 
                 const wikiTitle = secondAPI.entities[id].sitelinks.enwiki.title
 
+                setCityName(wikiTitle) //SET STATE 
+
                 const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${wikiTitle}&origin=*`)
                     .then(response => response.json())
                     .then(data => data)
 
-                // get wikiID out of the thirdAPI result so it's consistent on every call
                 const keys = Object.keys(thirdAPI.query.pages)[0]
+                const wkExtract = (thirdAPI.query.pages[keys].extract)
+                // save first 3 sentences and remove '(listen)' link from the wiki extract
+                const listenRegex = (/\(listen\)/g);
+                const wkBlurb = wkExtract.match(/[^.]*.[^.]*.[^.]*./)[0].replace(listenRegex, '');
 
-                const extract = (thirdAPI.query.pages[keys].extract)
-                // save first 3 sentences of extract into blurb
-                const blurb = extract.match(/[^.]*.[^.]*.[^.]*./)[0]
+                setWikiBlurb(wkBlurb) //SET STATE 
 
                 // fetch main image from wiki article
                 const fourthAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=%2A&pithumbsize=800&prop=pageimages&titles=${wikiTitle}&format=json`)
                     .then(response => response.json())
                     .then(data => data)
 
-                // get wikiID out of fourthAPI
-                const imageKey = Object.keys(fourthAPI.query.pages)[0]
-                const imageLink = (fourthAPI.query.pages[imageKey].thumbnail.source)
+                const wkImageKey = Object.keys(fourthAPI.query.pages)[0]
+                const wkImage = (fourthAPI.query.pages[wkImageKey].thumbnail.source)
+
+                setWikiPic(wkImage) //SET STATE 
 
                 // FIND CITY VIA COORDS TO GET CORRECT CITY NAME IN TELEPORT, AND THEN FIND IMAGE AFTER
                 const teleportCity = await fetch(`https://api.teleport.org/api/locations/${center.lat},${center.lng}/`)
@@ -406,7 +409,7 @@ export default function GetCityData({ map, trigger }) {
                         return cityLowerCase;
                     })
 
-                // remove accents from the city name (ie Sao Paulo)
+                // remove accents from the city name
                 let cityASCII = ''
                 function removeAccents(str) {
                     cityASCII = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -417,7 +420,9 @@ export default function GetCityData({ map, trigger }) {
                 const teleportImg = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/images/`)
                     .then(response => response.json())
                     .then(data => data);
-                const tpPhoto = teleportImg.photos[0].image.mobile
+                const tpImage = teleportImg.photos[0].image.mobile
+                
+                setTpPic(tpImage) //SET STATE 
 
                 const teleportBlurb = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/scores/`)
                     .then(response => response.json())
@@ -431,15 +436,13 @@ export default function GetCityData({ map, trigger }) {
                     return `${category.name}: ${category.score_out_of_10.toFixed(2)} / 10`
                 })
 
-                const regex = /(<([^>]+)>)/ig;
-                const tpSummary = citySummary.replace(regex, '');
-                setTpBlurb(tpSummary)
-                setWikiBlurb(blurb);
-                setWikiPic(imageLink)
-                setTpMetrics(cityRank)
-                setTpPic(tpPhoto)
-                setCityName(wikiTitle)
-
+                setTpMetrics(cityRank) //SET STATE 
+                
+                // removes html tags from teleport summary:
+                const htmlRegex = /(<([^>]+)>)/ig;
+                const tpSummary = citySummary.replace(htmlRegex, '');
+                
+                setTpBlurb(tpSummary) //SET STATE 
             }
             getApiData()
         }

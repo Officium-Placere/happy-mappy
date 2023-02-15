@@ -3,7 +3,6 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import "./styles/styles.scss";
 import GetCityData from './GetCityData';
 
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXBwbGVtdWZmaW4iLCJhIjoiY2xjdmFzZmppMDYwMTNxbW92dTBhYTZrdSJ9.NMqeTpj0UTSYGlOzAsBAAw';
 
 export default function DisplayMap() {
@@ -111,21 +110,17 @@ export default function DisplayMap() {
     let spinEnabled = false;
 
     function spinGlobe() {
-
         const center = map.current.getCenter();
-
         if (spinEnabled) {
             let distancePerSecond = 360 / revolutionSpeed;
             center.lng += distancePerSecond
             center.lat = Math.floor(Math.random() * (90 - (-90))) + (-90);
         }
-
         map.current.zoomTo(2, { easing: (n) => n, duration: 1000 })
-
         setTimeout(() => {
             map.current.easeTo({ center, duration: 3000, easing: (n) => n });
         }, 1000)
-    }
+    };
 
     const handleBtn = () => {
         spinEnabled = !spinEnabled;
@@ -133,7 +128,6 @@ export default function DisplayMap() {
             spinGlobe()
             setTimeout(() => {
                 setTrigger((trigger) => trigger + 1);
-                // easeToCity()
             }, 3000)
             spinButton.current.innerHTML = 'Finding...';
         }
