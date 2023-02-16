@@ -91,8 +91,18 @@ export default function DisplayMap() {
         map.current.on('moveend', () => {
             if (map.current.getZoom() === 9) {
                 spinButton.current.innerHTML = 'Try again!';
+                if (
+                    spinButton.current.innerHTML === 'Try again!'
+                ) {
+                    map.current.dragPan.enable()
+                    map.current.dragRotate.enable()
+                    map.current.scrollZoom.enable();
+                    map.current.boxZoom.enable();
+                    map.current.keyboard.enable();
+                    map.current.touchZoomRotate.enable();
+                    map.current.doubleClickZoom.enable();
+                }
             }
-
         })
     });
 
@@ -115,21 +125,42 @@ export default function DisplayMap() {
             let distancePerSecond = 360 / revolutionSpeed;
             center.lng += distancePerSecond
             center.lat = Math.floor(Math.random() * (90 - (-90))) + (-90);
+            // map.current.scrollZoom.disable();
         }
-        map.current.zoomTo(2, { easing: (n) => n, duration: 1000 })
-        setTimeout(() => {
+
+        if (map.current.getZoom() <= 2) { // if map is zoomed out to 2 or less, spin randomly 
             map.current.easeTo({ center, duration: 3000, easing: (n) => n });
-        }, 1000)
+        } else { // else zoom out to 2 first, and then spin randomly
+            map.current.zoomTo(2, { easing: (n) => n, duration: 1000 })
+            setTimeout(() => {
+                map.current.easeTo({ center, duration: 3000, easing: (n) => n });
+            }, 1000)
+        }
     };
+
+
 
     const handleBtn = () => {
         spinEnabled = !spinEnabled;
         if (spinEnabled) {
+            // map.current.scrollZoom.disable();
             spinGlobe()
             setTimeout(() => {
                 setTrigger((trigger) => trigger + 1);
             }, 3000)
             spinButton.current.innerHTML = 'Finding...';
+
+            if (
+                spinButton.current.innerHTML === 'Finding...'
+            ) {
+                map.current.dragPan.disable()
+                map.current.dragRotate.disable()
+                map.current.scrollZoom.disable();
+                map.current.boxZoom.disable();
+                map.current.keyboard.disable();
+                map.current.touchZoomRotate.disable();
+                map.current.doubleClickZoom.disable();
+            }
         }
         spinEnabled = !spinEnabled
     };

@@ -11,7 +11,6 @@ export default function GetCityData({ map, trigger }) {
     const [cityName, setCityName] = useState()
 
 
-
     useEffect(() => {
         const testJson = {
             "type": "FeatureCollection",
