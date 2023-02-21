@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import DoughnutChart from './DoughnutChart';
 
 export default function GetCityData({ map, trigger }) {
 
@@ -10,8 +11,10 @@ export default function GetCityData({ map, trigger }) {
     const [tpPic, setTpPic] = useState()
     const [cityName, setCityName] = useState()
 
+    const [chartData, setChartData] = useState();
 
     useEffect(() => {
+
         const testJson = {
             "type": "FeatureCollection",
             "features": [
@@ -163,24 +166,6 @@ export default function GetCityData({ map, trigger }) {
                     "type": "Feature",
                     "geometry": {
                         "type": "Point",
-                        "coordinates": [113.2590, 23.1288]
-                    },
-                    "properties": {
-                        "city": "Guangzhou",
-                        "city_ascii": "Guangzhou",
-                        "country": "China",
-                        "iso2": "CN",
-                        "iso3": "CHN",
-                        "admin_name": "Guangdong",
-                        "capital": "admin",
-                        "population": 21489000,
-                        "id": 1156237133
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
                         "coordinates": [31.2358, 30.0444]
                     },
                     "properties": {
@@ -235,24 +220,6 @@ export default function GetCityData({ map, trigger }) {
                     "type": "Feature",
                     "geometry": {
                         "type": "Point",
-                        "coordinates": [88.3639, 22.5727]
-                    },
-                    "properties": {
-                        "city": "Kolkāta",
-                        "city_ascii": "Kolkata",
-                        "country": "India",
-                        "iso2": "IN",
-                        "iso3": "IND",
-                        "admin_name": "West Bengal",
-                        "capital": "admin",
-                        "population": 18698000,
-                        "id": 1356060520
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
                         "coordinates": [37.6178, 55.7558]
                     },
                     "properties": {
@@ -283,24 +250,6 @@ export default function GetCityData({ map, trigger }) {
                         "capital": "primary",
                         "population": 17573000,
                         "id": 1764068610
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [90.3944, 23.7289]
-                    },
-                    "properties": {
-                        "city": "Dhaka",
-                        "city_ascii": "Dhaka",
-                        "country": "Bangladesh",
-                        "iso2": "BD",
-                        "iso3": "BGD",
-                        "admin_name": "Dhaka",
-                        "capital": "primary",
-                        "population": 16839000,
-                        "id": 1050529279
                     }
                 },
                 {
@@ -368,6 +317,7 @@ export default function GetCityData({ map, trigger }) {
                 const keys = Object.keys(thirdAPI.query.pages)[0]
                 const wkExtract = (thirdAPI.query.pages[keys].extract)
                 // save first 3 sentences and remove '(listen)' link from the wiki extract
+                // NOTE: MAYBE CUT FIRST PARENTHESIS OUT ENTIRELY???
                 const listenRegex = (/\(listen\)/g);
                 const wkBlurb = wkExtract.match(/[^.]*.[^.]*.[^.]*./)[0].replace(listenRegex, '');
 
@@ -420,7 +370,7 @@ export default function GetCityData({ map, trigger }) {
                     .then(response => response.json())
                     .then(data => data);
                 const tpImage = teleportImg.photos[0].image.mobile
-                
+
                 setTpPic(tpImage) //SET STATE 
 
                 const teleportBlurb = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/scores/`)
@@ -432,15 +382,59 @@ export default function GetCityData({ map, trigger }) {
 
                 const cityRanking = teleportBlurb.categories
                 const cityRank = cityRanking.map((category) => {
-                    return `${category.name}: ${category.score_out_of_10.toFixed(2)} / 10`
+                    return `${category.name}: ${category.score_out_of_10.toFixed(2)}`
                 })
 
                 setTpMetrics(cityRank) //SET STATE 
-                
+
+                // regex to select metric name and rating out of string and push them into a data object
+                const titleRegex = /^.*?(?=:)/gm; //  /^.*?(?=\:)/gm; - was this!!!
+                const metricRegex = /(?<=: ).*/gm;
+                const graphData = [];
+
+                cityRank.forEach((metric) => {
+                    graphData.push({ title: metric.match(titleRegex), metric: parseFloat(metric.match(metricRegex)) })
+                })
+
+                console.log(graphData)
+
+                setChartData({
+                    labels: graphData.map((data) => data.title[0]),
+                    datasets: [
+                        {
+                            label: "Metric out of 10 ",
+                            data: graphData.map((data) => data.metric),
+                            backgroundColor: [
+                                "rgba(75,192,192,1)",
+                                "#ecf0f1",
+                                "#50AF95",
+                                "#f3ba2f",
+                                "#2a71d0",
+                                "red",
+                                "blue",
+                                "green",
+                                "yellow",
+                                "purple",
+                                "orange",
+                                "grey",
+                                "brown",
+                                "red",
+                                "blue",
+                                "green"
+                                
+                            ],
+                            borderColor: "black",
+                            borderWidth: 2
+                        }
+                    ]
+                });
+
+                console.log(chartData)
+
                 // removes html tags from teleport summary:
                 const htmlRegex = /(<([^>]+)>)/ig;
                 const tpSummary = citySummary.replace(htmlRegex, '');
-                
+
                 setTpBlurb(tpSummary) //SET STATE 
             }
             getApiData()
@@ -459,21 +453,28 @@ export default function GetCityData({ map, trigger }) {
                 onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : 'Show city info'}
             </button>
 
-            <div style={{ display: showInfo ? 'block' : 'none' }}>
-                <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
-                </p>
+            {trigger !== 0 ?
+                <div style={{ display: showInfo ? 'block' : 'none' }}>
+                    <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
+                    </p>
 
-                <p>{tpMetrics}</p>
-                <p>{tpBlurb}</p>
 
-                <div>
-                    <img src={tpPic} alt={`${cityName}`} />
+                    <DoughnutChart chartData={chartData} />
+
+                    <p>{tpMetrics}</p>
+                    <p>{tpBlurb}</p>
+
+                    <div>
+                        <img src={tpPic} alt={`${cityName}`} />
+                    </div>
+                    <div>
+                        <img src={wikiPic} alt={`${cityName}`} />
+                    </div>
+
                 </div>
-                <div>
-                    <img src={wikiPic} alt={`${cityName}`} />
-                </div>
-
-            </div>
+                :
+                null
+            }
         </>
     )
 }
