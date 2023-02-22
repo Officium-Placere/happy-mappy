@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import DoughnutChart from './DoughnutChart';
+import Graph from './Graph';
 
 export default function GetCityData({ map, trigger }) {
 
@@ -11,7 +11,20 @@ export default function GetCityData({ map, trigger }) {
     const [tpPic, setTpPic] = useState()
     const [cityName, setCityName] = useState()
 
-    const [chartData, setChartData] = useState();
+    // currently chartData state has to have data in it on page load otherwise there's an error and the page goes blank, as state is undefined on first click of the button. 
+    const [chartData, setChartData] = useState({
+        labels: ['Red'],
+        datasets: [
+            {
+                label: 'Starting Test Data',
+                data: [5],
+                backgroundColor: [
+                    'white'
+                ],
+                borderWidth: 1,
+            }
+        ]
+    });
 
     useEffect(() => {
 
@@ -378,8 +391,6 @@ export default function GetCityData({ map, trigger }) {
                     .then(data => data);
 
                 const citySummary = teleportBlurb.summary;
-                // NOTE: for Moscow- there's a byline in <i> tags above the blurb, we might want to cut it out..?
-
                 const cityRanking = teleportBlurb.categories
                 const cityRank = cityRanking.map((category) => {
                     return `${category.name}: ${category.score_out_of_10.toFixed(2)}`
@@ -387,7 +398,7 @@ export default function GetCityData({ map, trigger }) {
 
                 setTpMetrics(cityRank) //SET STATE 
 
-                // regex to select metric name and rating out of string and push them into a data object
+                // regex to select category title and metric out of string and push them into a data object
                 const titleRegex = /^.*?(?=:)/gm; //  /^.*?(?=\:)/gm; - was this!!!
                 const metricRegex = /(?<=: ).*/gm;
                 const graphData = [];
@@ -396,44 +407,44 @@ export default function GetCityData({ map, trigger }) {
                     graphData.push({ title: metric.match(titleRegex), metric: parseFloat(metric.match(metricRegex)) })
                 })
 
-                console.log(graphData)
 
+                // SET STATE FOR CHART JS GRAPH
                 setChartData({
                     labels: graphData.map((data) => data.title[0]),
                     datasets: [
                         {
-                            label: "Metric out of 10 ",
+                            label: "Score out of 10 ",
                             data: graphData.map((data) => data.metric),
                             backgroundColor: [
-                                "rgba(75,192,192,1)",
-                                "#ecf0f1",
-                                "#50AF95",
-                                "#f3ba2f",
-                                "#2a71d0",
-                                "red",
-                                "blue",
-                                "green",
-                                "yellow",
-                                "purple",
-                                "orange",
-                                "grey",
-                                "brown",
-                                "red",
-                                "blue",
-                                "green"
-                                
+                                'teal',  
+                                '#3cb44b',
+                                '#ffe119',
+                                '#4363d8',
+                                '#f58231',
+                                '#911eb4',
+                                '#42d4f4',
+                                '#f032e6',
+                                '#bfef45',
+                                '#fabed4',
+                                '#469990',
+                                '#dcbeff',
+                                '#800000',
+                                '#aaffc3',
+                                '#808000',
+                                '#ffd8b1',
+                                '#b696c6'
                             ],
                             borderColor: "black",
-                            borderWidth: 2
+                            borderWidth: 1
                         }
                     ]
                 });
 
-                console.log(chartData)
-
+                // removes anything in between <i> tags (author byline for tpSummary):
+                const bylineRegex = /<i>(.*?)<\/i>/gs;
                 // removes html tags from teleport summary:
                 const htmlRegex = /(<([^>]+)>)/ig;
-                const tpSummary = citySummary.replace(htmlRegex, '');
+                const tpSummary = citySummary.replace(bylineRegex, '').replace(htmlRegex, '');
 
                 setTpBlurb(tpSummary) //SET STATE 
             }
@@ -458,8 +469,7 @@ export default function GetCityData({ map, trigger }) {
                     <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
                     </p>
 
-
-                    <DoughnutChart chartData={chartData} />
+                    <Graph chartData={chartData} />
 
                     <p>{tpMetrics}</p>
                     <p>{tpBlurb}</p>
