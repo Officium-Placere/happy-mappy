@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Graph from './Graph';
 
-export default function GetCityData({ map, trigger }) {
+export default function GetCityData({ map, trigger, showCityData }) {
 
     const [showInfo, setShowInfo] = useState(false);
     const [wikiBlurb, setWikiBlurb] = useState()
@@ -305,150 +305,189 @@ export default function GetCityData({ map, trigger }) {
             });
 
             async function getApiData() {
-                const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${center.lat}&longitude=${center.lng}&localityLanguage=en&key=bdc_e3a41bcc2937431191cc18382f3d5492`)
-                    .then(response => response.json())
-                    .then(data => data)
+                let id
+                let wikiTitle
+                let cityASCII
 
-                const cityObj = firstAPI.localityInfo.administrative.find((poiObj => poiObj.name === firstAPI.city))
+                try {
 
-                // ID returned for coordinates is Sao Paulo state, so change id to Q174 for Sao Paulo city
-                let id = ''
-                cityObj.wikidataId === 'Q175' ? id = 'Q174' : id = cityObj.wikidataId;
+                    const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${center.lat}&longitude=${center.lng}&localityLanguage=en&key=bdc_e3a41bcc2937431191cc18382f3d5492`)
+                        .then(response => response.json())
+                        .then(data => data)
 
-                const secondAPI = await fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
-                    .then(response => response.json())
-                    .then(data => data)
+                    const cityObj = firstAPI.localityInfo.administrative.find((poiObj => poiObj.name === firstAPI.city))
 
-                const wikiTitle = secondAPI.entities[id].sitelinks.enwiki.title
+                    // ID returned for coordinates is Sao Paulo state, so change id to Q174 for Sao Paulo city
+                    cityObj.wikidataId === 'Q175' ? id = 'Q174' : id = cityObj.wikidataId;
 
-                setCityName(wikiTitle) //SET STATE 
+                } catch (error) {
+                    alert(`big data cloud api not working`)
+                }
 
-                const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${wikiTitle}&origin=*`)
-                    .then(response => response.json())
-                    .then(data => data)
+                try {
+                    const secondAPI = await fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
+                        .then(response => response.json())
+                        .then(data => data)
 
-                const keys = Object.keys(thirdAPI.query.pages)[0]
-                const wkExtract = (thirdAPI.query.pages[keys].extract)
-                // save first 3 sentences and remove '(listen)' link from the wiki extract
-                // NOTE: MAYBE CUT FIRST PARENTHESIS OUT ENTIRELY???
-                const listenRegex = (/\(listen\)/g);
-                const wkBlurb = wkExtract.match(/[^.]*.[^.]*.[^.]*./)[0].replace(listenRegex, '');
+                    let wikiTitle = secondAPI.entities[id].sitelinks.enwiki.title
 
-                setWikiBlurb(wkBlurb) //SET STATE 
+                    setCityName(wikiTitle) //SET STATE 
 
-                // fetch main image from wiki article
-                const fourthAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=%2A&pithumbsize=800&prop=pageimages&titles=${wikiTitle}&format=json`)
-                    .then(response => response.json())
-                    .then(data => data)
+                } catch (error) {
+                    alert(`wiki api not working`)
+                }
 
-                const wkImageKey = Object.keys(fourthAPI.query.pages)[0]
-                const wkImage = (fourthAPI.query.pages[wkImageKey].thumbnail.source)
+                try {
 
-                setWikiPic(wkImage) //SET STATE 
+                    const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${wikiTitle}&origin=*`)
+                        .then(response => response.json())
+                        .then(data => data)
 
-                // FIND CITY VIA COORDS TO GET CORRECT CITY NAME IN TELEPORT, AND THEN FIND IMAGE AFTER
-                const teleportCity = await fetch(`https://api.teleport.org/api/locations/${center.lat},${center.lng}/`)
-                    .then(response => response.json())
-                    .then(data => data);
+                    const keys = Object.keys(thirdAPI.query.pages)[0]
+                    const wkExtract = (thirdAPI.query.pages[keys].extract)
+                    // save first 3 sentences and remove '(listen)' link from the wiki extract
+                    // NOTE: MAYBE CUT FIRST PARENTHESIS OUT ENTIRELY???
+                    const listenRegex = (/\(listen\)/g);
+                    const wkBlurb = wkExtract.match(/[^.]*.[^.]*.[^.]*./)[0].replace(listenRegex, '');
 
-                const nearestCity = Object.entries(teleportCity._embedded)
-                const nearestCityName = nearestCity[0];
-                const cName = Object.entries(nearestCityName[1][0]._links)
-                const tpCity = cName[0][1].name
+                    setWikiBlurb(wkBlurb) //SET STATE 
 
-                // remove 'city' from the name, when it's not Mexico City, ie for New York City as API lists NYC as New York
-                const editedCityName = [];
-                let cityLowerCase = '';
-                tpCity === 'Mexico City'
-                    ?
-                    cityLowerCase = tpCity.toLowerCase().split(' ').join('-')
-                    :
-                    tpCity.toLowerCase().split(' ').map((word) => {
-                        if (word !== 'city') {
-                            editedCityName.push(word)
-                        }
-                        cityLowerCase = editedCityName.join('-');
-                        return cityLowerCase;
+                } catch (error) {
+                    alert(`wiki api call #2 not working`)
+                }
+
+                try {
+                    // fetch main image from wiki article
+                    const fourthAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=%2A&pithumbsize=800&prop=pageimages&titles=${wikiTitle}&format=json`)
+                        .then(response => response.json())
+                        .then(data => console.log(data))
+                    
+
+                    const wkImageKey = Object.keys(fourthAPI.query.pages)[0]
+                    const wkImage = (fourthAPI.query.pages[wkImageKey].thumbnail.source)
+
+                    setWikiPic(wkImage) //SET STATE 
+
+                } catch (error) {
+                    alert(`wiki api call #3 not working`)
+                }
+                try {
+                    // FIND CITY VIA COORDS TO GET CORRECT CITY NAME IN TELEPORT, AND THEN FIND IMAGE AFTER
+                    const teleportCity = await fetch(`https://api.teleport.org/api/locations/${center.lat},${center.lng}/`)
+                        .then(response => response.json())
+                        .then(data => data);
+
+                    const nearestCity = Object.entries(teleportCity._embedded)
+                    const nearestCityName = nearestCity[0];
+                    const cName = Object.entries(nearestCityName[1][0]._links)
+                    const tpCity = cName[0][1].name
+
+                    // remove 'city' from the name when it's not Mexico City, ie for New York City as API lists NYC as New York
+                    const editedCityName = [];
+                    let cityLowerCase = '';
+                    tpCity === 'Mexico City'
+                        ?
+                        cityLowerCase = tpCity.toLowerCase().split(' ').join('-')
+                        :
+                        tpCity.toLowerCase().split(' ').map((word) => {
+                            if (word !== 'city') {
+                                editedCityName.push(word)
+                            }
+                            cityLowerCase = editedCityName.join('-');
+                            return cityLowerCase;
+                        })
+
+                    // remove accents from the city name
+                    function removeAccents(str) {
+                        cityASCII = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                        return cityASCII
+                    }
+                    removeAccents(cityLowerCase)
+
+                } catch (error) {
+                    alert(`Teleport api call #1 not working`)
+                }
+
+                try {
+                    const teleportImg = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/images/`)
+                        .then(response => response.json())
+                        .then(data => data);
+                    const tpImage = teleportImg.photos[0].image.mobile
+
+                    setTpPic(tpImage) //SET STATE 
+
+                } catch (error) {
+                    alert(`Teleport api call #2 not working`)
+                }
+
+                try {
+                    const teleportBlurb = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/scores/`)
+                        .then(response => response.json())
+                        .then(data => data);
+
+                    const citySummary = teleportBlurb.summary;
+                    const cityRanking = teleportBlurb.categories
+                    const cityRank = cityRanking.map((category) => {
+                        return `${category.name}: ${category.score_out_of_10.toFixed(2)} `
                     })
 
-                // remove accents from the city name
-                let cityASCII = ''
-                function removeAccents(str) {
-                    cityASCII = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    return cityASCII
+                    setTpMetrics(cityRank) //SET STATE 
+
+                    // regex to select category title and metric out of string and push them into a data object
+                    const titleRegex = /^.*?(?=:)/gm; //  /^.*?(?=\:)/gm; - was this!!!
+                    const metricRegex = /(?<=: ).*/gm;
+                    const graphData = [];
+
+                    cityRank.forEach((metric) => {
+                        graphData.push({ title: metric.match(titleRegex), metric: parseFloat(metric.match(metricRegex)) })
+                    })
+
+                    // SET STATE FOR CHART JS GRAPH
+                    setChartData({
+                        labels: graphData.map((data) => data.title[0]),
+                        datasets: [
+                            {
+                                label: "Score out of 10 ",
+                                data: graphData.map((data) => data.metric),
+                                backgroundColor: [
+                                    '#F0F8F9',
+                                    '#E2F1F3',
+                                    '#D4EAED',
+                                    '#C5E3E7',
+                                    '#B7DCE1',
+                                    '#A9D5DB',
+                                    '#9ACED5',
+                                    '#8CC7CF',
+                                    '#7EC0C9',
+                                    '#6FB9C3',
+                                    '#61B2BD',
+                                    '#52ABB7',
+                                    '#48A1AD',
+                                    '#42939E',
+                                    '#3C8690',
+                                    '#367981',
+                                    '#306C73'
+                                ],
+                                borderColor: "black",
+                                borderWidth: 1
+                            }
+                        ]
+                    });
+
+                    // removes anything in between <i> tags (author byline for tpSummary):
+                    const bylineRegex = /<i>(.*?)<\/i>/gs;
+                    // removes html tags from teleport summary:
+                    const htmlRegex = /(<([^>]+)>)/ig;
+                    const tpSummary = citySummary.replace(bylineRegex, '').replace(htmlRegex, '');
+
+                    setTpBlurb(tpSummary) //SET STATE 
+                } catch (error) {
+                    alert(`Teleport api call #3 not working`)
                 }
-                removeAccents(cityLowerCase)
-
-                const teleportImg = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/images/`)
-                    .then(response => response.json())
-                    .then(data => data);
-                const tpImage = teleportImg.photos[0].image.mobile
-
-                setTpPic(tpImage) //SET STATE 
-
-                const teleportBlurb = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/scores/`)
-                    .then(response => response.json())
-                    .then(data => data);
-
-                const citySummary = teleportBlurb.summary;
-                const cityRanking = teleportBlurb.categories
-                const cityRank = cityRanking.map((category) => {
-                    return `${category.name}: ${category.score_out_of_10.toFixed(2)}`
-                })
-
-                setTpMetrics(cityRank) //SET STATE 
-
-                // regex to select category title and metric out of string and push them into a data object
-                const titleRegex = /^.*?(?=:)/gm; //  /^.*?(?=\:)/gm; - was this!!!
-                const metricRegex = /(?<=: ).*/gm;
-                const graphData = [];
-
-                cityRank.forEach((metric) => {
-                    graphData.push({ title: metric.match(titleRegex), metric: parseFloat(metric.match(metricRegex)) })
-                })
-
-
-                // SET STATE FOR CHART JS GRAPH
-                setChartData({
-                    labels: graphData.map((data) => data.title[0]),
-                    datasets: [
-                        {
-                            label: "Score out of 10 ",
-                            data: graphData.map((data) => data.metric),
-                            backgroundColor: [
-                                'teal',  
-                                '#3cb44b',
-                                '#ffe119',
-                                '#4363d8',
-                                '#f58231',
-                                '#911eb4',
-                                '#42d4f4',
-                                '#f032e6',
-                                '#bfef45',
-                                '#fabed4',
-                                '#469990',
-                                '#dcbeff',
-                                '#800000',
-                                '#aaffc3',
-                                '#808000',
-                                '#ffd8b1',
-                                '#b696c6'
-                            ],
-                            borderColor: "black",
-                            borderWidth: 1
-                        }
-                    ]
-                });
-
-                // removes anything in between <i> tags (author byline for tpSummary):
-                const bylineRegex = /<i>(.*?)<\/i>/gs;
-                // removes html tags from teleport summary:
-                const htmlRegex = /(<([^>]+)>)/ig;
-                const tpSummary = citySummary.replace(bylineRegex, '').replace(htmlRegex, '');
-
-                setTpBlurb(tpSummary) //SET STATE 
             }
+
             getApiData()
+
         }
 
         // don't run on the initial render
@@ -460,31 +499,31 @@ export default function GetCityData({ map, trigger }) {
 
     return (
         <>
-            <button
-                onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : 'Show city info'}
-            </button>
+            {showCityData ?
+                <div>
+                    <button
+                        onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : 'Show city info'}
+                    </button>
 
-            {trigger !== 0 ?
-                <div style={{ display: showInfo ? 'block' : 'none' }}>
-                    <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
-                    </p>
+                    <div style={{ display: showInfo ? 'block' : 'none' }}>
+                        <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
+                        </p>
 
-                    <Graph chartData={chartData} />
+                        <Graph chartData={chartData} />
 
-                    <p>{tpMetrics}</p>
-                    <p>{tpBlurb}</p>
+                        <p className='visually-hidden'>City Rankings per Category: Score out of 10: {tpMetrics} / 10</p>
+                        <p>{tpBlurb}</p>
 
-                    <div>
-                        <img src={tpPic} alt={`${cityName}`} />
+                        <div>
+                            <img src={tpPic} alt={`${cityName}`} />
+                        </div>
+                        <div>
+                            <img src={wikiPic} alt={`${cityName}`} />
+                        </div>
+
                     </div>
-                    <div>
-                        <img src={wikiPic} alt={`${cityName}`} />
-                    </div>
-
                 </div>
-                :
-                null
-            }
+                : null}
         </>
     )
 }

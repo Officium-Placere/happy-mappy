@@ -15,7 +15,7 @@ export default function DisplayMap() {
     const [lng, setLng] = useState(Math.floor(Math.random() * (90 - (-90))) + (-90));
     const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
     const [zoom, setZoom] = useState(2);
-
+    const [showCityData, setShowCityData] = useState(false);
     //initialize map
     useEffect(() => {
         if (map.current) return;
@@ -101,6 +101,8 @@ export default function DisplayMap() {
                     map.current.keyboard.enable();
                     map.current.touchZoomRotate.enable();
                     map.current.doubleClickZoom.enable();
+
+                    setShowCityData(true);
                 }
             }
         })
@@ -160,6 +162,8 @@ export default function DisplayMap() {
                 map.current.keyboard.disable();
                 map.current.touchZoomRotate.disable();
                 map.current.doubleClickZoom.disable();
+
+                setShowCityData(false);
             }
         }
         spinEnabled = !spinEnabled
@@ -168,15 +172,19 @@ export default function DisplayMap() {
     return (
         <>
             <button
+                disabled={spinEnabled}
                 id="btn-spin"
                 ref={spinButton}
                 onClick={() => handleBtn()}>Start rotation
             </button>
             <div ref={mapContainer} className="map-container" />
+
             <GetCityData
                 map={map}
                 trigger={trigger}
+                showCityData={showCityData}
             />
+
         </>
     )
 }
