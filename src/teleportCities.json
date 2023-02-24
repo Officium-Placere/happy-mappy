@@ -1,0 +1,3965 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.2107,
+                    56.1572
+                ]
+            },
+            "properties": {
+                "city-ascii": "Aarhus",
+                "country": "Denmark",
+                "id": 1208841031
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    138.6007,
+                    -34.9285
+                ]
+            },
+            "properties": {
+                "city-ascii": "Adelaide",
+                "country": "Australia",
+                "id": 1036136750
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -106.6464,
+                    35.1053
+                ]
+            },
+            "properties": {
+                "city-ascii": "Albuquerque",
+                "country": "United States",
+                "id": 1840019176
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    76.9,
+                    43.25
+                ]
+            },
+            "properties": {
+                "city-ascii": "Almaty",
+                "country": "Kazakhstan",
+                "id": 1398351701
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.8833,
+                    52.3667
+                ]
+            },
+            "properties": {
+                "city-ascii": "Amsterdam",
+                "country": "Netherlands",
+                "id": 1528355309
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -149.1091,
+                    61.1508
+                ]
+            },
+            "properties": {
+                "city-ascii": "Anchorage",
+                "country": "United States",
+                "id": 1840023385
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -0.4483,
+                    40.9775
+                ]
+            },
+            "properties": {
+                "city-ascii": "Andorra",
+                "country": "Spain",
+                "id": 1724666450
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    32.85,
+                    39.93
+                ]
+            },
+            "properties": {
+                "city-ascii": "Ankara",
+                "country": "Turkey",
+                "id": 1792572891
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5536,
+                    35.5704
+                ]
+            },
+            "properties": {
+                "city-ascii": "Asheville",
+                "country": "United States",
+                "id": 1840013411
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -57.6333,
+                    -25.3
+                ]
+            },
+            "properties": {
+                "city-ascii": "Asuncion",
+                "country": "Paraguay",
+                "id": 1600057911
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    23.7281,
+                    37.9842
+                ]
+            },
+            "properties": {
+                "city-ascii": "Athens",
+                "country": "Greece",
+                "id": 1300715560
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.4224,
+                    33.7627
+                ]
+            },
+            "properties": {
+                "city-ascii": "Atlanta",
+                "country": "United States",
+                "id": 1840013660
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    174.7833,
+                    -36.85
+                ]
+            },
+            "properties": {
+                "city-ascii": "Auckland",
+                "country": "New Zealand",
+                "id": 1554435911
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -97.7522,
+                    30.3004
+                ]
+            },
+            "properties": {
+                "city-ascii": "Austin",
+                "country": "United States",
+                "id": 1840006830
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    49.8352,
+                    40.3667
+                ]
+            },
+            "properties": {
+                "city-ascii": "Baku",
+                "country": "Azerbaijan",
+                "id": 1031946365
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    88.34,
+                    22.65
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bali",
+                "country": "India",
+                "id": 1356113138
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.6144,
+                    39.3051
+                ]
+            },
+            "properties": {
+                "city-ascii": "Baltimore",
+                "country": "United States",
+                "id": 1840001592
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    100.5167,
+                    13.75
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bangkok",
+                "country": "Thailand",
+                "id": 1764068610
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.1769,
+                    41.3825
+                ]
+            },
+            "properties": {
+                "city-ascii": "Barcelona",
+                "country": "Spain",
+                "id": 1724594040
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.4075,
+                    39.904
+                ]
+            },
+            "properties": {
+                "city-ascii": "Beijing",
+                "country": "China",
+                "id": 1156228865
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    35.5131,
+                    33.8869
+                ]
+            },
+            "properties": {
+                "city-ascii": "Beirut",
+                "country": "Lebanon",
+                "id": 1422847713
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -5.93,
+                    54.5964
+                ]
+            },
+            "properties": {
+                "city-ascii": "Belfast",
+                "country": "United Kingdom",
+                "id": 1826325087
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    20.4667,
+                    44.8167
+                ]
+            },
+            "properties": {
+                "city-ascii": "Belgrade",
+                "country": "Serbia",
+                "id": 1688374696
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -88.1886,
+                    17.4986
+                ]
+            },
+            "properties": {
+                "city-ascii": "Belize City",
+                "country": "Belize",
+                "id": 1084150679
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    77.5913,
+                    12.9791
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bangalore",
+                "country": "India",
+                "id": null
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.3233,
+                    60.3925
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bergen",
+                "country": "Norway",
+                "id": 1578465701
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.3833,
+                    52.5167
+                ]
+            },
+            "properties": {
+                "city-ascii": "Berlin",
+                "country": "Germany",
+                "id": 1276451290
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.4474,
+                    46.948
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bern",
+                "country": "Switzerland",
+                "id": 1756374318
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -2.9236,
+                    43.2569
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bilbao",
+                "country": "Spain",
+                "id": 1724331267
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -1.9025,
+                    52.48
+                ]
+            },
+            "properties": {
+                "city-ascii": "Birmingham",
+                "country": "United Kingdom",
+                "id": 1826423213
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -86.7987,
+                    33.5277
+                ]
+            },
+            "properties": {
+                "city-ascii": "Birmingham",
+                "country": "United States",
+                "id": 1840006507
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -74.0705,
+                    4.6126
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bogota",
+                "country": "Colombia",
+                "id": 1170483426
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -116.2312,
+                    43.6007
+                ]
+            },
+            "properties": {
+                "city-ascii": "Boise",
+                "country": "United States",
+                "id": 1840027142
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.3428,
+                    44.4939
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bologna",
+                "country": "Italy",
+                "id": 1380202039
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -0.58,
+                    44.84
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bordeaux",
+                "country": "France",
+                "id": 1250449238
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -71.0846,
+                    42.3188
+                ]
+            },
+            "properties": {
+                "city-ascii": "Boston",
+                "country": "United States",
+                "id": 1840000455
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -105.2523,
+                    40.0249
+                ]
+            },
+            "properties": {
+                "city-ascii": "Boulder",
+                "country": "United States",
+                "id": 1840018774
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -111.0552,
+                    45.6832
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bozeman",
+                "country": "United States",
+                "id": 1840018509
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    17.1128,
+                    48.1447
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bratislava",
+                "country": "Slovakia",
+                "id": 1703195001
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -0.1395,
+                    50.8284
+                ]
+            },
+            "properties": {
+                "city-ascii": "Brighton",
+                "country": "United Kingdom",
+                "id": 1826609057
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    153.0281,
+                    -27.4678
+                ]
+            },
+            "properties": {
+                "city-ascii": "Brisbane",
+                "country": "Australia",
+                "id": 1036192929
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -2.5833,
+                    51.45
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bristol",
+                "country": "United Kingdom",
+                "id": 1826921049
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    16.6083,
+                    49.1953
+                ]
+            },
+            "properties": {
+                "city-ascii": "Brno",
+                "country": "Czechia",
+                "id": 1203676514
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.3314,
+                    50.8353
+                ]
+            },
+            "properties": {
+                "city-ascii": "Brussels",
+                "country": "Belgium",
+                "id": 1056469830
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.0833,
+                    44.4
+                ]
+            },
+            "properties": {
+                "city-ascii": "Bucharest",
+                "country": "Romania",
+                "id": 1642414442
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    19.0408,
+                    47.4983
+                ]
+            },
+            "properties": {
+                "city-ascii": "Budapest",
+                "country": "Hungary",
+                "id": 1348611435
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -58.3819,
+                    -34.5997
+                ]
+            },
+            "properties": {
+                "city-ascii": "Buenos Aires",
+                "country": "Argentina",
+                "id": 1032717330
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.8487,
+                    42.9016
+                ]
+            },
+            "properties": {
+                "city-ascii": "Buffalo",
+                "country": "United States",
+                "id": 1840000386
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -3.1792,
+                    51.4817
+                ]
+            },
+            "properties": {
+                "city-ascii": "Caerdydd",
+                "country": "United Kingdom",
+                "id": 1826362422
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    31.2358,
+                    30.0444
+                ]
+            },
+            "properties": {
+                "city-ascii": "Cairo",
+                "country": "Egypt",
+                "id": 1818253931
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -114.0667,
+                    51.05
+                ]
+            },
+            "properties": {
+                "city-ascii": "Calgary",
+                "country": "Canada",
+                "id": 1124690423
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0.1192,
+                    52.2053
+                ]
+            },
+            "properties": {
+                "city-ascii": "Cambridge",
+                "country": "United Kingdom",
+                "id": 1826229713
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.425,
+                    -33.925
+                ]
+            },
+            "properties": {
+                "city-ascii": "Cape Town",
+                "country": "South Africa",
+                "id": 1710680650
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -66.9333,
+                    10.5
+                ]
+            },
+            "properties": {
+                "city-ascii": "Caracas",
+                "country": "Venezuela",
+                "id": 1862748204
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -3.1792,
+                    51.4817
+                ]
+            },
+            "properties": {
+                "city-ascii": "Cardiff",
+                "country": "United Kingdom",
+                "id": 1826362422
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -7.62,
+                    33.5992
+                ]
+            },
+            "properties": {
+                "city-ascii": "Casablanca",
+                "country": "Morocco",
+                "id": 1504175315
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -80.8304,
+                    35.208
+                ]
+            },
+            "properties": {
+                "city-ascii": "Charlotte",
+                "country": "United States",
+                "id": 1840014557
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -85.2488,
+                    35.0657
+                ]
+            },
+            "properties": {
+                "city-ascii": "Chattanooga",
+                "country": "United States",
+                "id": 1840014569
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    80.275,
+                    13.0825
+                ]
+            },
+            "properties": {
+                "city-ascii": "Chennai",
+                "country": "India",
+                "id": 1356374944
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    98.9833,
+                    18.7889
+                ]
+            },
+            "properties": {
+                "city-ascii": "Chiang Mai",
+                "country": "Thailand",
+                "id": 1764662886
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -87.6862,
+                    41.8373
+                ]
+            },
+            "properties": {
+                "city-ascii": "Chicago",
+                "country": "United States",
+                "id": 1840000494
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    28.8353,
+                    47.0228
+                ]
+            },
+            "properties": {
+                "city-ascii": "Chisinau",
+                "country": "Moldova",
+                "id": 1498011437
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    172.6365,
+                    -43.5309
+                ]
+            },
+            "properties": {
+                "city-ascii": "Christchurch",
+                "country": "New Zealand",
+                "id": 1554377228
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.5061,
+                    39.1413
+                ]
+            },
+            "properties": {
+                "city-ascii": "Cincinnati",
+                "country": "United States",
+                "id": 1840003814
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -81.6804,
+                    41.4767
+                ]
+            },
+            "properties": {
+                "city-ascii": "Cleveland",
+                "country": "United States",
+                "id": 1840000596
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    23.5594,
+                    46.78
+                ]
+            },
+            "properties": {
+                "city-ascii": "Cluj-Napoca",
+                "country": "Romania",
+                "id": 1642503974
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.9578,
+                    50.9422
+                ]
+            },
+            "properties": {
+                "city-ascii": "Cologne",
+                "country": "Germany",
+                "id": 1276015998
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -104.7606,
+                    38.8674
+                ]
+            },
+            "properties": {
+                "city-ascii": "Colorado Springs",
+                "country": "United States",
+                "id": 1840018825
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.8771,
+                    32.51
+                ]
+            },
+            "properties": {
+                "city-ascii": "Columbus",
+                "country": "United States",
+                "id": 1840014887
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.5615,
+                    55.6805
+                ]
+            },
+            "properties": {
+                "city-ascii": "Copenhagen",
+                "country": "Denmark",
+                "id": 1208763942
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -8.4731,
+                    51.9
+                ]
+            },
+            "properties": {
+                "city-ascii": "Cork",
+                "country": "Ireland",
+                "id": 1372221853
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -49.2719,
+                    -25.4297
+                ]
+            },
+            "properties": {
+                "city-ascii": "Curitiba",
+                "country": "Brazil",
+                "id": 1076701712
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -123.3131,
+                    44.9222
+                ]
+            },
+            "properties": {
+                "city-ascii": "Dallas",
+                "country": "United States",
+                "id": 1840018590
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    39.2833,
+                    -6.8
+                ]
+            },
+            "properties": {
+                "city-ascii": "Dar es Salaam",
+                "country": "Tanzania",
+                "id": 1834843853
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -104.8759,
+                    39.7621
+                ]
+            },
+            "properties": {
+                "city-ascii": "Denver",
+                "country": "United States",
+                "id": 1840018789
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -93.6105,
+                    41.5725
+                ]
+            },
+            "properties": {
+                "city-ascii": "Des Moines",
+                "country": "United States",
+                "id": 1840007069
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -83.1024,
+                    42.3834
+                ]
+            },
+            "properties": {
+                "city-ascii": "Detroit",
+                "country": "United States",
+                "id": 1840003971
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    51.5333,
+                    25.3
+                ]
+            },
+            "properties": {
+                "city-ascii": "Doha",
+                "country": "Qatar",
+                "id": 1634459660
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.74,
+                    51.05
+                ]
+            },
+            "properties": {
+                "city-ascii": "Dresden",
+                "country": "Germany",
+                "id": 1276561036
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    55.3094,
+                    25.2697
+                ]
+            },
+            "properties": {
+                "city-ascii": "Dubai",
+                "country": "United Arab Emirates",
+                "id": 1784736618
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -6.2603,
+                    53.3497
+                ]
+            },
+            "properties": {
+                "city-ascii": "Dublin",
+                "country": "Ireland",
+                "id": 1372595407
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.7724,
+                    51.2311
+                ]
+            },
+            "properties": {
+                "city-ascii": "Dusseldorf",
+                "country": "Germany",
+                "id": 1276615258
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -3.189,
+                    55.953
+                ]
+            },
+            "properties": {
+                "city-ascii": "Edinburgh",
+                "country": "United Kingdom",
+                "id": 1826492520
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -113.4903,
+                    53.5344
+                ]
+            },
+            "properties": {
+                "city-ascii": "Edmonton",
+                "country": "Canada",
+                "id": 1124290735
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.4842,
+                    51.4344
+                ]
+            },
+            "properties": {
+                "city-ascii": "Eindhoven",
+                "country": "Netherlands",
+                "id": 1528636212
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -123.1173,
+                    44.0563
+                ]
+            },
+            "properties": {
+                "city-ascii": "Eugene",
+                "country": "United States",
+                "id": 1840020007
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.2542,
+                    43.7714
+                ]
+            },
+            "properties": {
+                "city-ascii": "Florence",
+                "country": "Italy",
+                "id": 1380726561
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -48.553,
+                    -27.5933
+                ]
+            },
+            "properties": {
+                "city-ascii": "Florianopolis",
+                "country": "Brazil",
+                "id": 1076190259
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -105.0656,
+                    40.5478
+                ]
+            },
+            "properties": {
+                "city-ascii": "Fort Collins",
+                "country": "United States",
+                "id": 1840020151
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.6797,
+                    50.1136
+                ]
+            },
+            "properties": {
+                "city-ascii": "Frankfurt",
+                "country": "Germany",
+                "id": 1276054552
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    130.4167,
+                    33.6
+                ]
+            },
+            "properties": {
+                "city-ascii": "Fukuoka",
+                "country": "Japan",
+                "id": 1392576294
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -9.0418,
+                    53.2729
+                ]
+            },
+            "properties": {
+                "city-ascii": "Galway",
+                "country": "Ireland",
+                "id": 1372499968
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.6333,
+                    54.3667
+                ]
+            },
+            "properties": {
+                "city-ascii": "Gdansk",
+                "country": "Poland",
+                "id": 1616406372
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.15,
+                    46.2
+                ]
+            },
+            "properties": {
+                "city-ascii": "Geneva",
+                "country": "Switzerland",
+                "id": 1756810813
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -5.3781,
+                    36.1324
+                ]
+            },
+            "properties": {
+                "city-ascii": "Gibraltar",
+                "country": "Gibraltar",
+                "id": 1292385245
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -4.25,
+                    55.8611
+                ]
+            },
+            "properties": {
+                "city-ascii": "Glasgow",
+                "country": "United Kingdom",
+                "id": 1826836462
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.981,
+                    57.6717
+                ]
+            },
+            "properties": {
+                "city-ascii": "Gothenburg",
+                "country": "Sweden",
+                "id": 1752059374
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.7224,
+                    45.1715
+                ]
+            },
+            "properties": {
+                "city-ascii": "Grenoble",
+                "country": "France",
+                "id": 1250071647
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -103.3475,
+                    20.6767
+                ]
+            },
+            "properties": {
+                "city-ascii": "Guadalajara",
+                "country": "Mexico",
+                "id": 1484950208
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -90.5252,
+                    14.6099
+                ]
+            },
+            "properties": {
+                "city-ascii": "Guatemala City",
+                "country": "Guatemala",
+                "id": 1320197916
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -63.5906,
+                    44.6475
+                ]
+            },
+            "properties": {
+                "city-ascii": "Halifax",
+                "country": "Canada",
+                "id": 1124130981
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.7386,
+                    52.3744
+                ]
+            },
+            "properties": {
+                "city-ascii": "Hannover",
+                "country": "Germany",
+                "id": 1276457707
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -82.3589,
+                    23.1367
+                ]
+            },
+            "properties": {
+                "city-ascii": "Havana",
+                "country": "Cuba",
+                "id": 1192752771
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.6333,
+                    10.8167
+                ]
+            },
+            "properties": {
+                "city-ascii": "Ho Chi Minh City",
+                "country": "Vietnam",
+                "id": 1704774326
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    114.1831,
+                    22.3069
+                ]
+            },
+            "properties": {
+                "city-ascii": "Hong Kong",
+                "country": "Hong Kong",
+                "id": 1344982653
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -157.846,
+                    21.3294
+                ]
+            },
+            "properties": {
+                "city-ascii": "Honolulu",
+                "country": "United States",
+                "id": 1840013305
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -95.3889,
+                    29.7863
+                ]
+            },
+            "properties": {
+                "city-ascii": "Houston",
+                "country": "United States",
+                "id": 1840020925
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    78.4747,
+                    17.3617
+                ]
+            },
+            "properties": {
+                "city-ascii": "Hyderabad",
+                "country": "India",
+                "id": 1356871768
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -86.1458,
+                    39.7771
+                ]
+            },
+            "properties": {
+                "city-ascii": "Indianapolis",
+                "country": "United States",
+                "id": 1840030084
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.3933,
+                    47.2683
+                ]
+            },
+            "properties": {
+                "city-ascii": "Innsbruck",
+                "country": "Austria",
+                "id": 1040038924
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    28.9603,
+                    41.01
+                ]
+            },
+            "properties": {
+                "city-ascii": "Istanbul",
+                "country": "Turkey",
+                "id": 1792756324
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -81.6749,
+                    30.3322
+                ]
+            },
+            "properties": {
+                "city-ascii": "Jacksonville",
+                "country": "United States",
+                "id": 1840015031
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.8451,
+                    -6.2146
+                ]
+            },
+            "properties": {
+                "city-ascii": "Jakarta",
+                "country": "Indonesia",
+                "id": 1360771077
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    28.0416,
+                    -26.2044
+                ]
+            },
+            "properties": {
+                "city-ascii": "Johannesburg",
+                "country": "South Africa",
+                "id": 1710550792
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -94.5541,
+                    39.1239
+                ]
+            },
+            "properties": {
+                "city-ascii": "Kansas City",
+                "country": "United States",
+                "id": 1840008535
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.4,
+                    49.0167
+                ]
+            },
+            "properties": {
+                "city-ascii": "Karlsruhe",
+                "country": "Germany",
+                "id": 1276923210
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    85.3667,
+                    27.7167
+                ]
+            },
+            "properties": {
+                "city-ascii": "Kathmandu",
+                "country": "Nepal",
+                "id": 1524589448
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    30.5236,
+                    50.45
+                ]
+            },
+            "properties": {
+                "city-ascii": "Kiev",
+                "country": "Ukraine",
+                "id": 1804382913
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -76.7931,
+                    17.9714
+                ]
+            },
+            "properties": {
+                "city-ascii": "Kingston",
+                "country": "Jamaica",
+                "id": 1388709177
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -83.9496,
+                    35.9692
+                ]
+            },
+            "properties": {
+                "city-ascii": "Knoxville",
+                "country": "United States",
+                "id": 1840014486
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    19.9372,
+                    50.0614
+                ]
+            },
+            "properties": {
+                "city-ascii": "Krakow",
+                "country": "Poland",
+                "id": 1616172264
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    101.6953,
+                    3.1478
+                ]
+            },
+            "properties": {
+                "city-ascii": "Kuala Lumpur",
+                "country": "Malaysia",
+                "id": 1458988644
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    135.7683,
+                    35.0117
+                ]
+            },
+            "properties": {
+                "city-ascii": "Kyoto",
+                "country": "Japan",
+                "id": 1392622735
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -68.1475,
+                    -16.4942
+                ]
+            },
+            "properties": {
+                "city-ascii": "La Paz",
+                "country": "Bolivia",
+                "id": 1068000064
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    3.4,
+                    6.45
+                ]
+            },
+            "properties": {
+                "city-ascii": "Lagos",
+                "country": "Nigeria",
+                "id": 1566593751
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -15.4314,
+                    28.1272
+                ]
+            },
+            "properties": {
+                "city-ascii": "Las Palmas",
+                "country": "Spain",
+                "id": 1724501748
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -115.2654,
+                    36.2333
+                ]
+            },
+            "properties": {
+                "city-ascii": "Las Vegas",
+                "country": "United States",
+                "id": 1840020364
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.6333,
+                    46.5333
+                ]
+            },
+            "properties": {
+                "city-ascii": "Lausanne",
+                "country": "Switzerland",
+                "id": 1756055099
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -1.5492,
+                    53.7997
+                ]
+            },
+            "properties": {
+                "city-ascii": "Leeds",
+                "country": "United Kingdom",
+                "id": 1826343963
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.3833,
+                    51.3333
+                ]
+            },
+            "properties": {
+                "city-ascii": "Leipzig",
+                "country": "Germany",
+                "id": 1276563678
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    3.0583,
+                    50.6278
+                ]
+            },
+            "properties": {
+                "city-ascii": "Lille",
+                "country": "France",
+                "id": 1250071961
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.0375,
+                    -12.06
+                ]
+            },
+            "properties": {
+                "city-ascii": "Lima",
+                "country": "Peru",
+                "id": 1604728603
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -9.139,
+                    38.708
+                ]
+            },
+            "properties": {
+                "city-ascii": "Lisbon",
+                "country": "Portugal",
+                "id": 1620619017
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -2.9919,
+                    53.4075
+                ]
+            },
+            "properties": {
+                "city-ascii": "Liverpool",
+                "country": "United Kingdom",
+                "id": 1826558678
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.5167,
+                    46.05
+                ]
+            },
+            "properties": {
+                "city-ascii": "Ljubljana",
+                "country": "Slovenia",
+                "id": 1705917455
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -0.1275,
+                    51.5072
+                ]
+            },
+            "properties": {
+                "city-ascii": "London",
+                "country": "United Kingdom",
+                "id": 1826645935
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -118.4068,
+                    34.1139
+                ]
+            },
+            "properties": {
+                "city-ascii": "Los Angeles",
+                "country": "United States",
+                "id": 1840020491
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -85.6485,
+                    38.1663
+                ]
+            },
+            "properties": {
+                "city-ascii": "Louisville",
+                "country": "United States",
+                "id": 1840030815
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.1328,
+                    49.6106
+                ]
+            },
+            "properties": {
+                "city-ascii": "Luxembourg",
+                "country": "Luxembourg",
+                "id": 1442262731
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    24.0315,
+                    49.8419
+                ]
+            },
+            "properties": {
+                "city-ascii": "Lviv",
+                "country": "Ukraine",
+                "id": 1804939658
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.84,
+                    45.76
+                ]
+            },
+            "properties": {
+                "city-ascii": "Lyon",
+                "country": "France",
+                "id": 1250196189
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -89.3931,
+                    43.0826
+                ]
+            },
+            "properties": {
+                "city-ascii": "Madison",
+                "country": "United States",
+                "id": 1840002915
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -3.7167,
+                    40.4167
+                ]
+            },
+            "properties": {
+                "city-ascii": "Madrid",
+                "country": "Spain",
+                "id": 1724616994
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -4.42,
+                    36.7194
+                ]
+            },
+            "properties": {
+                "city-ascii": "Malaga",
+                "country": "Spain",
+                "id": 1724397372
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.0333,
+                    55.5833
+                ]
+            },
+            "properties": {
+                "city-ascii": "Malmo",
+                "country": "Sweden",
+                "id": 1752705818
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -86.2667,
+                    12.15
+                ]
+            },
+            "properties": {
+                "city-ascii": "Managua",
+                "country": "Nicaragua",
+                "id": 1558296252
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -2.2453,
+                    53.4794
+                ]
+            },
+            "properties": {
+                "city-ascii": "Manchester",
+                "country": "United Kingdom",
+                "id": 1826246335
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    120.9833,
+                    14.6
+                ]
+            },
+            "properties": {
+                "city-ascii": "Manila",
+                "country": "Philippines",
+                "id": 1608618140
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.37,
+                    43.2964
+                ]
+            },
+            "properties": {
+                "city-ascii": "Marseille",
+                "country": "France",
+                "id": 1250774071
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -75.5748,
+                    6.2447
+                ]
+            },
+            "properties": {
+                "city-ascii": "Medellin",
+                "country": "Colombia",
+                "id": 1170680389
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    144.9631,
+                    -37.8136
+                ]
+            },
+            "properties": {
+                "city-ascii": "Melbourne",
+                "country": "Australia",
+                "id": 1036533631
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -89.9773,
+                    35.1046
+                ]
+            },
+            "properties": {
+                "city-ascii": "Memphis",
+                "country": "United States",
+                "id": 1840015457
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -99.1333,
+                    19.4333
+                ]
+            },
+            "properties": {
+                "city-ascii": "Mexico City",
+                "country": "Mexico",
+                "id": 1484247881
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -80.2102,
+                    25.7839
+                ]
+            },
+            "properties": {
+                "city-ascii": "Miami",
+                "country": "United States",
+                "id": 1840015149
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.19,
+                    45.4669
+                ]
+            },
+            "properties": {
+                "city-ascii": "Milan",
+                "country": "Italy",
+                "id": 1380724377
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -87.9673,
+                    43.0642
+                ]
+            },
+            "properties": {
+                "city-ascii": "Milwaukee",
+                "country": "United States",
+                "id": 1840003046
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -93.2678,
+                    44.9635
+                ]
+            },
+            "properties": {
+                "city-ascii": "Minneapolis",
+                "country": "United States",
+                "id": 1840007830
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    27.5618,
+                    53.9022
+                ]
+            },
+            "properties": {
+                "city-ascii": "Minsk",
+                "country": "Belarus",
+                "id": 1112348503
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -56.1667,
+                    -34.8667
+                ]
+            },
+            "properties": {
+                "city-ascii": "Montevideo",
+                "country": "Uruguay",
+                "id": 1858107000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -73.5617,
+                    45.5089
+                ]
+            },
+            "properties": {
+                "city-ascii": "Montreal",
+                "country": "Canada",
+                "id": 1124586170
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.6178,
+                    55.7558
+                ]
+            },
+            "properties": {
+                "city-ascii": "Moscow",
+                "country": "Russia",
+                "id": 1643318494
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    72.8775,
+                    19.0758
+                ]
+            },
+            "properties": {
+                "city-ascii": "Mumbai",
+                "country": "India",
+                "id": 1356226629
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.575,
+                    48.1375
+                ]
+            },
+            "properties": {
+                "city-ascii": "Munich",
+                "country": "Germany",
+                "id": 1276692352
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    36.8172,
+                    -1.2864
+                ]
+            },
+            "properties": {
+                "city-ascii": "Nairobi",
+                "country": "Kenya",
+                "id": 1404000661
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -1.5528,
+                    47.2181
+                ]
+            },
+            "properties": {
+                "city-ascii": "Nantes",
+                "country": "France",
+                "id": 1250091495
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.25,
+                    40.8333
+                ]
+            },
+            "properties": {
+                "city-ascii": "Naples",
+                "country": "Italy",
+                "id": 1380646673
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -86.7843,
+                    36.1715
+                ]
+            },
+            "properties": {
+                "city-ascii": "Nashville",
+                "country": "United States",
+                "id": 1840036155
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    77.209,
+                    28.6139
+                ]
+            },
+            "properties": {
+                "city-ascii": "New Delhi",
+                "country": "India",
+                "id": 1356215164
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -89.9288,
+                    30.0687
+                ]
+            },
+            "properties": {
+                "city-ascii": "New Orleans",
+                "country": "United States",
+                "id": 1840001839
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -73.9249,
+                    40.6943
+                ]
+            },
+            "properties": {
+                "city-ascii": "New York",
+                "country": "United States",
+                "id": 1840034016
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.2663,
+                    43.7034
+                ]
+            },
+            "properties": {
+                "city-ascii": "Nice",
+                "country": "France",
+                "id": 1250774553
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    33.365,
+                    35.1725
+                ]
+            },
+            "properties": {
+                "city-ascii": "Nicosia",
+                "country": "Cyprus",
+                "id": 1196944155
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -97.5136,
+                    35.4676
+                ]
+            },
+            "properties": {
+                "city-ascii": "Oklahoma City",
+                "country": "United States",
+                "id": 1840020428
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -96.0522,
+                    41.2627
+                ]
+            },
+            "properties": {
+                "city-ascii": "Omaha",
+                "country": "United States",
+                "id": 1840009315
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -81.3369,
+                    28.4772
+                ]
+            },
+            "properties": {
+                "city-ascii": "Orlando",
+                "country": "United States",
+                "id": 1840015099
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    135.4582,
+                    34.752
+                ]
+            },
+            "properties": {
+                "city-ascii": "Osaka",
+                "country": "Japan",
+                "id": 1392419823
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.7528,
+                    59.9111
+                ]
+            },
+            "properties": {
+                "city-ascii": "Oslo",
+                "country": "Norway",
+                "id": 1578324706
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -75.695,
+                    45.4247
+                ]
+            },
+            "properties": {
+                "city-ascii": "Ottawa",
+                "country": "Canada",
+                "id": 1124399363
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    25.4719,
+                    65.0142
+                ]
+            },
+            "properties": {
+                "city-ascii": "Oulu",
+                "country": "Finland",
+                "id": 1246093273
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -1.2578,
+                    51.7519
+                ]
+            },
+            "properties": {
+                "city-ascii": "Oxford",
+                "country": "United Kingdom",
+                "id": 1826689568
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -122.1468,
+                    37.3913
+                ]
+            },
+            "properties": {
+                "city-ascii": "Palo Alto",
+                "country": "United States",
+                "id": 1840020333
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.5,
+                    9
+                ]
+            },
+            "properties": {
+                "city-ascii": "Panama City",
+                "country": "Panama",
+                "id": 1591672475
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.3522,
+                    48.8566
+                ]
+            },
+            "properties": {
+                "city-ascii": "Paris",
+                "country": "France",
+                "id": 1250015082
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.8589,
+                    -31.9522
+                ]
+            },
+            "properties": {
+                "city-ascii": "Perth",
+                "country": "Australia",
+                "id": 1036178956
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -75.1339,
+                    40.0077
+                ]
+            },
+            "properties": {
+                "city-ascii": "Philadelphia",
+                "country": "United States",
+                "id": 1840000673
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    104.921,
+                    11.5696
+                ]
+            },
+            "properties": {
+                "city-ascii": "Phnom Penh",
+                "country": "Cambodia",
+                "id": 1116260534
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -112.0891,
+                    33.5722
+                ]
+            },
+            "properties": {
+                "city-ascii": "Phoenix",
+                "country": "United States",
+                "id": 1840020568
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    98.3975,
+                    7.8881
+                ]
+            },
+            "properties": {
+                "city-ascii": "Phuket",
+                "country": "Thailand",
+                "id": 1764327831
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.9762,
+                    40.4396
+                ]
+            },
+            "properties": {
+                "city-ascii": "Pittsburgh",
+                "country": "United States",
+                "id": 1840001254
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -122.65,
+                    45.5372
+                ]
+            },
+            "properties": {
+                "city-ascii": "Portland",
+                "country": "United States",
+                "id": 1840019941
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -70.2715,
+                    43.6773
+                ]
+            },
+            "properties": {
+                "city-ascii": "Portland",
+                "country": "United States",
+                "id": 1840000327
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -8.6108,
+                    41.1495
+                ]
+            },
+            "properties": {
+                "city-ascii": "Porto",
+                "country": "Portugal",
+                "id": 1620356810
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -51.23,
+                    -30.0328
+                ]
+            },
+            "properties": {
+                "city-ascii": "Porto Alegre",
+                "country": "Brazil",
+                "id": 1076658221
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.4167,
+                    50.0833
+                ]
+            },
+            "properties": {
+                "city-ascii": "Prague",
+                "country": "Czechia",
+                "id": 1203744823
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -71.4187,
+                    41.823
+                ]
+            },
+            "properties": {
+                "city-ascii": "Providence",
+                "country": "United States",
+                "id": 1840003289
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -71.2081,
+                    46.8139
+                ]
+            },
+            "properties": {
+                "city-ascii": "Quebec City",
+                "country": "Canada",
+                "id": 1124823933
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.5125,
+                    -0.22
+                ]
+            },
+            "properties": {
+                "city-ascii": "Quito",
+                "country": "Ecuador",
+                "id": 1218441993
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.6435,
+                    35.8325
+                ]
+            },
+            "properties": {
+                "city-ascii": "Raleigh",
+                "country": "United States",
+                "id": 1840014497
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -21.935,
+                    64.1475
+                ]
+            },
+            "properties": {
+                "city-ascii": "Reykjavik",
+                "country": "Iceland",
+                "id": 1352327190
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.4756,
+                    37.5295
+                ]
+            },
+            "properties": {
+                "city-ascii": "Richmond",
+                "country": "United States",
+                "id": 1840001698
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    24.1069,
+                    56.9475
+                ]
+            },
+            "properties": {
+                "city-ascii": "Riga",
+                "country": "Latvia",
+                "id": 1428586192
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.1964,
+                    -22.9083
+                ]
+            },
+            "properties": {
+                "city-ascii": "Rio de Janeiro",
+                "country": "Brazil",
+                "id": 1076887657
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    46.71,
+                    24.65
+                ]
+            },
+            "properties": {
+                "city-ascii": "Riyadh",
+                "country": "Saudi Arabia",
+                "id": 1682999334
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.6162,
+                    43.168
+                ]
+            },
+            "properties": {
+                "city-ascii": "Rochester",
+                "country": "United States",
+                "id": 1840000373
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.4828,
+                    41.8931
+                ]
+            },
+            "properties": {
+                "city-ascii": "Rome",
+                "country": "Italy",
+                "id": 1380382862
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.4792,
+                    51.9225
+                ]
+            },
+            "properties": {
+                "city-ascii": "Rotterdam",
+                "country": "Netherlands",
+                "id": 1528892850
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    30.3167,
+                    59.95
+                ]
+            },
+            "properties": {
+                "city-ascii": "Saint Petersburg",
+                "country": "Russia",
+                "id": 1643616350
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -111.9306,
+                    40.7777
+                ]
+            },
+            "properties": {
+                "city-ascii": "Salt Lake City",
+                "country": "United States",
+                "id": 1840021383
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -98.5253,
+                    29.4658
+                ]
+            },
+            "properties": {
+                "city-ascii": "San Antonio",
+                "country": "United States",
+                "id": 1840022220
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.1225,
+                    32.8312
+                ]
+            },
+            "properties": {
+                "city-ascii": "San Diego",
+                "country": "United States",
+                "id": 1840021990
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -122.443,
+                    37.7562
+                ]
+            },
+            "properties": {
+                "city-ascii": "San Francisco",
+                "country": "United States",
+                "id": 1840021543
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -84.0833,
+                    9.9333
+                ]
+            },
+            "properties": {
+                "city-ascii": "San Jose",
+                "country": "Costa Rica",
+                "id": 1188749877
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -66.0636,
+                    18.4037
+                ]
+            },
+            "properties": {
+                "city-ascii": "San Juan",
+                "country": "Puerto Rico",
+                "id": 1630035577
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -120.6691,
+                    35.2669
+                ]
+            },
+            "properties": {
+                "city-ascii": "San Luis Obispo",
+                "country": "United States",
+                "id": 1840021734
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -89.1914,
+                    13.6989
+                ]
+            },
+            "properties": {
+                "city-ascii": "San Salvador",
+                "country": "El Salvador",
+                "id": 1222647454
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -70.6667,
+                    -33.45
+                ]
+            },
+            "properties": {
+                "city-ascii": "Santiago",
+                "country": "Chile",
+                "id": 1152554349
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -69.8933,
+                    18.4764
+                ]
+            },
+            "properties": {
+                "city-ascii": "Santo Domingo",
+                "country": "Dominican Republic",
+                "id": 1214636202
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -46.62529,
+                    -23.533773
+                ]
+            },
+            "properties": {
+                "city-ascii": "Sao Paulo",
+                "country": "Brazil",
+                "id": null
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.4132,
+                    43.8563
+                ]
+            },
+            "properties": {
+                "city-ascii": "Sarajevo",
+                "country": "Bosnia And Herzegovina",
+                "id": 1070966777
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -106.6833,
+                    52.1333
+                ]
+            },
+            "properties": {
+                "city-ascii": "Saskatoon",
+                "country": "Canada",
+                "id": 1124612546
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -122.3244,
+                    47.6211
+                ]
+            },
+            "properties": {
+                "city-ascii": "Seattle",
+                "country": "United States",
+                "id": 1840021117
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    126.99,
+                    37.56
+                ]
+            },
+            "properties": {
+                "city-ascii": "Seoul",
+                "country": "South Korea",
+                "id": 1410836482
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -5.99,
+                    37.39
+                ]
+            },
+            "properties": {
+                "city-ascii": "Sevilla",
+                "country": "Spain",
+                "id": 1724991838
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    121.4667,
+                    31.1667
+                ]
+            },
+            "properties": {
+                "city-ascii": "Shanghai",
+                "country": "China",
+                "id": 1156073548
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    103.8,
+                    1.3
+                ]
+            },
+            "properties": {
+                "city-ascii": "Singapore",
+                "country": "Singapore",
+                "id": 1702341327
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    21.4333,
+                    41.9833
+                ]
+            },
+            "properties": {
+                "city-ascii": "Skopje",
+                "country": "Macedonia",
+                "id": 1807600615
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    23.3217,
+                    42.6979
+                ]
+            },
+            "properties": {
+                "city-ascii": "Sofia",
+                "country": "Bulgaria",
+                "id": 1100762037
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -90.2451,
+                    38.6358
+                ]
+            },
+            "properties": {
+                "city-ascii": "St. Louis",
+                "country": "United States",
+                "id": 1840001651
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.0686,
+                    59.3294
+                ]
+            },
+            "properties": {
+                "city-ascii": "Stockholm",
+                "country": "Sweden",
+                "id": 1752425602
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.1775,
+                    48.7761
+                ]
+            },
+            "properties": {
+                "city-ascii": "Stuttgart",
+                "country": "Germany",
+                "id": 1276171358
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    151.2094,
+                    -33.865
+                ]
+            },
+            "properties": {
+                "city-ascii": "Sydney",
+                "country": "Australia",
+                "id": 1036074917
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    121.5319,
+                    25.0478
+                ]
+            },
+            "properties": {
+                "city-ascii": "Taipei",
+                "country": "Taiwan",
+                "id": 1158881289
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    24.745,
+                    59.4372
+                ]
+            },
+            "properties": {
+                "city-ascii": "Tallinn",
+                "country": "Estonia",
+                "id": 1233260021
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -82.4451,
+                    27.9942
+                ]
+            },
+            "properties": {
+                "city-ascii": "Tampa",
+                "country": "United States",
+                "id": 1840015982
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    23.76,
+                    61.4981
+                ]
+            },
+            "properties": {
+                "city-ascii": "Tampere",
+                "country": "Finland",
+                "id": 1246964318
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    26.7225,
+                    58.38
+                ]
+            },
+            "properties": {
+                "city-ascii": "Tartu",
+                "country": "Estonia",
+                "id": 1233809410
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    69.2667,
+                    41.3
+                ]
+            },
+            "properties": {
+                "city-ascii": "Tashkent",
+                "country": "Uzbekistan",
+                "id": 1860331871
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    44.7925,
+                    41.7225
+                ]
+            },
+            "properties": {
+                "city-ascii": "Tbilisi",
+                "country": "Georgia",
+                "id": 1268203191
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    51.4167,
+                    35.7
+                ]
+            },
+            "properties": {
+                "city-ascii": "Tehran",
+                "country": "Iran",
+                "id": 1364305026
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    34.78,
+                    32.08
+                ]
+            },
+            "properties": {
+                "city-ascii": "Tel Aviv-Yafo",
+                "country": "Israel",
+                "id": 1376401542
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.31,
+                    52.08
+                ]
+            },
+            "properties": {
+                "city-ascii": "The Hague",
+                "country": "Netherlands",
+                "id": 1528799905
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    22.9356,
+                    40.6403
+                ]
+            },
+            "properties": {
+                "city-ascii": "Thessaloniki",
+                "country": "Greece",
+                "id": 1300397999
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    139.7744,
+                    35.6839
+                ]
+            },
+            "properties": {
+                "city-ascii": "Tokyo",
+                "country": "Japan",
+                "id": 1392685764
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -79.3733,
+                    43.7417
+                ]
+            },
+            "properties": {
+                "city-ascii": "Toronto",
+                "country": "Canada",
+                "id": 1124279679
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.444,
+                    43.6045
+                ]
+            },
+            "properties": {
+                "city-ascii": "Toulouse",
+                "country": "France",
+                "id": 1250258110
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.18,
+                    36.8008
+                ]
+            },
+            "properties": {
+                "city-ascii": "Tunis",
+                "country": "Tunisia",
+                "id": 1788742103
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.7,
+                    45.0667
+                ]
+            },
+            "properties": {
+                "city-ascii": "Turin",
+                "country": "Italy",
+                "id": 1380244627
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    22.27,
+                    60.4517
+                ]
+            },
+            "properties": {
+                "city-ascii": "Turku",
+                "country": "Finland",
+                "id": 1246456609
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    17.64,
+                    59.8601
+                ]
+            },
+            "properties": {
+                "city-ascii": "Uppsala",
+                "country": "Sweden",
+                "id": 1752330831
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.1156,
+                    52.0889
+                ]
+            },
+            "properties": {
+                "city-ascii": "Utrecht",
+                "country": "Netherlands",
+                "id": 1528871692
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -0.3764,
+                    39.47
+                ]
+            },
+            "properties": {
+                "city-ascii": "Valencia",
+                "country": "Spain",
+                "id": 1724981666
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.5125,
+                    35.8978
+                ]
+            },
+            "properties": {
+                "city-ascii": "Valletta",
+                "country": "Malta",
+                "id": 1470574399
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -123.1,
+                    49.25
+                ]
+            },
+            "properties": {
+                "city-ascii": "Vancouver",
+                "country": "Canada",
+                "id": 1124825478
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -123.3647,
+                    48.4283
+                ]
+            },
+            "properties": {
+                "city-ascii": "Victoria",
+                "country": "Canada",
+                "id": 1124147219
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    16.3725,
+                    48.2083
+                ]
+            },
+            "properties": {
+                "city-ascii": "Vienna",
+                "country": "Austria",
+                "id": 1040261752
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    25.2833,
+                    54.6833
+                ]
+            },
+            "properties": {
+                "city-ascii": "Vilnius",
+                "country": "Lithuania",
+                "id": 1440887149
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    21.0111,
+                    52.23
+                ]
+            },
+            "properties": {
+                "city-ascii": "Warsaw",
+                "country": "Poland",
+                "id": 1616024847
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -77.0163,
+                    38.9047
+                ]
+            },
+            "properties": {
+                "city-ascii": "Washington",
+                "country": "United States",
+                "id": 1840006060
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    174.7772,
+                    -41.2889
+                ]
+            },
+            "properties": {
+                "city-ascii": "Wellington",
+                "country": "New Zealand",
+                "id": 1554772152
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -97.1464,
+                    49.8844
+                ]
+            },
+            "properties": {
+                "city-ascii": "Winnipeg",
+                "country": "Canada",
+                "id": 1124224963
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    17.0325,
+                    51.11
+                ]
+            },
+            "properties": {
+                "city-ascii": "Wroclaw",
+                "country": "Poland",
+                "id": 1616108520
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    44.5144,
+                    40.1814
+                ]
+            },
+            "properties": {
+                "city-ascii": "Yerevan",
+                "country": "Armenia",
+                "id": 1051074169
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    15.9772,
+                    45.8131
+                ]
+            },
+            "properties": {
+                "city-ascii": "Zagreb",
+                "country": "Croatia",
+                "id": 1191233290
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.5411,
+                    47.3744
+                ]
+            },
+            "properties": {
+                "city-ascii": "Zurich",
+                "country": "Switzerland",
+                "id": 1756539143
+            }
+        }
+    ]
+}
