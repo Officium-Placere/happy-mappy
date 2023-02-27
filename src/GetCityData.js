@@ -28,7 +28,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
     });
 
     useEffect(() => {
-        
+
         function easeToCity() {
             const center = map.current.getCenter();
             const cityNum = teleportCities.features[Math.floor(Math.random() * teleportCities.features.length)]
@@ -53,12 +53,33 @@ export default function GetCityData({ map, trigger, showCityData }) {
                     .then(response => response.json())
                     .then(data => data)
 
-                const cityObj = firstAPI.localityInfo.administrative.find((poiObj => poiObj.name === firstAPI.city))
+                const cityObj = []
+                firstAPI.localityInfo.administrative.map((poiObj => {
+                    if (poiObj.name === firstAPI.city) {
+                        cityObj.push(poiObj)
+                    }
+                }))
 
-                // ID returned for coordinates is Sao Paulo state, so change id to Q174 for Sao Paulo city
                 let id = ''
-                cityObj.wikidataId === 'Q175' ? id = 'Q174' : id = cityObj.wikidataId;
-
+                let city
+                cityObj.forEach(obj => {
+                    if (obj.description.includes('city')) {
+                        city = obj
+                    } else if (obj.description.includes('capital')) {
+                        city = obj
+                    }  else if (obj.description.includes('municipality')) {
+                        city = obj
+                    }  else if (obj.description.includes('metropolis')) {
+                        city = obj
+                    } 
+                    else city = false
+                })
+                
+                if (city === false) {
+                    city = cityObj[0]
+                }
+                id = city.wikidataId;
+            
                 const secondAPI = await fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
                     .then(response => response.json())
                     .then(data => data)
@@ -190,9 +211,17 @@ export default function GetCityData({ map, trigger, showCityData }) {
                 const tpSummary = citySummary.replace(bylineRegex, '').replace(htmlRegex, '');
 
                 setTpBlurb(tpSummary) //SET STATE 
+
+                console.log(wikiTitle)
+                console.log(wkBlurb)
+                console.log(wkImage)
+                console.log(tpImage)
+                console.log(tpSummary)
+                console.log(cityRank)
             }
 
             getApiData()
+
 
             // try {
             // } catch (error) {
@@ -210,29 +239,31 @@ export default function GetCityData({ map, trigger, showCityData }) {
     return (
         <>
             {showCityData ?
-                <div>
+                <>
                     <button
-                        onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : 'Show city info'}
+                        onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : `Show details about ${cityName}`}
                     </button>
 
-                    <div style={{ display: showInfo ? 'block' : 'none' }}>
+                    <div className='city-info' style={{ display: showInfo ? 'block' : 'none' }}>
+                        <h2>{cityName}</h2>
+
                         <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
                         </p>
+
+                        <div className='image-container'>
+                            <img src={tpPic} alt={`${cityName}`} />
+
+                            <img src={wikiPic} alt={`${cityName}`} />
+                        </div>
 
                         <Graph chartData={chartData} />
 
                         <p className='visually-hidden'>City Rankings per Category: Score out of 10: {tpMetrics} / 10</p>
+
                         <p>{tpBlurb}</p>
 
-                        <div>
-                            <img src={tpPic} alt={`${cityName}`} />
-                        </div>
-                        <div>
-                            <img src={wikiPic} alt={`${cityName}`} />
-                        </div>
-
                     </div>
-                </div>
+                </>
                 : null}
         </>
     )

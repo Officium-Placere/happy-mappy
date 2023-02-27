@@ -170,7 +170,7 @@ export default function DisplayMap() {
     };
 
     return (
-        <>
+        <div>
             <button
                 disabled={spinEnabled}
                 id="btn-spin"
@@ -185,6 +185,6 @@ export default function DisplayMap() {
                 showCityData={showCityData}
             />
 
-        </>
+        </div>
     )
 }

@@ -1,7 +1,6 @@
 @import url("./partialStyles/setup.scss");
 @import url("./partialStyles/baseStyles.scss");
 @import url("./partialStyles/variables.scss");
-@import url("./partialStyles/logo.scss");
 @import url("./partialStyles/mapContainer.scss");
 @import url("./partialStyles/pageLayout.scss");
 .logoInfo {

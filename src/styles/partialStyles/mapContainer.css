@@ -1,5 +1,42 @@
 .map-container {
-  height: 1000px;
-  width: 1000px;
+  width: 800px;
+  height: 800px;
   display: inline-block;
+}
+
+button {
+  background-color: olivedrab;
+  height: 100px;
+  width: 100px;
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  margin: 15px;
+  color: white;
+}
+
+img {
+  width: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 20px;
+}
+
+p {
+  margin: 15px;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.chart-container {
+  width: 70%;
+  margin: 15px auto;
+}
+
+.city-info {
+  width: 50%;
+  text-align: center;
 }/*# sourceMappingURL=mapContainer.css.map */
