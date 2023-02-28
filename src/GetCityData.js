@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Graph from './Graph';
 import teleportCities from './teleportCities.json'
 
 export default function GetCityData({ map, trigger, showCityData }) {
 
+    const cityInfoContainer = useRef(null);
     const [showInfo, setShowInfo] = useState(false);
     const [wikiBlurb, setWikiBlurb] = useState()
     const [wikiPic, setWikiPic] = useState()
@@ -58,6 +59,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
                     if (poiObj.name === firstAPI.city) {
                         cityObj.push(poiObj)
                     }
+                    // return cityObj
                 }))
 
                 let id = ''
@@ -67,19 +69,19 @@ export default function GetCityData({ map, trigger, showCityData }) {
                         city = obj
                     } else if (obj.description.includes('capital')) {
                         city = obj
-                    }  else if (obj.description.includes('municipality')) {
+                    } else if (obj.description.includes('municipality')) {
                         city = obj
-                    }  else if (obj.description.includes('metropolis')) {
+                    } else if (obj.description.includes('metropolis')) {
                         city = obj
-                    } 
+                    }
                     else city = false
                 })
-                
+
                 if (city === false) {
                     city = cityObj[0]
                 }
                 id = city.wikidataId;
-            
+
                 const secondAPI = await fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
                     .then(response => response.json())
                     .then(data => data)
@@ -235,36 +237,49 @@ export default function GetCityData({ map, trigger, showCityData }) {
         }
     }, [trigger, map]);
 
-
     return (
         <>
-            {showCityData ?
-                <>
+            {
+                showCityData
+                    ?
+                <div>
                     <button
-                        onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : `Show details about ${cityName}`}
+                        className='show-city-button'
+                        onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide Info' : `Show info`}
                     </button>
 
-                    <div className='city-info' style={{ display: showInfo ? 'block' : 'none' }}>
-                        <h2>{cityName}</h2>
+                    <div
+                        ref={cityInfoContainer}
+                        className={showInfo ? 'city-info-container slideout-active' : 'city-info-container'}>
+                        <div className="wrapper">
 
-                        <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
-                        </p>
+                            <div className='city-info'>
+                                <h2>{cityName}</h2>
 
-                        <div className='image-container'>
-                            <img src={tpPic} alt={`${cityName}`} />
+                                <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
+                                </p >
 
-                            <img src={wikiPic} alt={`${cityName}`} />
-                        </div>
+                                <div className='image-container'>
+                                    <img src={tpPic} alt={`${cityName}`} />
 
-                        <Graph chartData={chartData} />
+                                    <img src={wikiPic} alt={`${cityName}`} />
+                                </div>
 
-                        <p className='visually-hidden'>City Rankings per Category: Score out of 10: {tpMetrics} / 10</p>
+                                <Graph chartData={chartData} />
 
-                        <p>{tpBlurb}</p>
+                                <p className='visually-hidden'>City Rankings per Category: Score out of 10: {tpMetrics} / 10</p>
 
+                                <p>{tpBlurb}</p>
+
+                            </div >
+
+
+                        </div >
                     </div>
-                </>
-                : null}
+                </div >
+                    :
+            null
+            }
         </>
     )
 }

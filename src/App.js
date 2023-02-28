@@ -6,10 +6,8 @@ export default function App() {
 
   return (
     <>
-      <div className="wrapper">
         <DisplayMap />
         {/* <Footer/> */}
-      </div>
     </>
   );
 

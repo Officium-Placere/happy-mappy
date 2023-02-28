@@ -20,3 +20,26 @@ h2 {
   white-space: nowrap !important;
   border: 0 !important;
 }
+
+button {
+  background-color: olivedrab;
+  height: 100px;
+  width: 100px;
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  margin: 15px;
+  color: white;
+  position: absolute;
+  z-index: 10;
+}
+
+img {
+  width: 350px;
+  object-fit: cover;
+  margin: 20px;
+}
+
+p {
+  margin: 15px;
+}
