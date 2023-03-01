@@ -7,7 +7,7 @@ h2 {
 }
 
 
-// bar chat metrics shown only for screen-readers:
+// bar chart metrics shown only for screen-readers:
 .visually-hidden {
   position: absolute;
   position: absolute !important;
@@ -21,18 +21,7 @@ h2 {
   border: 0 !important;
 }
 
-button {
-  background-color: olivedrab;
-  height: 100px;
-  width: 100px;
-  padding: 10px;
-  border: none;
-  border-radius: 15px;
-  margin: 15px;
-  color: white;
-  position: absolute;
-  z-index: 10;
-}
+
 
 img {
   width: 350px;

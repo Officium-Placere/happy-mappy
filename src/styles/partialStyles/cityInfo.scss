@@ -1,12 +1,4 @@
-// MAP FILE
-.display-map {
-    position: relative;
-}
 
-.spin-button {
-    top: 0px; 
-    left: 0px;
-}
 
 // CITY INFO FILE
 .image-container {
@@ -46,3 +38,16 @@
     top: 200px;
     left: 0px;
 }
+
+.show-city-button {
+    background-color: olivedrab;
+    height: 100px;
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    margin: 15px;
+    color: white;
+    position: absolute;
+    z-index: 10;
+  }

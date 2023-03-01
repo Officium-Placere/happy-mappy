@@ -1,5 +1,5 @@
 .wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  margin: 0 auto;
+  max-width: 1260px;
+  width: 90%;
 }/*# sourceMappingURL=pageLayout.css.map */

@@ -15,4 +15,15 @@ h2 {
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+
+img {
+  width: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 20px;
+}
+
+p {
+  margin: 15px;
 }/*# sourceMappingURL=baseStyles.css.map */
