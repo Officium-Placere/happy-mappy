@@ -21,13 +21,15 @@ h2 {
   border: 0 !important;
 }
 
-
+button {
+  cursor: pointer;
+}
 
 img {
   width: 350px;
   object-fit: cover;
   margin: 20px;
-}
+} 
 
 p {
   margin: 15px;

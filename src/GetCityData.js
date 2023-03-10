@@ -53,41 +53,54 @@ export default function GetCityData({ map, trigger, showCityData }) {
                 const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${center.lat}&longitude=${center.lng}&localityLanguage=en&key=bdc_e3a41bcc2937431191cc18382f3d5492`)
                     .then(response => response.json())
                     .then(data => data)
-
+                console.log(firstAPI)
                 const cityObj = []
-                firstAPI.localityInfo.administrative.map((poiObj => {
+                firstAPI.localityInfo.administrative.map(poiObj => {
                     if (poiObj.name === firstAPI.city) {
                         cityObj.push(poiObj)
+                        console.log(poiObj)
                     }
-                    // return cityObj
-                }))
-
-                let id = ''
-                let city
-                cityObj.forEach(obj => {
-                    if (obj.description.includes('city')) {
-                        city = obj
-                    } else if (obj.description.includes('capital')) {
-                        city = obj
-                    } else if (obj.description.includes('municipality')) {
-                        city = obj
-                    } else if (obj.description.includes('metropolis')) {
-                        city = obj
-                    }
-                    else city = false
                 })
+                // if city isn't in administrative property, check informative property, do same loop:
+                if (cityObj.length === 0) {
+                    firstAPI.localityInfo.informative.map(poiObj => {
+                        if (poiObj.name === firstAPI.city) {
+                            cityObj.push(poiObj)
+                        }
+                    })
+                }
+                console.log(cityObj)
+                let city
+                let id = ''
+                cityObj.forEach(obj => {
+                    if (obj.description) { // some of the cityObj objects do not have description properties, so only if they all do, then go through this:
+                        if (obj.description.includes('city')) {
+                            city = obj
+                        } else if (obj.description.includes('capital')) {
+                            city = obj
+                        } else if (obj.description.includes('municipality')) {
+                            city = obj
+                        } else if (obj.description.includes('metropolis')) {
+                            city = obj
+                        }
+                        else city = false
+                    }
 
+                    else city = false
+
+                })
+                console.log(city)
                 if (city === false) {
                     city = cityObj[0]
                 }
+                console.log(cityObj[0].wikidataId)
                 id = city.wikidataId;
-
                 const secondAPI = await fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
                     .then(response => response.json())
                     .then(data => data)
-
+                console.log(secondAPI)
                 const wikiTitle = secondAPI.entities[id].sitelinks.enwiki.title
-
+                console.log(wikiTitle)
                 setCityName(wikiTitle) //SET STATE 
 
                 const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${wikiTitle}&origin=*`)
@@ -113,39 +126,8 @@ export default function GetCityData({ map, trigger, showCityData }) {
 
                 setWikiPic(wkImage) //SET STATE 
 
-                // FIND CITY VIA COORDS TO GET CORRECT CITY NAME IN TELEPORT, AND THEN FIND IMAGE AFTER
-                const teleportCity = await fetch(`https://api.teleport.org/api/locations/${center.lat},${center.lng}/`)
-                    .then(response => response.json())
-                    .then(data => data);
-
-                const nearestCity = Object.entries(teleportCity._embedded)
-                const nearestCityName = nearestCity[0];
-                const cName = Object.entries(nearestCityName[1][0]._links)
-                const tpCity = cName[0][1].name
-
-                // remove 'city' from the name when it's not Mexico City, ie for New York City as API lists NYC as New York
-                const editedCityName = [];
-                let cityLowerCase = '';
-                tpCity === 'Mexico City'
-                    ?
-                    cityLowerCase = tpCity.toLowerCase().split(' ').join('-')
-                    :
-                    tpCity.toLowerCase().split(' ').map((word) => {
-                        if (word !== 'city') {
-                            editedCityName.push(word)
-                        }
-                        cityLowerCase = editedCityName.join('-');
-                        return cityLowerCase;
-                    })
-
-                // remove accents from the city name
-                let cityASCII = ''
-                function removeAccents(str) {
-                    cityASCII = str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    return cityASCII
-                }
-                removeAccents(cityLowerCase)
-
+                let cityASCII = cityNum.properties['city-ascii'].toLowerCase().split(' ').join('-')
+                
                 const teleportImg = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/images/`)
                     .then(response => response.json())
                     .then(data => data);
@@ -242,43 +224,43 @@ export default function GetCityData({ map, trigger, showCityData }) {
             {
                 showCityData
                     ?
-                <div>
-                    <button
-                        className='show-city-button'
-                        onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide Info' : `Show info`}
-                    </button>
+                    <div>
+                        <button
+                            className='show-city-button'
+                            onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide Info' : `Show info`}
+                        </button>
 
-                    <div
-                        ref={cityInfoContainer}
-                        className={showInfo ? 'city-info-container slideout-active' : 'city-info-container'}>
-                        <div className="wrapper">
+                        <div
+                            ref={cityInfoContainer}
+                            className={showInfo ? 'city-info-container slideout-active' : 'city-info-container'}>
+                            <div className="wrapper">
 
-                            <div className='city-info'>
-                                <h2>{cityName}</h2>
+                                <div className='city-info'>
+                                    <h2>{cityName}</h2>
 
-                                <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
-                                </p >
+                                    <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
+                                    </p >
 
-                                <div className='image-container'>
-                                    <img src={tpPic} alt={`${cityName}`} />
+                                    <div className='image-container'>
+                                        <img src={tpPic} alt={`${cityName}`} />
 
-                                    <img src={wikiPic} alt={`${cityName}`} />
-                                </div>
+                                        <img src={wikiPic} alt={`${cityName}`} />
+                                    </div>
 
-                                <Graph chartData={chartData} />
+                                    <Graph chartData={chartData} />
 
-                                <p className='visually-hidden'>City Rankings per Category: Score out of 10: {tpMetrics} / 10</p>
+                                    <p className='visually-hidden'>City Rankings per Category: Score out of 10: {tpMetrics} / 10</p>
 
-                                <p>{tpBlurb}</p>
+                                    <p>{tpBlurb}</p>
+
+                                </div >
+
 
                             </div >
-
-
-                        </div >
-                    </div>
-                </div >
+                        </div>
+                    </div >
                     :
-            null
+                    null
             }
         </>
     )
