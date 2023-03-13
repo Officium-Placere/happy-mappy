@@ -53,23 +53,23 @@ export default function GetCityData({ map, trigger, showCityData }) {
                 const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${center.lat}&longitude=${center.lng}&localityLanguage=en&key=bdc_e3a41bcc2937431191cc18382f3d5492`)
                     .then(response => response.json())
                     .then(data => data)
-                console.log(firstAPI)
+                // console.log(firstAPI)
                 const cityObj = []
-                firstAPI.localityInfo.administrative.map(poiObj => {
+                firstAPI.localityInfo.administrative.forEach(poiObj => {
                     if (poiObj.name === firstAPI.city) {
                         cityObj.push(poiObj)
-                        console.log(poiObj)
+                        // console.log(poiObj)
                     }
                 })
                 // if city isn't in administrative property, check informative property, do same loop:
                 if (cityObj.length === 0) {
-                    firstAPI.localityInfo.informative.map(poiObj => {
+                    firstAPI.localityInfo.informative.forEach(poiObj => {
                         if (poiObj.name === firstAPI.city) {
                             cityObj.push(poiObj)
                         }
                     })
                 }
-                console.log(cityObj)
+                // console.log(cityObj)
                 let city
                 let id = ''
                 cityObj.forEach(obj => {
@@ -89,18 +89,18 @@ export default function GetCityData({ map, trigger, showCityData }) {
                     else city = false
 
                 })
-                console.log(city)
+                // console.log(city)
                 if (city === false) {
                     city = cityObj[0]
                 }
-                console.log(cityObj[0].wikidataId)
+                // console.log(cityObj[0].wikidataId)
                 id = city.wikidataId;
                 const secondAPI = await fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
                     .then(response => response.json())
                     .then(data => data)
-                console.log(secondAPI)
+                // console.log(secondAPI)
                 const wikiTitle = secondAPI.entities[id].sitelinks.enwiki.title
-                console.log(wikiTitle)
+                // console.log(wikiTitle)
                 setCityName(wikiTitle) //SET STATE 
 
                 const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${wikiTitle}&origin=*`)
@@ -196,12 +196,12 @@ export default function GetCityData({ map, trigger, showCityData }) {
 
                 setTpBlurb(tpSummary) //SET STATE 
 
-                console.log(wikiTitle)
-                console.log(wkBlurb)
-                console.log(wkImage)
-                console.log(tpImage)
-                console.log(tpSummary)
-                console.log(cityRank)
+                // console.log(wikiTitle)
+                // console.log(wkBlurb)
+                // console.log(wkImage)
+                // console.log(tpImage)
+                // console.log(tpSummary)
+                // console.log(cityRank)
             }
 
             getApiData()
