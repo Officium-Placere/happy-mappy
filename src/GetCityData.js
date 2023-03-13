@@ -95,7 +95,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
                 }
                 // console.log(cityObj[0].wikidataId)
                 id = city.wikidataId;
-                const secondAPI = await fetch(`http://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
+                const secondAPI = await fetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
                     .then(response => response.json())
                     .then(data => data)
                 // console.log(secondAPI)
