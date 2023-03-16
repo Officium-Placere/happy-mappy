@@ -22,11 +22,11 @@
   background-color: #d1758c;
   position: absolute;
   left: 50%;
-  top: 250px;
+  top: -300px;
   transform: translate(-50%, -50%);
   transition: 0.7s ease-in all;
   z-index: 30;
-  width: 50vw;
-  height: 50vh;
+  width: 30vw;
   border-radius: 60px;
+  padding: 10px 0;
 }/*# sourceMappingURL=introduction.css.map */

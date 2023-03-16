@@ -15,12 +15,14 @@
 
 .image-container {
   display: flex;
-  width: 100%;
+  width: 75%;
   justify-content: center;
+  margin: 0 auto;
 }
-
-img {
-  width: 100%;
+.image-container img {
+  width: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .chart-container {
@@ -47,7 +49,7 @@ img {
 .show-city-button {
   top: 5px;
   right: 20%;
-  width: 150px;
+  width: 170px;
   background-color: #2f4d6b;
   border: 2px solid #fafafd;
   border-radius: 40px;
