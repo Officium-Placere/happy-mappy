@@ -17,11 +17,15 @@ h1 {
     border-radius: 20px;
     border: none;
     position: absolute;
-    transition: 0.4s ease-in all;
+    transition: 0.3s ease-in all;
     top: 10px;
     right: 60px;
     z-index: 20;
     padding: 3px 10px;
+    &:hover, 
+    &:focus {
+        transform: scale(1.1);
+    }
 }
 
 .hideIntroButton {
@@ -71,21 +75,28 @@ h1 {
     right: 0px;
     bottom: 0px;
     left: 0px;
-    opacity: 0.55;
+    opacity: 0.6;
 }
 
 .closeButton {
     z-index: 20;
-    background-color: #fafafd;
     border: none;
-    border-radius: 50%;
-    box-shadow: 0 0 5px 5px #fafafd;
+    border-radius: 15px;
+    color: black;
+    background-color: #fafafd;
+    box-shadow: 0 0 3px 3px #fafafd;
+    border: none;
     padding: 7px 14px;
     font-weight: bold;
     position: absolute;
     top: 30px;
     right: 30px;
     font-family: 'Bungee Inline', cursive;
+    transition: 0.4s ease-in-out all;
+    &:hover, 
+    &:focus {
+        transform: scale(1.1);
+    }
 }
 
 .overlay {

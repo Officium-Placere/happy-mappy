@@ -22,6 +22,10 @@
   color: white;
   position: absolute;
   z-index: 10;
+  transition: 0.2s ease-in all;
+  &:active {
+    scale: 0.9;
+  }
 }
 
 // Intro component - fullscreen maybe, and drop / bounce into place, spinning 3d globe (3js) in bg or just on side of the intro text, x button, little instruction slide out flag 

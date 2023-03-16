@@ -22,4 +22,8 @@
   color: white;
   position: absolute;
   z-index: 10;
+  transition: 0.2s ease-in all;
+}
+.spin-button:active {
+  scale: 0.9;
 }/*# sourceMappingURL=mapContainer.css.map */
