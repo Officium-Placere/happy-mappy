@@ -76,20 +76,21 @@ h1 {
   z-index: 20;
   border: none;
   border-radius: 15px;
-  color: black;
-  background-color: #fafafd;
-  box-shadow: 0 0 3px 3px #fafafd;
+  color: white;
+  background-color: black;
   border: none;
   padding: 7px 14px;
   font-weight: bold;
   position: absolute;
   top: 30px;
   right: 30px;
-  font-family: "Bungee Inline", cursive;
-  transition: 0.4s ease-in-out all;
+  transition: 0.3s ease-in-out all;
 }
 .closeButton:hover, .closeButton:focus {
-  transform: scale(1.1);
+  scale: 1.1;
+}
+.closeButton:active {
+  scale: 0.9;
 }
 
 .overlay {
