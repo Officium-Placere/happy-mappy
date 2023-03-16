@@ -1,0 +1,23 @@
+@media (max-width: 880px){
+    .city-info-container {
+        width: 80vw;
+    }
+    
+    .photo {
+        width: 70vw;
+    }
+}
+
+@media (max-width: 650px){
+    .city-info-container {
+        width: 95vw;
+    }
+}
+
+@media (max-width: 520px){
+    // chart needs to change to vertical bar chart to show all category names or something
+    .photo {
+        width: 90vw;
+        margin: 5px 0;
+    }
+}

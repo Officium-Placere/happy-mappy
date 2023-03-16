@@ -1,0 +1,19 @@
+@media (max-width: 880px) {
+  .city-info-container {
+    width: 80vw;
+  }
+  .photo {
+    width: 70vw;
+  }
+}
+@media (max-width: 650px) {
+  .city-info-container {
+    width: 95vw;
+  }
+}
+@media (max-width: 520px) {
+  .photo {
+    width: 90vw;
+    margin: 5px 0;
+  }
+}/*# sourceMappingURL=mediaQueries.css.map */
