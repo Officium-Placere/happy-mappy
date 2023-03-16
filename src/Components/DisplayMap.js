@@ -172,7 +172,7 @@ export default function DisplayMap() {
         className='display-map'
         >
             <button
-                className='spin-button'
+                className='spin-button sheen'
                 disabled={spinEnabled}
                 id="btn-spin"
                 ref={spinButton}

@@ -7,8 +7,10 @@
     transition: 0.7s linear bottom;
     overflow-y: scroll;
     overflow-x: hidden;
-    background-color: white;
+    background-color: #fafafd;
     border-radius: 12px;
+    box-shadow: 0 0 40px 5px #fafafd;
+
     height: 70vh;
     z-index: 20;
 }
@@ -31,7 +33,7 @@
 
 .city-info {
     margin: 0 auto;
-    text-align: center; 
+    text-align: center;
     a {
         transition: 0.2s ease-in all;
         color: #2f4d6b;
@@ -46,10 +48,10 @@
 }
 
 .show-city-button {
-    top: 5px; 
+    top: 5px;
     right: 20%;
     width: 170px;
-    background-color:#2f4d6b;
+    background-color: #2f4d6b;
     border: 2px solid #fafafd;
     border-radius: 40px;
     margin: 15px;
@@ -62,3 +64,4 @@
         scale: 0.9
     }
 }
+

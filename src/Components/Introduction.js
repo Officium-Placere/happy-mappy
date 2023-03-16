@@ -5,7 +5,7 @@ export default function Introduction() {
     const [introModal, setIntroModal] = useState(false); // show intro on page mount
 
     const introRef = useRef(null);
-    const introButton = useRef(null);
+    // const introButton = useRef(null); - this lets us slide the intro button off page when intro modal is showing, not sure if we wanna do that
 
     useEffect(() => {
 
@@ -18,7 +18,7 @@ export default function Introduction() {
 
     const showIntro = () => {
         setIntroModal(true)
-        introButton.current.classList.add('hideIntroButton')
+        // introButton.current.classList.add('hideIntroButton')
         introRef.current.classList.remove('slideOutIntro');
         introRef.current.classList.add('slideInIntro');
     }
@@ -26,7 +26,7 @@ export default function Introduction() {
     const closeIntro = () => {
         setIntroModal(false)
 
-        introButton.current.classList.remove('hideIntroButton')
+        // introButton.current.classList.remove('hideIntroButton')
         introRef.current.classList.add('slideOutIntro')
         introRef.current.classList.remove('slideInIntro')
 
@@ -35,7 +35,9 @@ export default function Introduction() {
     return (
         <>
             <div className="wrapper">
-                <button ref={introButton} className='introButton hideIntroButton' onClick={() => showIntro()}>what's this about?</button>
+                <button 
+                // ref={introButton} 
+                className='introButton  sheen' onClick={() => showIntro()}>how does this work?</button>
 
                 { introModal ? <div className="overlay"></div> : null }
                 <div ref={introRef} className='intro'>

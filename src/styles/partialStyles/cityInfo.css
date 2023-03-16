@@ -7,8 +7,9 @@
   transition: 0.7s linear bottom;
   overflow-y: scroll;
   overflow-x: hidden;
-  background-color: white;
+  background-color: #fafafd;
   border-radius: 12px;
+  box-shadow: 0 0 40px 5px #fafafd;
   height: 70vh;
   z-index: 20;
 }

@@ -208,7 +208,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
                     ?
                     <div>
                         <button
-                            className='show-city-button'
+                            className='show-city-button sheen'
                             onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : `Show city info`}
                         </button>
 
