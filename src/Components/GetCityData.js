@@ -212,7 +212,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
                             onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : `Show city info`}
                         </button>
 
-                        { showInfo ? <div className="cityOverlay"></div> : null }
+                        {showInfo ? <div className="cityOverlay"></div> : null}
 
                         <div
                             ref={cityInfoContainer}
@@ -222,8 +222,12 @@ export default function GetCityData({ map, trigger, showCityData }) {
                                     <h2>{cityName}</h2>
                                     <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a></p >
                                     <div className='image-container'>
+                                        <div className="photo">
                                             <img src={tpPic} alt={`${cityName}`} />
+                                        </div>
+                                        <div className="photo">
                                             <img src={wikiPic} alt={`${cityName}`} />
+                                        </div>
                                     </div>
                                     <Graph chartData={chartData} />
                                     <p className='visually-hidden'>City Rankings per Category: Score out of 10: {tpMetrics} / 10</p>
