@@ -31,12 +31,11 @@ export default function Introduction() {
         introRef.current.classList.remove('slideInIntro')
 
     }
-    // if introModal is true, ie it's being shown then add like an opacity over everything else (overlay) to prevent it from being clicked - up in app.js
 
     return (
         <>
             <div className="wrapper">
-                <button ref={introButton} className='introButton' onClick={() => showIntro()}>what's this about?</button>
+                <button ref={introButton} className='introButton hideIntroButton' onClick={() => showIntro()}>what's this about?</button>
 
                 { introModal ? <div className="overlay"></div> : null }
                 <div ref={introRef} className='intro'>
