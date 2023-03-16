@@ -49,11 +49,6 @@ button:focus::after {
   animation: sheen 1s forwards;
 }
 
-@keyframes sheen {
-  100% {
-    transform: rotateZ(60deg) translate(1em, -9em);
-  }
-}
 img {
   width: 350px;
   -o-object-fit: cover;
@@ -64,4 +59,10 @@ img {
 
 p {
   margin: 15px;
+}
+
+@keyframes sheen {
+  100% {
+    transform: rotateZ(60deg) translate(1em, -9em);
+  }
 }/*# sourceMappingURL=baseStyles.css.map */

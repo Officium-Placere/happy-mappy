@@ -212,6 +212,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
                             onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : `Show city info`}
                         </button>
 
+                        { showInfo ? <div className="cityOverlay"></div> : null }
 
                         <div
                             ref={cityInfoContainer}

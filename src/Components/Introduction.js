@@ -39,7 +39,7 @@ export default function Introduction() {
                 // ref={introButton} 
                 className='introButton  sheen' onClick={() => showIntro()}>how does this work?</button>
 
-                { introModal ? <div className="overlay"></div> : null }
+                { introModal ? <div className="introOverlay"></div> : null }
                 <div ref={introRef} className='intro'>
                     <button className='closeButton' onClick={() => closeIntro()}>x</button>
                     <h1>Globe Spinner</h1>
