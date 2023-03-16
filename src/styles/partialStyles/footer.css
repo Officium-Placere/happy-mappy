@@ -2,7 +2,7 @@ footer {
   color: #fafafd;
   text-align: center;
   position: relative;
-  font-size: clamp(0.8rem, 2vw, 1rem);
+  font-size: clamp(0.7rem, 1vw, 1rem);
   line-height: 18px;
   letter-spacing: 1.1px;
   text-transform: lowercase;
@@ -20,11 +20,11 @@ footer a:hover, footer a:focus {
 
 .footerInfo {
   position: absolute;
-  bottom: -2px;
+  bottom: -10px;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #2f4d6b;
-  padding: 7px 16px;
+  padding: 7px 20px;
   margin: 0;
   border-radius: 50px;
 }/*# sourceMappingURL=footer.css.map */
