@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import "./styles/styles.scss";
 import GetCityData from './GetCityData';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXBwbGVtdWZmaW4iLCJhIjoiY2xjdmFzZmppMDYwMTNxbW92dTBhYTZrdSJ9.NMqeTpj0UTSYGlOzAsBAAw';
@@ -14,8 +13,9 @@ export default function DisplayMap() {
     const [trigger, setTrigger] = useState(0);
     const [lng, setLng] = useState(Math.floor(Math.random() * (90 - (-90))) + (-90));
     const [lat, setLat] = useState(Math.floor(Math.random() * (45 - (-45))) + (-45));
-    const [zoom, setZoom] = useState(2);
+    const [zoom, setZoom] = useState(1);
     const [showCityData, setShowCityData] = useState(false);
+
     //initialize map
     useEffect(() => {
         if (map.current) return;
@@ -90,9 +90,9 @@ export default function DisplayMap() {
         //reset button when globe spin ends
         map.current.on('moveend', () => {
             if (map.current.getZoom() === 9) {
-                spinButton.current.innerHTML = 'Try again!';
+                spinButton.current.innerHTML = 'Spin again!';
                 if (
-                    spinButton.current.innerHTML === 'Try again!'
+                    spinButton.current.innerHTML === 'Spin again!'
                 ) {
                     map.current.dragPan.enable()
                     map.current.dragRotate.enable()
@@ -114,7 +114,7 @@ export default function DisplayMap() {
         map.current.on('move', () => {
             setLng(map.current.getCenter().lng.toFixed(4));
             setLat(map.current.getCenter().lat.toFixed(4));
-            setZoom(map.current.getZoom().toFixed(2));
+            setZoom(map.current.getZoom().toFixed(1));
         });
     });
 
@@ -127,16 +127,15 @@ export default function DisplayMap() {
             let distancePerSecond = 360 / revolutionSpeed;
             center.lng += distancePerSecond
             center.lat = Math.floor(Math.random() * (90 - (-90))) + (-90);
-            // map.current.scrollZoom.disable();
         }
 
-        if (map.current.getZoom() <= 2) { // if map is zoomed out to 2 or less, spin randomly 
-            map.current.easeTo({ center, duration: 3000, easing: (n) => n });
+        if (map.current.getZoom() <= 1) { // if map is zoomed out to 2 or less, spin randomly 
+            map.current.easeTo({ center, duration: 3500, easing: (n) => n });
         } else { // else zoom out to 2 first, and then spin randomly
-            map.current.zoomTo(2, { easing: (n) => n, duration: 1000 })
+            map.current.zoomTo(1, { easing: (n) => n, duration: 1500 })
             setTimeout(() => {
-                map.current.easeTo({ center, duration: 3000, easing: (n) => n });
-            }, 1000)
+                map.current.easeTo({ center, duration: 3500, easing: (n) => n });
+            }, 1500)
         }
     };
 
@@ -145,7 +144,6 @@ export default function DisplayMap() {
     const handleBtn = () => {
         spinEnabled = !spinEnabled;
         if (spinEnabled) {
-            // map.current.scrollZoom.disable();
             spinGlobe()
             setTimeout(() => {
                 setTrigger((trigger) => trigger + 1);
@@ -178,7 +176,7 @@ export default function DisplayMap() {
                 disabled={spinEnabled}
                 id="btn-spin"
                 ref={spinButton}
-                onClick={() => handleBtn()}>Start rotation
+                onClick={() => handleBtn()}>Spin globe!
             </button>
             <div ref={mapContainer} className="map-container" />
 

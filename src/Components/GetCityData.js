@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Graph from './Graph';
-import teleportCities from './teleportCities.json'
+import teleportCities from '../teleportCities.json'
 
 export default function GetCityData({ map, trigger, showCityData }) {
 
@@ -39,8 +39,8 @@ export default function GetCityData({ map, trigger, showCityData }) {
             map.current.flyTo({
                 center,
                 zoom: 9,
-                speed: 0.3,
-                duration: 9000,
+                speed: 0.4,
+                duration: 10000,
                 curve: 1.5,
                 essential: true,
                 easing(t) {
@@ -127,7 +127,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
                 setWikiPic(wkImage) //SET STATE 
 
                 let cityASCII = cityNum.properties['city-ascii'].toLowerCase().split(' ').join('-')
-                
+
                 const teleportImg = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/images/`)
                     .then(response => response.json())
                     .then(data => data);
@@ -163,25 +163,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
                         {
                             label: "Score out of 10 ",
                             data: graphData.map((data) => data.metric),
-                            backgroundColor: [
-                                '#F0F8F9',
-                                '#E2F1F3',
-                                '#D4EAED',
-                                '#C5E3E7',
-                                '#B7DCE1',
-                                '#A9D5DB',
-                                '#9ACED5',
-                                '#8CC7CF',
-                                '#7EC0C9',
-                                '#6FB9C3',
-                                '#61B2BD',
-                                '#52ABB7',
-                                '#48A1AD',
-                                '#42939E',
-                                '#3C8690',
-                                '#367981',
-                                '#306C73'
-                            ],
+                            backgroundColor: ['#2f4d6b'],
                             borderColor: "black",
                             borderWidth: 1
                         }
@@ -227,38 +209,30 @@ export default function GetCityData({ map, trigger, showCityData }) {
                     <div>
                         <button
                             className='show-city-button'
-                            onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide Info' : `Show info`}
+                            onClick={() => setShowInfo(!showInfo)}>{showInfo ? 'Hide city info' : `Show city info`}
                         </button>
+
 
                         <div
                             ref={cityInfoContainer}
                             className={showInfo ? 'city-info-container slideout-active' : 'city-info-container'}>
                             <div className="wrapper">
-
                                 <div className='city-info'>
                                     <h2>{cityName}</h2>
-
-                                    <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a>
-                                    </p >
-
+                                    <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a></p >
                                     <div className='image-container'>
-                                        <img src={tpPic} alt={`${cityName}`} />
-
-                                        <img src={wikiPic} alt={`${cityName}`} />
+                                            <img src={tpPic} alt={`${cityName}`} />
+                                            <img src={wikiPic} alt={`${cityName}`} />
                                     </div>
-
                                     <Graph chartData={chartData} />
-
                                     <p className='visually-hidden'>City Rankings per Category: Score out of 10: {tpMetrics} / 10</p>
-
                                     <p>{tpBlurb}</p>
 
                                 </div >
-
-
                             </div >
                         </div>
-                    </div >
+                    </div>
+
                     :
                     null
             }

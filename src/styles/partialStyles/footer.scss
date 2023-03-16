@@ -1,0 +1,31 @@
+footer {
+    color: #fafafd;
+    text-align: center;
+    position: relative;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    line-height: 18px;
+    letter-spacing: 1.1px;
+    text-transform: lowercase;
+    span {
+        display: block;
+    }
+    a {
+        text-decoration: none;
+        color: #fafafd;
+        &:hover, 
+        &:focus {
+            text-decoration: underline;
+        }
+    }
+}
+
+.footerInfo {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:#2f4d6b;
+    padding: 7px 16px;
+    margin: 0;
+    border-radius: 50px;
+}

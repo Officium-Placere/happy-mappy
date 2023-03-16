@@ -1,0 +1,33 @@
+
+.introButton {
+    background-color: #d1758c;
+    border-radius: 20px;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 60px;
+    z-index: 20;
+    padding: 3px 10px;
+}
+
+.slideOutIntro {
+    top: -300px !important;
+}
+
+.slideInIntro {
+    top: 400px !important;
+}
+
+.intro {
+    text-align: center;
+    background-color: #d1758c;
+    position: absolute;
+    left: 50%;
+    top: 250px;
+    transform: translate(-50%, -50%);
+    transition: 0.7s ease-in all;
+    z-index: 30;
+    width: 50vw;
+    height: 50vh;
+    border-radius: 60px;
+}

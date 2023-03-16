@@ -1,13 +1,15 @@
 import "./styles/styles.scss";
-import DisplayMap from "./DisplayMap";
-// import Footer from "./Footer";
+import Introduction from "./Components/Introduction";
+import DisplayMap from "./Components/DisplayMap";
+import Footer from "./Components/Footer";
 
 export default function App() {
 
   return (
     <>
+        <Introduction />
         <DisplayMap />
-        {/* <Footer/> */}
+        <Footer/>
     </>
   );
 
