@@ -61,6 +61,9 @@
   .city-info-container {
     width: 97%;
   }
+  .slideInIntro {
+    top: 60% !important;
+  }
   .slideout-active {
     bottom: 1%;
   }
