@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap");
 h1 {
   font-family: "Bungee Inline", cursive;
-  font-size: clamp(2.5rem, 8vw, 8rem);
+  font-size: clamp(2.5rem, 6vw, 7rem);
   z-index: 10;
   margin: 0 0 20px;
 }
@@ -45,19 +45,19 @@ h1 {
   transform: translate(-50%, -50%);
   transition: 0.8s ease-in all;
   z-index: 50;
-  width: 90vw;
-  height: 70vh;
+  width: 70vw;
+  height: 40vh;
   border-radius: 60px;
-  box-shadow: 0 0 50px 15px #fafafd;
+  box-shadow: 0 0 20px 5px #fafafd;
   text-align: center;
-  padding: 0 10px;
+  padding: 10px;
 }
 .intro p {
-  font-size: clamp(1rem, 4vw, 1.8rem);
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
   z-index: 10;
-  font-weight: bold;
   margin: 0;
   padding: 0 30px;
+  width: 80%;
 }
 
 .intro::before {
@@ -79,12 +79,12 @@ h1 {
   color: #fafafd;
   background-color: black;
   border: none;
-  padding: 6px 14px;
+  padding: 6px 12px;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   position: absolute;
   top: 20px;
-  right: 20px;
+  right: 25px;
   transition: 0.2s ease-in-out all;
 }
 .closeButton:hover, .closeButton:focus {

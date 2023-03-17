@@ -20,6 +20,13 @@
   }
 }
 @media (max-width: 650px) {
+  .intro {
+    width: 80vw;
+    height: 45vh;
+  }
+  .intro p {
+    width: 100%;
+  }
   .city-info-container {
     width: 95vw;
   }
@@ -54,17 +61,17 @@
     right: 5%;
   }
   .closeButton {
-    padding: 4px 12px;
+    padding: 4px 10px;
   }
 }
 @media (max-width: 400px) {
-  .city-info-container {
-    width: 97%;
-  }
-  .slideInIntro {
-    top: 52% !important;
+  .intro {
+    height: 70vh;
   }
   .slideout-active {
     bottom: 1%;
+  }
+  .city-info-container {
+    width: 97%;
   }
 }/*# sourceMappingURL=mediaQueries.css.map */

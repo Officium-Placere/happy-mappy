@@ -18,7 +18,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
         labels: ['Red'],
         datasets: [
             {
-                label: 'Starting Test Data',
+                label: 'City Data',
                 data: [5],
                 backgroundColor: [
                     'white'
@@ -53,12 +53,11 @@ export default function GetCityData({ map, trigger, showCityData }) {
                 const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${center.lat}&longitude=${center.lng}&localityLanguage=en&key=bdc_e3a41bcc2937431191cc18382f3d5492`)
                     .then(response => response.json())
                     .then(data => data)
-                // console.log(firstAPI)
-                const cityObj = []
+
+                    const cityObj = []
                 firstAPI.localityInfo.administrative.forEach(poiObj => {
                     if (poiObj.name === firstAPI.city) {
                         cityObj.push(poiObj)
-                        // console.log(poiObj)
                     }
                 })
                 // if city isn't in administrative property, check informative property, do same loop:
@@ -69,7 +68,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
                         }
                     })
                 }
-                // console.log(cityObj)
+
                 let city
                 let id = ''
                 cityObj.forEach(obj => {
@@ -85,23 +84,21 @@ export default function GetCityData({ map, trigger, showCityData }) {
                         }
                         else city = false
                     }
-
                     else city = false
-
                 })
-                // console.log(city)
+
                 if (city === false) {
                     city = cityObj[0]
                 }
-                // console.log(cityObj[0].wikidataId)
+
                 id = city.wikidataId;
                 const secondAPI = await fetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
                     .then(response => response.json())
                     .then(data => data)
-                // console.log(secondAPI)
-                const wikiTitle = secondAPI.entities[id].sitelinks.enwiki.title
-                // console.log(wikiTitle)
-                setCityName(wikiTitle) //SET STATE 
+
+                    const wikiTitle = secondAPI.entities[id].sitelinks.enwiki.title
+
+                    setCityName(wikiTitle) //SET STATE 
 
                 const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${wikiTitle}&origin=*`)
                     .then(response => response.json())
@@ -110,13 +107,12 @@ export default function GetCityData({ map, trigger, showCityData }) {
                 const keys = Object.keys(thirdAPI.query.pages)[0]
                 const wkExtract = (thirdAPI.query.pages[keys].extract)
                 // save first 3 sentences and remove '(listen)' link from the wiki extract
-                // NOTE: MAYBE CUT FIRST PARENTHESIS OUT ENTIRELY???
                 const listenRegex = (/\(listen\)/g);
                 const wkBlurb = wkExtract.match(/[^.]*.[^.]*.[^.]*./)[0].replace(listenRegex, '');
 
                 setWikiBlurb(wkBlurb) //SET STATE 
 
-                // fetch main image from wiki article
+                // fetch image from wiki article
                 const fourthAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=%2A&pithumbsize=800&prop=pageimages&titles=${wikiTitle}&format=json`)
                     .then(response => response.json())
                     .then(data => data)
@@ -161,9 +157,9 @@ export default function GetCityData({ map, trigger, showCityData }) {
                     labels: graphData.map((data) => data.title[0]),
                     datasets: [
                         {
-                            label: "Score out of 10 ",
+                            label: 'Score',
                             data: graphData.map((data) => data.metric),
-                            backgroundColor: ['#2f4d6b'],
+                            backgroundColor: '#2f4d6b',
                             borderColor: "white",
                             borderWidth: 0.1,
                             borderRadius: 25
@@ -225,12 +221,10 @@ export default function GetCityData({ map, trigger, showCityData }) {
                                             <img src={wikiPic} alt={`${cityName}`} />
                                         </div>
                                     </div>
-                                    <div className="chart-container">
-                                    <Graph chartData={chartData}/>
-                                    </div>
-                                    <p className='visually-hidden'>City Rankings per Category: Score out of 10: {tpMetrics} / 10</p>
+                                    {/* <h3>Teleport City Ranking</h3> */}
                                     <p>{tpBlurb}</p>
-
+                                    <Graph chartData={chartData}/>
+                                    <p className='visually-hidden'>City Ranking per Category: Score out of 10: {tpMetrics}</p>
                                 </div >
                             </div >
                         </div>

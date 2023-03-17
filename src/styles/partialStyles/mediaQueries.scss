@@ -27,6 +27,15 @@
 }
 
 @media (max-width: 650px){
+
+    .intro {
+        width: 80vw;
+        height: 45vh;
+        p {
+            width: 100%;
+        }
+    }
+
     .city-info-container {
         width: 95vw;
     }
@@ -71,22 +80,21 @@
     }
 
     .closeButton {
-        padding: 4px 12px;
+        padding: 4px 10px;
     }
 }
 
 @media (max-width: 400px){
     
-    .city-info-container {
-        width: 97%;
+    .intro {
+        height: 70vh;
     }
-
-    .slideInIntro {
-        top: 52% !important;
-    }
-
+    
     .slideout-active {
         bottom: 1%;
     }
     
+    .city-info-container {
+        width: 97%;
+    }
 }
