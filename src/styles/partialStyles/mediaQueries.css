@@ -42,6 +42,7 @@
   }
   .introButton {
     left: 2%;
+    right: none;
   }
   .spin-button,
   .show-city-button {
