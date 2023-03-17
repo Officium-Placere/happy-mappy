@@ -13,6 +13,9 @@
   box-shadow: 0 0 25px 5px #fafafd;
   z-index: 35;
 }
+.city-info-container h2 {
+  margin-top: 35px;
+}
 
 .close-city-info-button {
   font-size: 1rem;
