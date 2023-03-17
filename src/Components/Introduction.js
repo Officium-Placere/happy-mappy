@@ -38,7 +38,7 @@ export default function Introduction() {
                 { introModal ? <div className="introOverlay"></div> : null }
                 <div ref={introRef} className='intro'>
                     <button className='closeButton' onClick={() => closeIntro()}>x</button>
-                    <h1>Globe Spinner</h1>
+                    <h1>City Spinner</h1>
                     <p>Wondering where to travel to next? Click the 'Spin Globe' button and watch the globe spin to a random city in the world, then click the 'Show City Info' button to find out more about it!</p>
                 </div>
 

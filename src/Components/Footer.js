@@ -3,7 +3,7 @@ function Footer() {
         <footer>
             <p className="footerInfo">
             <span>
-            © Globe Spinner
+            © City Spinner
             </span>
                 Created by{' '}
                 <a href="https://www.gabriellapenev.com/" target="blank" rel="noopener noreferrer">Gaby</a>  &{' '}
