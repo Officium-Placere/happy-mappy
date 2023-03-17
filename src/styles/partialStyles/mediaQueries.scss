@@ -1,3 +1,4 @@
+
 @media (max-width: 880px){
     .city-info-container {
         width: 80vw;
@@ -5,6 +6,24 @@
     
     .photo {
         width: 70vw;
+    }
+
+    .spin-button, 
+    .show-city-button {
+        width: 135px;
+        top: 5%;
+    }
+    
+    .show-city-button {
+        right: 10%;
+    }
+
+    .spin-button {
+        left: 10%;
+    }
+
+    .slideout-active {
+        bottom: 2%;
     }
 }
 
@@ -20,4 +39,35 @@
         width: 90vw;
         margin: 5px 0;
     }
+
+    .closeButton {
+        padding: 4px 12px;
+    }
+}
+
+@media (max-width: 400px){
+    
+    .city-info-container {
+        width: 97%;
+    }
+
+    .slideout-active {
+        bottom: 1%;
+    }
+
+    .spin-button,
+    .show-city-button {
+        top: 7%;
+        padding: 8px;
+        width: 120px;
+    }
+
+    .spin-button {
+        left: 5%;
+    }
+
+    .show-city-button {
+        right: 5%;
+    }
+    
 }
