@@ -10,8 +10,31 @@
     overflow-x: hidden;
     background-color: #fafafd;
     border-radius: 12px;
-    box-shadow: 0 0 25px 5px #2f4d6b;
+    box-shadow: 0 0 25px 5px #fafafd;
     z-index: 35;
+}
+
+.close-city-info-button {
+    font-size: 1rem;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    z-index: 20;
+    border: none;
+    border-radius: 50%;
+    color: #fafafd;
+    background-color: black;
+    border: none;
+    font-weight: bold;
+    position: absolute;
+    transition: 0.2s ease-in-out all;
+    &:hover, 
+    &:focus {
+        scale: 1.1;
+    }
+    &:active {
+        scale: 0.9;
+    }
 }
 
 .image-container {
@@ -42,18 +65,19 @@
 }
 
 .chart-container {
-    width: 90%;
-    margin: 15px auto;
+    width: 98%;
+    margin: 5px auto;
 }
 
 .city-info {
     margin: 0 auto;
     text-align: center;
     a {
-        transition: 0.2s ease-in all;
+        text-decoration: none;
         color: #2f4d6b;
-        &:hover {
-            color: #ac2b4b;
+        &:hover,
+        &:focus {
+            text-decoration: underline;
         }
     }
 }

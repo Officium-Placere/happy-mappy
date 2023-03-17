@@ -148,7 +148,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
                 setTpMetrics(cityRank) //SET STATE 
 
                 // regex to select category title and metric out of string and push them into a data object
-                const titleRegex = /^.*?(?=:)/gm; //  /^.*?(?=\:)/gm; - was this!!!
+                const titleRegex = /^.*?(?=:)/gm;
                 const metricRegex = /(?<=: ).*/gm;
                 const graphData = [];
 
@@ -164,8 +164,9 @@ export default function GetCityData({ map, trigger, showCityData }) {
                             label: "Score out of 10 ",
                             data: graphData.map((data) => data.metric),
                             backgroundColor: ['#2f4d6b'],
-                            borderColor: "black",
-                            borderWidth: 1
+                            borderColor: "white",
+                            borderWidth: 0.1,
+                            borderRadius: 25
                         }
                     ]
                 });
@@ -177,13 +178,6 @@ export default function GetCityData({ map, trigger, showCityData }) {
                 const tpSummary = citySummary.replace(bylineRegex, '').replace(htmlRegex, '');
 
                 setTpBlurb(tpSummary) //SET STATE 
-
-                // console.log(wikiTitle)
-                // console.log(wkBlurb)
-                // console.log(wkImage)
-                // console.log(tpImage)
-                // console.log(tpSummary)
-                // console.log(cityRank)
             }
 
             getApiData()
@@ -219,6 +213,8 @@ export default function GetCityData({ map, trigger, showCityData }) {
                             className={showInfo ? 'city-info-container slideout-active' : 'city-info-container'}>
                             <div className="wrapper">
                                 <div className='city-info'>
+                                <button className='close-city-info-button' onClick={() => setShowInfo(false)}>x</button>
+
                                     <h2>{cityName}</h2>
                                     <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a></p >
                                     <div className='image-container'>
@@ -229,7 +225,9 @@ export default function GetCityData({ map, trigger, showCityData }) {
                                             <img src={wikiPic} alt={`${cityName}`} />
                                         </div>
                                     </div>
-                                    <Graph chartData={chartData} />
+                                    <div className="chart-container">
+                                    <Graph chartData={chartData}/>
+                                    </div>
                                     <p className='visually-hidden'>City Rankings per Category: Score out of 10: {tpMetrics} / 10</p>
                                     <p>{tpBlurb}</p>
 

@@ -7,14 +7,13 @@
   }
   .spin-button,
   .show-city-button {
-    width: 135px;
-    top: 5%;
+    width: 145px;
   }
   .show-city-button {
-    right: 10%;
+    right: 14%;
   }
   .spin-button {
-    left: 10%;
+    left: 14%;
   }
   .slideout-active {
     bottom: 2%;
@@ -24,11 +23,35 @@
   .city-info-container {
     width: 95vw;
   }
+  .spin-button,
+  .show-city-button {
+    padding: 8px;
+    width: 120px;
+  }
+  .show-city-button {
+    right: 18%;
+  }
+  .spin-button {
+    left: 18%;
+  }
 }
 @media (max-width: 520px) {
   .photo {
     width: 90vw;
     margin: 5px 0;
+  }
+  .introButton {
+    left: 2%;
+  }
+  .spin-button,
+  .show-city-button {
+    top: 5%;
+  }
+  .spin-button {
+    left: 5%;
+  }
+  .show-city-button {
+    right: 5%;
   }
   .closeButton {
     padding: 4px 12px;
@@ -40,17 +63,5 @@
   }
   .slideout-active {
     bottom: 1%;
-  }
-  .spin-button,
-  .show-city-button {
-    top: 7%;
-    padding: 8px;
-    width: 120px;
-  }
-  .spin-button {
-    left: 5%;
-  }
-  .show-city-button {
-    right: 5%;
   }
 }/*# sourceMappingURL=mediaQueries.css.map */
