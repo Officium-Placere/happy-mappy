@@ -12,6 +12,9 @@ export default function GetCityData({ map, trigger, showCityData }) {
     const [tpMetrics, setTpMetrics] = useState()
     const [tpPic, setTpPic] = useState()
     const [cityName, setCityName] = useState()
+    const [error, setError] = useState(false);
+
+
 
     // currently chartData state has to have data in it on page load otherwise there's an error and the page goes blank, as state is undefined on first click of the button. 
     const [chartData, setChartData] = useState({
@@ -29,6 +32,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
     });
 
     useEffect(() => {
+        setError(false)
 
         function easeToCity() {
             const center = map.current.getCenter();
@@ -51,14 +55,9 @@ export default function GetCityData({ map, trigger, showCityData }) {
             async function getApiData() {
 
                 try {
-
-
                     const firstAPI = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode?latitude=${center.lat}&longitude=${center.lng}&localityLanguage=en&key=bdc_e3a41bcc2937431191cc18382f3d5492`)
                         .then(response => response.json())
                         .then(data => data)
-                        .catch((error) => {
-                            throw new Error(`Error fetching data from firstAPI: ${error.message}`);
-                        });
 
                     const cityObj = []
                     firstAPI.localityInfo.administrative.forEach(poiObj => {
@@ -101,9 +100,6 @@ export default function GetCityData({ map, trigger, showCityData }) {
                     const secondAPI = await fetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&origin=*&ids=${id}&sitefilter=enwiki&format=json`)
                         .then(response => response.json())
                         .then(data => data)
-                        .catch((error) => {
-                            throw new Error(`Error fetching data from secondAPI: ${error.message}`);
-                        });
 
                     const wikiTitle = secondAPI.entities[id].sitelinks.enwiki.title
 
@@ -112,9 +108,6 @@ export default function GetCityData({ map, trigger, showCityData }) {
                     const thirdAPI = await fetch(`https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${wikiTitle}&origin=*`)
                         .then(response => response.json())
                         .then(data => data)
-                        .catch((error) => {
-                            throw new Error(`Error fetching data from thirdAPI: ${error.message}`);
-                        });
 
                     const keys = Object.keys(thirdAPI.query.pages)[0]
                     const wkExtract = (thirdAPI.query.pages[keys].extract)
@@ -128,9 +121,6 @@ export default function GetCityData({ map, trigger, showCityData }) {
                     const fourthAPI = await fetch(`https://en.wikipedia.org/w/api.php?action=query&origin=%2A&pithumbsize=800&prop=pageimages&titles=${wikiTitle}&format=json`)
                         .then(response => response.json())
                         .then(data => data)
-                        .catch((error) => {
-                            throw new Error(`Error fetching data from fourthAPI: ${error.message}`);
-                        });
 
                     const wkImageKey = Object.keys(fourthAPI.query.pages)[0]
                     const wkImage = (fourthAPI.query.pages[wkImageKey].thumbnail.source)
@@ -142,9 +132,6 @@ export default function GetCityData({ map, trigger, showCityData }) {
                     const teleportImg = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/images/`)
                         .then(response => response.json())
                         .then(data => data)
-                        .catch((error) => {
-                            throw new Error(`Error fetching data from teleportIMG API: ${error.message}`);
-                        });
 
                     const tpImage = teleportImg.photos[0].image.mobile
 
@@ -153,9 +140,6 @@ export default function GetCityData({ map, trigger, showCityData }) {
                     const teleportBlurb = await fetch(`https://api.teleport.org/api/urban_areas/slug:${cityASCII}/scores/`)
                         .then(response => response.json())
                         .then(data => data)
-                        .catch((error) => {
-                            throw new Error(`Error fetching data from teleportBlurb API: ${error.message}`);
-                        });
 
                     const citySummary = teleportBlurb.summary;
                     const cityRanking = teleportBlurb.categories
@@ -199,9 +183,7 @@ export default function GetCityData({ map, trigger, showCityData }) {
                 }
 
                 catch (error) {
-                    console.error(`Error in getApiData() async function: ${error.message}`);
-                    // Handle error or rethrow the error to the calling function
-                    throw error;
+                    setError(true)
                 }
             }
             getApiData()
@@ -225,33 +207,42 @@ export default function GetCityData({ map, trigger, showCityData }) {
                         </button>
 
                         {showInfo ? <div className="cityOverlay"></div> : null}
+                        {
+                            error
+                                ?
+                                <div
+                                    ref={cityInfoContainer}
+                                    className={showInfo ? 'city-info-container slideout-active' : 'city-info-container'}>
+                                        <h2 style={{'textAlign': 'center', 'textTransform' : 'initial', 'width' : '100%', 'maxWidth' : '700px', 'margin' : '0 auto', 'paddingTop' : '60px'}}>Sorry! There seems to be an error on our end! Please try spinning again!</h2>
+                                        <button className='close-city-info-button' onClick={() => setShowInfo(false)}>x</button>
+                                </div>
+                                :
+                                <div
+                                    ref={cityInfoContainer}
+                                    className={showInfo ? 'city-info-container slideout-active' : 'city-info-container'}>
+                                    <div className="wrapper">
+                                        <div className='city-info'>
+                                            <button className='close-city-info-button' onClick={() => setShowInfo(false)}>x</button>
 
-                        <div
-                            ref={cityInfoContainer}
-                            className={showInfo ? 'city-info-container slideout-active' : 'city-info-container'}>
-                            <div className="wrapper">
-                                <div className='city-info'>
-                                    <button className='close-city-info-button' onClick={() => setShowInfo(false)}>x</button>
-
-                                    <h2>{cityName}</h2>
-                                    <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a></p >
-                                    <div className='image-container'>
-                                        <div className="photo">
-                                            <img src={tpPic} alt={`${cityName}`} />
-                                        </div>
-                                        <div className="photo">
-                                            <img src={wikiPic} alt={`${cityName}`} />
-                                        </div>
-                                    </div>
-                                    {/* <h3>Teleport City Ranking</h3> */}
-                                    <p>{tpBlurb}</p>
-                                    <Graph chartData={chartData} />
-                                    <p className='visually-hidden'>City Ranking per Category: Score out of 10: {tpMetrics}</p>
-                                </div >
-                            </div >
-                        </div>
+                                            <h2>{cityName}</h2>
+                                            <p>{wikiBlurb}.. <a target="_blank" rel="noopener noreferrer" href={`https://en.wikipedia.org/wiki/${cityName}`}>see more</a></p >
+                                            <div className='image-container'>
+                                                <div className="photo">
+                                                    <img src={tpPic} alt={`${cityName}`} />
+                                                </div>
+                                                <div className="photo">
+                                                    <img src={wikiPic} alt={`${cityName}`} />
+                                                </div>
+                                            </div>
+                                            {/* <h3>Teleport City Ranking</h3> */}
+                                            <p>{tpBlurb}</p>
+                                            <Graph chartData={chartData} />
+                                            <p className='visually-hidden'>City Ranking per Category: Score out of 10: {tpMetrics}</p>
+                                        </div >
+                                    </div >
+                                </div>
+                        }
                     </div>
-
                     :
                     null
             }

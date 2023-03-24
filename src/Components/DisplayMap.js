@@ -184,6 +184,7 @@ export default function DisplayMap() {
                 map={map}
                 trigger={trigger}
                 showCityData={showCityData}
+                setShowCityData={setShowCityData}
             />
 
         </div>
