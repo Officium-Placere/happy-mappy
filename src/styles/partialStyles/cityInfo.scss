@@ -14,6 +14,15 @@
     z-index: 35;
     h2 {
         margin-top: 35px;
+        font-size: clamp(1.8rem, 5vw, 2.2rem);
+        text-transform: uppercase;
+    }
+    p {
+        width: 80%;
+        margin: 0 auto;
+        a {
+            display: inline-block;
+        }
     }
 }
 
@@ -68,8 +77,9 @@
 }
 
 .chart-container {
-    width: 98%;
+    width: 90%;
     margin: 5px auto;
+    padding-bottom: 20px;
 }
 
 .city-info {
