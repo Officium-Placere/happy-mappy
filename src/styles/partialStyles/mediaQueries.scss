@@ -1,0 +1,100 @@
+
+@media (max-width: 880px){
+    .city-info-container {
+        width: 80vw;
+    }
+    
+    .photo {
+        width: 70vw;
+    }
+
+    .spin-button, 
+    .show-city-button {
+        width: 145px;
+    }
+    
+    .show-city-button {
+        right: 14%;
+    }
+
+    .spin-button {
+        left: 14%;
+    }
+
+    .slideout-active {
+        bottom: 2%;
+    }
+}
+
+@media (max-width: 650px){
+
+    .intro {
+        width: 80vw;
+        height: 45vh;
+        p {
+            width: 100%;
+        }
+    }
+
+    .city-info-container {
+        width: 95vw;
+    }
+
+    .spin-button,
+    .show-city-button {
+        padding: 8px;
+        width: 120px;
+    }
+
+    .show-city-button {
+        right: 18%;
+    }
+
+    .spin-button {
+        left: 18%;
+    }
+}
+
+@media (max-width: 520px){
+
+    .photo {
+        width: 90vw;
+        margin: 5px 0;
+    }
+
+    .introButton {
+        left: 2%;
+    }
+
+    .spin-button,
+    .show-city-button {
+        top: 5%;
+    }
+
+    .spin-button {
+        left: 5%;
+    }
+
+    .show-city-button {
+        right: 5%;
+    }
+
+    .closeButton {
+        padding: 4px 10px;
+    }
+}
+
+@media (max-width: 400px){
+    
+    .intro {
+        height: 68vh;
+    }
+    
+    .slideout-active {
+        bottom: 1%;
+    }
+    
+    .city-info-container {
+        width: 97%;
+    }
+}

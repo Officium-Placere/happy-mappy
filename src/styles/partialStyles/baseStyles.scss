@@ -1,6 +1,74 @@
 //google font styles
-@import url('https://fonts.googleapis.com/css2?family=Jost&family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 
-h1, h2 {
-  font-family: 'Playfair Display', 'serif;'
+
+.wrapper {
+  margin: 0 auto;
+  // max-width: 1260px;
+  width: 100%;
+}
+
+h1,
+h2, 
+body, 
+a, 
+html, 
+button {
+  font-family: 'Questrial', sans-serif;
+}
+
+
+// bar chart metrics shown only for screen-readers:
+.visually-hidden {
+  position: absolute;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+button {
+  cursor: pointer;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  position: relative;
+  overflow: hidden;
+}
+
+//  button sheen effect base animation 
+.sheen:after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  background: linear-gradient(to bottom, rgba(229, 172, 142, 0), rgba(255, 255, 255, 0.2) 50%, rgba(229, 172, 142, 0));
+  transform: rotateZ(60deg) translate(-5em, 7.5em);
+}
+
+.sheen:hover::after,
+button:focus::after {
+  animation: sheen 1s forwards;
+}
+
+img {
+  width: 350px;
+  object-fit: cover;
+  margin: 10px;
+  border-radius: 10px;
+} 
+
+p {
+  margin: 15px;
+}
+
+@keyframes sheen {
+  100% {
+      transform: rotateZ(60deg) translate(1em, -9em);
+  }
 }

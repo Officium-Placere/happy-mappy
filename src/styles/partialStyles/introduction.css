@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap");
+h1 {
+  font-family: "Bungee Inline", cursive;
+  font-size: clamp(2.5rem, 6vw, 7rem);
+  z-index: 10;
+  margin: 0 0 20px;
+}
+
+.introButton {
+  background-color: #2f4d6b;
+  font-size: 1.3rem;
+  color: white;
+  border-radius: 20px;
+  border: 1.5px solid #fafafd;
+  position: absolute;
+  transition: 0.2s ease-in-out all;
+  top: 7px;
+  left: 1%;
+  z-index: 20;
+  padding: 5px 12px;
+}
+.introButton:hover, .introButton:focus {
+  transform: scale(1.1);
+}
+.introButton:active {
+  scale: 0.9;
+}
+
+.slideOutIntro {
+  top: -50% !important;
+}
+
+.slideInIntro {
+  top: 50% !important;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: -50%;
+  transform: translate(-50%, -50%);
+  transition: 0.8s ease-in all;
+  z-index: 50;
+  width: 70vw;
+  height: 40vh;
+  border-radius: 60px;
+  box-shadow: 0 0 20px 5px #fafafd;
+  text-align: center;
+  padding: 10px;
+}
+.intro p {
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  z-index: 10;
+  margin: 0;
+  padding: 0 30px;
+  width: 80%;
+}
+
+.intro::before {
+  content: "";
+  background-color: #fafafd;
+  border-radius: 60px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.75;
+}
+
+.closeButton {
+  z-index: 20;
+  border: none;
+  border-radius: 50%;
+  color: #fafafd;
+  background-color: black;
+  border: none;
+  padding: 6px 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  transition: 0.2s ease-in-out all;
+}
+.closeButton:hover, .closeButton:focus {
+  scale: 1.1;
+}
+.closeButton:active {
+  scale: 0.9;
+}
+
+.introOverlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.3;
+  position: absolute;
+  z-index: 40;
+  top: 0;
+}/*# sourceMappingURL=introduction.css.map */

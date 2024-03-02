@@ -1,10 +1,8 @@
 @import url('./partialStyles/setup.scss');
 @import url('./partialStyles/baseStyles.scss');
+@import url('./partialStyles/introduction.scss');
 @import url('./partialStyles/variables.scss');
-@import url('./partialStyles/logo.scss');
 @import url('./partialStyles/mapContainer.scss');
-@import url('./partialStyles/pageLayout.scss');
-
-.logoInfo {
-  background-color: #9a031e;
-}
+@import url('./partialStyles/cityInfo.scss');
+@import url('./partialStyles/footer.scss');
+@import url('./partialStyles/mediaQueries.scss');

@@ -1,5 +1,31 @@
 .map-container {
-  height: 1000px;
-  width: 1000px;
+  width: 100vw;
+  height: 100vh;
   display: inline-block;
 }
+
+.display-map {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.spin-button {
+  top: 3px;
+  left: 20%;
+  width: 170px;
+  background-color:#2f4d6b;
+  border: 2px solid #fafafd;
+  border-radius: 40px;
+  margin: 15px;
+  padding: 10px 15px;
+  color: #fafafd;
+  position: absolute;
+  z-index: 10;
+  transition: 0.2s ease-in all;
+  &:active {
+    scale: 0.9;
+  }
+}
+
+// Intro component - fullscreen maybe, and drop / bounce into place, spinning 3d globe (3js) in bg or just on side of the intro text, x button, little instruction slide out flag 
